@@ -228,7 +228,7 @@ a:hover {
 #wst-shortcut .dd {
 	display: none
 }
-#wst-shortcut .wst-city{color:#e23c3d;font-weight:bold;}
+#wst-shortcut .wst-city{color:#ff6600;font-weight:bold;}
 #wst-shortcut .hover .outline,#wst-shortcut .hover .dd {
 	position: absolute;
 	border: 1px solid #DDD;
@@ -512,7 +512,7 @@ a:hover {
 	position: absolute;
 	width: 360px;
 	min-height: 100px;
-	border: 1px solid #e23c3d;
+	border: 1px solid #ff6600;
 	right: 0px;
 	top: 36px;
 	z-index: 1000;
@@ -595,7 +595,7 @@ button:hover{
 }
 
 .wst-panel-curr{
-	background-color:#E23C3D;color:#ffffff;font-weight:bold;float:left;border:1px solid red;border-bottom:0px;height:30px;width:60px;text-align:center;line-height:30px;cursor:pointer;
+	background-color:#ff6600;color:#ffffff;font-weight:bold;float:left;border:1px solid #FF9900;border-bottom:0px;height:30px;width:60px;text-align:center;line-height:30px;cursor:pointer;
 }
 .wst-panel-notcurr{
 	color:#000000;font-weight:bold;float:left;border:0px;height:30px;width:60px;text-align:center;line-height:30px;cursor:pointer;background-color: #F3F3F3;
@@ -662,7 +662,7 @@ b, strong {
    text-align:left;
 }
 .btn-red{
-   background:#E23C3D;margin: 5px 0 0 8px;text-decoration: none;border: 0 none;color:#ffffff;font-weight:bold; cursor:pointer;padding: 8px 25px;
+   background:#ff6600;margin: 5px 0 0 8px;text-decoration: none;border: 0 none;color:#ffffff;font-weight:bold; cursor:pointer;padding: 8px 25px;
 }
 .email-verify{display:none;}
 #keyword,.wst-search-keyword{
@@ -701,7 +701,7 @@ b, strong {
     padding-right: 40px;
 }
 .hot-cities h2 a {
-    color: #e23c3d;
+    color: #ff6600;
     font-size: 28px;
     margin-left: 10px;
 }
@@ -786,7 +786,7 @@ b, strong {
     text-decoration: none;
 }
 .hot-cities input.button {
-    background-color: #e23c3d;
+    background-color: #ff6600;
     border: medium none;
     border-radius: 2px;
     color: #fff;
@@ -975,12 +975,12 @@ b, strong {
 
 
 #wst-searchbox{
-	height:36px;border:2px solid #e23c3d;position:relative;margin-top:60px;margin-left:20px;
+	height:36px;border:2px solid #ff6600;position:relative;margin-top:60px;margin-left:20px;
 }
 #wst-search-type-box{position:absolute;top:30px;left:20px;}
 #wst-search-type{position:absolute;top:30px;left:20px;}
 #wst-search-container{float:left;width:670px;position:relative;}
-.wst-search-button{position:absolute;top:0px;right:0px;width:80px;height:36px;color:#ffffff;font-weight:bolder;background-color:#e23c3d;line-height:36px;text-align:center;font-size:15px;cursor:pointer;}
+.wst-search-button{position:absolute;top:0px;right:0px;width:80px;height:36px;color:#ffffff;font-weight:bolder;background-color:#ff6600;line-height:36px;text-align:center;font-size:15px;cursor:pointer;}
 #wst-search-des-container{float:left;width:280px;height:60px;}
 #wst-search-des-container .des-box{width:280px;height:36px;position:relative;margin-top:50px;padding-left:25px;}
 #wst-search-pbox{width:1210px;margin:0 auto;text-align:left;}
@@ -1008,7 +1008,7 @@ b, strong {
 .wst-footer-hp-box{background-color:#F7F7F7;text-align:center;margin-top:20px;}
 .wst-footer-hp-ck1{line-height:30px;text-align:left;}
 .wst-footer-hp-ck2{border:2px solid #D5D5D5;height:50px;line-height:50px;margin-top:20px;background-color:#ffffff;}
-.wst-footer-hp-ck3{margin-top:20px;padding-bottom:10px;}
+.wst-footer-hp-ck3{margin-top:20px;padding-bottom:10px;padding-top: 20px;}
 
 .wst-footer-frd{color:#e23e3d;font-weight:bolder;font-size:18px;}
 .wst-footer-pno{color:red;font-weight:bolder;font-size:18px;}
@@ -1022,9 +1022,9 @@ b, strong {
 .wst-user-top-main{height:132px;width:1210px;margin:0 auto;text-align:left;}
 .wst-user-top-logo{float:left;width:240px;height:132px;}
 .wst-user-top-search{float:right;width:600px;height:120px;}
-.wst-user-top-search .search-box{height:36px;border:2px solid #e23c3d;position:relative;margin-top:60px;margin-left:20px;}
+.wst-user-top-search .search-box{height:36px;border:2px solid #ff6600;position:relative;margin-top:60px;margin-left:20px;}
 .wst-search-ipt{border:0;width:493px;background: 0 0;padding-left:10px;line-height: 22px;padding-top: 8px; padding-bottom: 4px;font-size:15px;}
-.wst-search-btn{position:absolute;top:0px;right:0px;width:80px;height:36px;color:#ffffff;font-weight:bolder;background-color:#e23c3d;line-height:36px;text-align:center;font-size:15px;cursor:pointer;}
+.wst-search-btn{position:absolute;top:0px;right:0px;width:80px;height:36px;color:#ffffff;font-weight:bolder;background-color:#ff6600;line-height:36px;text-align:center;font-size:15px;cursor:pointer;}
 
 
 .filelist li .setdef {

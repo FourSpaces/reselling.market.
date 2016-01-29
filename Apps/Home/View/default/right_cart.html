@@ -16,7 +16,7 @@
 	<div class="mui-mbar-tabs">
 		<div class="quick_link_mian">
 			<div class="quick_links_panel">
-				<div id="quick_links" class="quick_links">
+				<div id="quick_links" class="quick_links" style="display:none;">
 					<li><a href="#" class="my_qlinks" style="margin-top: 5px;"><i class="setting"></i></a>
 						<div class="ibar_login_box status_login">
 							<if condition="$WST_USER['userId'] gt 0">
@@ -73,10 +73,10 @@
 							</div>
 							</div>
 						</if></li>
-					<li id="shopCart"><a href="#" class="message_list"><i class="message"></i>
-					<div class="span">购物车</div> <span class="cart_num">0</span></a></li>
+					<li style="display:none;" id="shopCart"><a href="#" class="message_list"><i class="message"></i>
+					<div style="display:none;" class="span">购物车</div> <span class="cart_num">0</span></a></li>
 					<if condition="$CONF['qqNo'] neq ''">
-					<li>
+					<li style="display:none;">
 						<a href="tencent://message/?uin={$CONF['qqNo']}&Site=QQ交谈&Menu=yes" style="padding-top:5px;padding-bottom:5px;margin-bottom: 5px;">
 						<img src="__ROOT__/Apps/Home/View/default/images/qq.jpg"  height="38" width="40" />
 						</a>
@@ -85,6 +85,7 @@
 					
 				</div>
 				<div class="quick_toggle">
+					
 					<li><a href="#none"><i class="mpbtn_qrcode"></i></a>
 						<div class="mp_qrcode" style="display: none;">
 							<img

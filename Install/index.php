@@ -22,7 +22,9 @@ timezone_set();
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <title>二手商城安装</title>
+
 <link href="./css/general.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="js/install.js"></script>
@@ -141,7 +143,7 @@ timezone_set();
                 <tr>
                    <td align="right">数据库名<span class='red'>*</span>：</td>
                    <td align="left">
-                      <input type="text" class="ipt" name="db_name" id="db_name" value="wstmall" onblur='checkVal(this.id)'>
+                      <input type="text" class="ipt" name="db_name" id="db_name" value="reselling" onblur='checkVal(this.id)'>
                       <span class='db_name tips'>数据库名不能为空</span>
                       <span class="tips" style='display:inline-block'>&nbsp; (若数据库存在则会覆盖原数据库，不存在则会创建一个新数据库)</span>
                    </td>
@@ -149,7 +151,7 @@ timezone_set();
                 <tr>
                    <td align="right">表前缀：</td>
                    <td align="left">
-                      <input type="text" class="ipt" name="db_prefix" id="db_prefix" value="wst_" onblur='checkVal(this.id)'>
+                      <input type="text" class="ipt" name="db_prefix" id="db_prefix" value="rmt_" onblur='checkVal(this.id)'>
                       <span class="tips" style='display:inline-block'>&nbsp; (建议修改表前缀)</span>
                    </td>
                 </tr>
@@ -205,6 +207,7 @@ timezone_set();
         <div class="content" style='text-align:center;'>
         <div style="margin-top: 200px;">
         <span style="display:inline-block;margin-top:10px;">
+
            <span style="font-weight: bold;font-size:18px;"> 恭喜</span>，系统已安装成功&nbsp;!<br /><br />
             安装成功后，建议删除Install目录
         </span><br /><br />

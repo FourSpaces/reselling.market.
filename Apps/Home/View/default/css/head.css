@@ -457,7 +457,7 @@ body {
 	font-size: 14px;
 	font-weight: bold;
 	text-indent: 10px;
-	background: #e23c3d; /*#A21C1D*/
+	background: #ff6600; /*#A21C1D*/
 	color: #FFF;
 	position: relative;
 }
@@ -489,7 +489,7 @@ body {
 }
 
 .headNav .navCon .navCon-menu li a:hover,.headNav .navCon .navCon-menu .curMenu {
-	background: #e23c3d;
+	background: #ff6600;
 	color: #FFFFFF;
 }
 
@@ -560,7 +560,7 @@ body {
 }
 
 .headNav .navCon .navCon-cate .cateMenu1 .on {
-	background: #e23c3d;
+	background: #ff6600;
 	/*background:url(../../../View/default/images/nvgbg.png) no-repeat;*/
 	background-size: 100% 100%;
 	*margin-bottom: -4px;
@@ -636,7 +636,7 @@ body {
 }
 
 .headNav .navCon .navCon-cate .cateMenu2 .on {
-	background: #e23c3d;
+	background: #ff6600;
 	background-size: 100% 100%;
 	*margin-bottom: -4px;
 }

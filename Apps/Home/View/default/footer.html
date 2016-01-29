@@ -14,9 +14,9 @@
 
 <div class="wst-footer-hp-box">
 	<div class="wst-footer">
-		<div class="wst-footer-hp-ck1">
-			<volist name="helps" key="k1" id="vo1">
-			<div class="wst-footer-wz-ca">
+		<div class="wst-footer-hp-ck1" >
+			<volist name="helps" key="k1" id="vo1" >
+			<div class="wst-footer-wz-ca" style="display:none;">
 				<div class="wst-footer-wz-pt">
 				    <img src="__ROOT__/Apps/Home/View/default/images/a{$k1}.jpg" height="18" width="18"/>
 					<span class="wst-footer-wz-pn">{$vo1["catName"]}</span>
@@ -29,7 +29,7 @@
 			</div>
 			</volist>
 			
-			<div class="wst-footer-wz-clt">
+			<div class="wst-footer-wz-clt" style="display:none;">
 				<div style="padding-top:5px;line-height:25px;">
 				    <img src="__ROOT__/Apps/Home/View/default/images/a6.jpg" height="18" width="18"/>
 					<span class="wst-footer-wz-kf">联系客服</span>
@@ -39,7 +39,7 @@
 						<span class="wst-footer-pno">{$CONF['phoneNo']}</span><br/>
 						</if>
 						<if condition="$CONF['qqNo'] neq ''">
-						<a href="tencent://message/?uin={$CONF['qqNo']}&Site=QQ交谈&Menu=yes">
+						<a style="display:none;" href="tencent://message/?uin={$CONF['qqNo']}&Site=QQ交谈&Menu=yes">
 						<img border="0" src="http://wpa.qq.com/pa?p=1:{$CONF['qqNo']}:7" alt="QQ交谈" width="71" height="24" />
 						</a><br/>
 						</if>
@@ -50,7 +50,7 @@
 			<div class="wst-clear"></div>
 		</div>
 	    
-		<div class="wst-footer-hp-ck2">
+		<div class="wst-footer-hp-ck2" style="display:none;">
 			<img src="__ROOT__/Apps/Home/View/default/images/alipay.jpg" height="40" width="120"/>支付宝签约商家&nbsp;|&nbsp;
 			<span class="wst-footer-frd">正品保障</span><span >100%原产地</span>&nbsp;|&nbsp;
 			<span class="wst-footer-frd">7天退货保障</span>购物无忧&nbsp;|&nbsp;
@@ -78,10 +78,10 @@
 			</php>
 	        <if condition="$CONF['mallLicense'] ==''">
 	        <div>
-				Copyright©2015 Powered By <a target="_blank" href="http://www.wstmall.com">WSTMall</a>
+				Copyright©2015 Powered By <a target="_blank" href="">AntFerry</a>
 			</div>
 			<else/>
-				<div id="wst-mallLicense" data='1' style="display:none;">Copyright©2015 Powered By <a target="_blank" href="http://www.wstmall.com">WSTMall</a></div>
+				<div id="wst-mallLicense" data='1' style="display:none;">Copyright©2015 Powered By <a target="_blank" href="">AntFerry</a></div>
 	        </if>
 	        </div>
 	    	
