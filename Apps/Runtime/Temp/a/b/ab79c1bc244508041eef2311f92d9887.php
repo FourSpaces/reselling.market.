@@ -1,0 +1,3 @@
+<?php
+//000000086400a:6:{i:334;a:0:{}i:54;a:0:{}i:55;a:0:{}i:50;a:4:{i:0;a:4:{s:7:"shopcnt";s:1:"0";s:6:"shopId";s:2:"22";s:8:"shopName";s:14:"测试店铺41";s:7:"shopImg";s:38:"Upload/shops/2015-05/5564715db78ba.png";}i:1;a:4:{s:7:"shopcnt";s:1:"0";s:6:"shopId";s:2:"23";s:8:"shopName";s:14:"测试店铺42";s:7:"shopImg";s:38:"Upload/shops/2015-05/556472c50ae1a.png";}i:2;a:4:{s:7:"shopcnt";s:1:"0";s:6:"shopId";s:2:"24";s:8:"shopName";s:14:"测试店铺43";s:7:"shopImg";s:38:"Upload/shops/2015-05/55647356b697b.png";}i:3;a:4:{s:7:"shopcnt";s:1:"0";s:6:"shopId";s:2:"25";s:8:"shopName";s:14:"测试店铺44";s:7:"shopImg";s:38:"Upload/shops/2015-05/556473da51f49.png";}}i:362;a:0:{}i:56;a:0:{}}
+?>
