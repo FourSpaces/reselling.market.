@@ -14,8 +14,10 @@ class FavoritesAction extends BaseAction{
 	 */
 	public function queryByPage(){
 		$this->isLogin();
+	    $USER = session('WST_USER');
 		$m = D('Home/Favorites');
     	$this->assign("umark","queryFavoritesByPage");
+    	$this->assign('userType',$USER['userType']);
     	$this->display("default/users/favorites");
 	}
 	/**
@@ -28,6 +30,7 @@ class FavoritesAction extends BaseAction{
 		$rs = array();
 		$rs['status'] = 1;
 		$rs['data'] = $page;
+
 		$this->ajaxReturn($rs);
 	}
     /**

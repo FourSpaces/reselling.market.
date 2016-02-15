@@ -25,13 +25,15 @@
 			       return false;
 			},onError:function(msg){
 		}});
-	   $("#areaName").formValidator({onShow:"",onFocus:"地区名称至少要输入1个字符",onCorrect:"输入正确"}).inputValidator({min:1,max:20,onError:"你输入的长度不正确,请确认"});
+	   $("#areaName").formValidator({onShow:"",onFocus:"名称至少要输入1个字符",onCorrect:"输入正确"}).inputValidator({min:1,max:20,onError:"你输入的长度不正确,请确认"});
+     $("#areaKey").formValidator({onShow:"",onFocus:"名称至少要输入1个字符",onCorrect:"输入正确"}).inputValidator({min:1,max:2,onError:"你输入的长度不正确,请确认"});
 	   
    });
    function edit(){
 	   var params = {};
 	   params.id = $('#id').val();
 	   params.areaName = $('#areaName').val();
+     params.areaKey = $('#areaKey').val();
 	   params.parentId = $('#parentId').val();
 	   params.isShow = $("input[name='isShow']:checked").val();
 	   params.areaSort = $('#areaSort').val();
@@ -56,8 +58,26 @@
         <div class="wst-body">
         <table class="table table-hover table-striped table-bordered wst-form">
            <tr>
-             <th width='120' align='right'>地区名称<font color='red'>*</font>：</th>
+             <th width='140' align='right'>
+              <if condition='($object["parentId"]) eq 0'>
+                城市名称
+                <else/>
+                学校名称
+              </if>
+              
+              <font color='red'>*</font>：</th>
              <td><input type='text' id='areaName' class="form-control wst-ipt" value='{$object.areaName}' maxLength='25'/></td>
+           </tr>
+           <tr>
+             <th width='140' align='right'>
+              <if condition='($object["parentId"]) eq 0'>
+                城市首字母
+                <else/>
+                学校首字母
+              </if>
+              
+              <font color='red'>*</font>：</th>
+             <td><input type='text' id='areaKey' class="form-control wst-ipt" style="text-transform:uppercase;" value='{$object.areaKey}' maxLength='1'  onKeyUp="value=value.replace(/[^a-zA-Z]/g,'')"/></td>
            </tr>
            <tr>
              <th align='right'>是否显示<font color='red'>*</font>：</th>

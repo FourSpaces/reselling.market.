@@ -74,11 +74,14 @@
 	    	  });
 	      }
 	    </script>
+        <style>
+            .hide {display: none;}
+        </style>
     <body class="skin-blue">
         <!-- header logo: style can be found in header.less -->
         <header class="header">
             <a href="#" class="logo">
-                WST Mall
+                BAST Mall
             </a>
             <nav class="navbar navbar-static-top" role="navigation">
                 <!-- Sidebar toggle button-->
@@ -169,23 +172,26 @@
                                 <php>if(in_array('spfl_00',$WST_STAFF['grant'])){</php>
                                 <li><a href="{:U('Admin/GoodsCats/index')}" target='pageContent'>商品分类</a></li>
                                 <php>}</php>
+
+                                <!--去掉这里的内容-->
                                 <php>if(in_array('ppgl_00',$WST_STAFF['grant'])){</php>
-					            <li><a href="{:U('Admin/Brands/index')}" target='pageContent'>品牌管理</a></li>
+					            <li style="display:none;"><a href="{:U('Admin/Brands/index')}" target='pageContent'>品牌管理</a></li>
 					            <php>}</php>
+
                                 <php>if(in_array('splb_00',$WST_STAFF['grant'])){</php>
 					            <li><a href="{:U('Admin/Goods/index')}" target='pageContent'>商品列表</a></li>
 					            <php>}</php>
                                 <php>if(in_array('spsh_00',$WST_STAFF['grant'])){</php>
-					            <li><a href="{:U('Admin/Goods/queryPenddingByPage')}" target='pageContent'>商品审核</a></li>
+					            <li class="hide"><a href="{:U('Admin/Goods/queryPenddingByPage')}" target='pageContent'>商品审核</a></li>
 					            <php>}</php>
                                 <php>if(in_array('sppl_00',$WST_STAFF['grant'])){</php>
-					            <li><a href="{:U('Admin/GoodsAppraises/index')}" target='pageContent'>商品评价</a></li>
+					            <li class="hide"><a href="{:U('Admin/GoodsAppraises/index')}" target='pageContent'>商品评价</a></li>
 					            <php>}</php>
                             </ul>
                         </li>
                         <php>}</php>
                         <php>if(in_array('ddgl_00',$WST_STAFF['grant'])){</php>
-                        <li class="treeview">
+                        <li  class="treeview hide" style="display:none;">
                             <a href="#">
                                 <span>订单管理</span>
                             </a>
@@ -213,7 +219,7 @@
 					            <li><a href="{:U('Admin/Shops/index')}" target='pageContent' >店铺列表</a></li>
 					            <php>}</php>
                                 <php>if(in_array('dpsh_00',$WST_STAFF['grant'])){</php>
-					            <li><a href="{:U('Admin/Shops/queryPeddingByPage')}" target='pageContent' >店铺审核</a></li>
+					            <li class="hide"><a href="{:U('Admin/Shops/queryPeddingByPage')}" target='pageContent' >店铺审核</a></li>
 					            <php>}</php>
                             </ul>
                         </li>
@@ -225,13 +231,13 @@
                             </a>
                             <ul class="treeview-menu">
                                <php>if(in_array('dqlb_00',$WST_STAFF['grant'])){</php>
-                               <li><a href="{:U('Admin/Areas/index')}" target='pageContent' >地区管理</a></li>
+                               <li><a href="{:U('Admin/Areas/index')}" target='pageContent' >学校管理</a></li>
                                <php>}</php>
                                <php>if(in_array('sqlb_00',$WST_STAFF['grant'])){</php>
-					           <li><a href="{:U('Admin/Communitys/index')}" target='pageContent' >社区列表</a></li>
+					           <li style="display:none;"><a href="{:U('Admin/Communitys/index')}" target='pageContent' >学校列表</a></li>
 					           <php>}</php>
                                <php>if(in_array('sqlb_01',$WST_STAFF['grant'])){</php>
-					           <li><a href="{:U('Admin/Communitys/toEdit')}" target='pageContent' >添加社区</a></li>
+					           <li class="hide"><a href="{:U('Admin/Communitys/toEdit')}" target='pageContent' >添加社区</a></li>
 					           <php>}</php>
                             </ul>
                         </li>
@@ -311,11 +317,13 @@
                                 <php>if(in_array('gggl_00',$WST_STAFF['grant'])){</php>
 					            <li><a href="{:U('Admin/Ads/index')}" target='pageContent'>广告管理</a></li>
 					            <php>}</php>
+
+                                <!--删除部分-->
                                 <php>if(in_array('yhgl_00',$WST_STAFF['grant'])){</php>
-					            <li><a href="{:U('Admin/Banks/index')}" target='pageContent'>银行管理</a></li>
+					            <li style="display:none;"><a href="{:U('Admin/Banks/index')}" target='pageContent'>银行管理</a></li>
 					            <php>}</php>
 					            <php>if(in_array('zfgl_00',$WST_STAFF['grant'])){</php>
-					            <li><a href="{:U('Admin/Payments/index')}" target='pageContent'>支付管理</a></li>
+					            <li style="display:none;"><a href="{:U('Admin/Payments/index')}" target='pageContent'>支付管理</a></li>
 					            <php>}</php>
 					            
                             </ul>

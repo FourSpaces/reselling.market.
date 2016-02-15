@@ -15,14 +15,18 @@ class IndexAction extends BaseAction {
 	 */
     public function index(){
    		$ads = D('Home/Ads');
+      //获得默认城市
    		$areaId2 = $this->getDefaultCity();
-   		//获取分类
-		$gcm = D('Home/GoodsCats');
-		$catList = $gcm->getGoodsCatsAndGoodsForIndex($areaId2);
-		$this->assign('catList',$catList);
+   		//获取商品分类及商品
+		  $gcm = D('Home/GoodsCats');
+		  $catList = $gcm->getGoodsCatsAndGoodsForIndex($areaId2);
+		  $this->assign('catList',$catList);
+     
+
    		//首页主广告
    		$indexAds = $ads->getAds($areaId2,-1);
    		$this->assign('indexAds',$indexAds);
+
    		//分类广告
    		$catAds = $ads->getAdsByCat($areaId2);
    		$this->assign('catAds',$catAds);
@@ -32,7 +36,7 @@ class IndexAction extends BaseAction {
    		}else{
    			$this->display("default/index");
    		}
-		
+		   
     }
     /**
      * 广告记数
@@ -47,8 +51,11 @@ class IndexAction extends BaseAction {
     public function changeCity(){
     	$m = D('Home/Areas');
     	$areaId2 = $this->getDefaultCity();
+      //获得省列表
     	$provinceList = $m->getProvinceList();
+      //获得市列表
     	$cityList = $m->getCityGroupByKey();
+      //获得社区
     	$area = $m->getArea($areaId2);
     	$this->assign('provinceList',$provinceList);
     	$this->assign('cityList',$cityList);

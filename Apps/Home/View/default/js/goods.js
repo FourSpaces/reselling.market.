@@ -44,6 +44,7 @@ function queryGoods(obj,mark){
 	params.c3Id = $("#c3Id").val();
 	params.bs = $("#bs").val();
 	params.mark = mark;
+	//价格
 	if(mark==8){
 		var sj = $("#sj").val();
 		if(sj==2){
@@ -60,16 +61,20 @@ function queryGoods(obj,mark){
 	params.msort = $("#msort").val();
 	params.sj = $("#sj").val();
 	
+	
 	if(mark==1){
+		//全部<配送区域>
 		var areaId3 = $(obj).attr("data");
 		params.areaId3 = areaId3;
 	}else if(mark==2){
+		//全部<配送区域>
 		var areaId3 = $("#wst-areas").find(".searched").attr("data");
 		var communityId = $(obj).attr("data");
 		communityId = communityId?communityId:'';
 		params.areaId3 = areaId3;
 		params.communityId = communityId;
 	}else if(mark==3){
+		//全部<商品品牌>
 		var areaId3 = $("#wst-areas").find(".searched").attr("data");
 		var communityId = $("#wst-communitys").find(".searched").attr("data");
 		var brandId = $(obj).attr("data");
@@ -78,6 +83,7 @@ function queryGoods(obj,mark){
 		params.communityId = communityId;
 		params.brandId = brandId;
 	}else if(mark==4){
+		//全部<价格区间>
 		var areaId3 = $("#wst-areas").find(".searched").attr("data");
 		var communityId = $("#wst-communitys").find(".searched").attr("data");
 		var brandId = $("#wst-brand").find(".searched").attr("data");
@@ -102,12 +108,16 @@ function queryGoods(obj,mark){
 		params.prices = prices;
 		
 	}else{
+		//获得配置区域  地区  社区
 		var areaId3 = $("#wst-areas").find(".searched").attr("data");
 		var communityId = $("#wst-communitys").find(".searched").attr("data");
+		//商标
 		var brandId = $("#wst-brand").find(".searched").attr("data");
 		if(mark==12){
+			//价格区间  输入
 			var prices = $("#sprice").val()+"_"+$("#eprice").val();
 		}else{
+			//价格区间  设置
 			var prices = $("#wst-price").find(".searched").attr("data");
 		}
 		
@@ -116,11 +126,12 @@ function queryGoods(obj,mark){
 		
 		params.mark = mark;
 		params.areaId3 = areaId3;
-		params.communityId = communityId;
-		params.brandId = brandId;
+		params.communityId = communityId; //社区标识
+		params.brandId = brandId; //商标
 		params.prices = prices;
 	}
 	
+	//获得要搜索的对象
 	var keyword = $.trim($("#keyword").val());
 	if(keyword!=""){
 		params.keyWords = keyword;
@@ -247,6 +258,9 @@ function getGoodsappraises(goodsId,p){
 	});
 }
 
+/*
+喜欢的商品
+ */
 function favoriteGoods(id){
 	if($('#f0_txt').attr('f')=='0'){
 		jQuery.post(Think.U("Home/Favorites/favoriteGoods") ,{id:id},function(data) {
@@ -265,6 +279,10 @@ function favoriteGoods(id){
 		cancelFavorites(id,0);
 	}
 }
+
+/*
+最喜欢的商店
+ */
 function favoriteShops(id){
 	if($('#f1_txt').attr('f')=='0'){
 		jQuery.post(Think.U("Home/Favorites/favoriteShops") ,{id:id},function(data) {

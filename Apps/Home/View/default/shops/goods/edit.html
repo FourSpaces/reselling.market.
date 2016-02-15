@@ -9,8 +9,29 @@
 <script type="text/javascript" src="__PUBLIC__/plugins/webuploader/webuploader.js"></script>
 <script type="text/javascript" src="__ROOT__/Apps/Home/View/default/js/goodsbatchupload.js"></script>
 <style>
+.input-prepend {
+    position: relative;
+    white-space: nowrap;
+    vertical-align: middle;
 
-
+}
+.input-prepend .add-on {
+    position: absolute;
+    color: #666;
+    line-height: 24px;
+    text-align: center;
+    margin: 5px 8px;
+}
+.input-prepend .input.mobile {
+    padding-left: 50px;
+    width:90px;
+}
+.control-group .input {
+    width: 135px;
+    height: 14px;
+    padding: 4px 5px;
+    line-height: 14px;
+}
 </style>   
 <script>
 var ablumInit = false;
@@ -24,15 +45,22 @@ $(function () {
 			       return false;
 			},onError:function(msg){
 		}});
+	   /*
 	   $("#goodsSn").formValidator({onShow:"",onFocus:"",onCorrect:"输入正确"}).inputValidator({min:1,max:50,onError:"请输入商品编号"});
-	   $("#goodsName").formValidator({onShow:"",onFocus:"",onCorrect:"输入正确"}).inputValidator({min:1,max:200,onError:"请输入商品名称"});
-	   $("#marketPrice").formValidator({onShow:"",onFocus:"",onCorrect:"输入正确"}).inputValidator({min:1,max:50,onError:"请输入市场价格"});
-	   $("#shopPrice").formValidator({onShow:"",onFocus:"",onCorrect:"输入正确"}).inputValidator({min:1,max:50,onError:"请输入店铺价格"});
+	   */
+	   $("#goodsName").formValidator({onShow:"",onFocus:"",onCorrect:"输入正确"}).inputValidator({min:1,max:200,onError:"请输入宝贝名称"});
+	   $("#marketPrice").formValidator({onShow:"",onFocus:"",onCorrect:"输入正确"}).inputValidator({min:1,max:50,onError:"请输入原价"});
+	   $("#shopPrice").formValidator({onShow:"",onFocus:"",onCorrect:"输入正确"}).inputValidator({min:1,max:50,onError:"请输入现价"});
+	   /*
 	   $("#goodsStock").formValidator({onShow:"",onFocus:"",onCorrect:"输入正确"}).inputValidator({min:1,max:50,onError:"请输入库存"});
-	   $("#goodsUnit").formValidator({onShow:"",onFocus:"",onCorrect:"输入正确"}).inputValidator({min:1,max:50,onError:"请输入商品单位"});
-	   $("#goodsCatId3").formValidator({onFocus:"请选择商城分类"}).inputValidator({min:1,onError: "请选择完整商城分类"});
+	   */
+	   /*
+	   $("#goodsUnit").formValidator({onShow:"",onFocus:"",onCorrect:"输入正确"}).inputValidator({min:1,max:50,onError:"请输入宝贝单位"});
+	   */
+	   $("#goodsCatId3").formValidator({onFocus:"请选择宝贝分类"}).inputValidator({min:1,onError: "请选择完整宝贝分类"});
+	   /*
 	   $("#shopCatId2").formValidator({onFocus:"请选择本店分类"}).inputValidator({min:1,onError: "请选择完整本店分类"});
-	   
+	   */
 	   KindEditor.ready(function(K) {
 			editor1 = K.create('textarea[name="goodsDesc"]', {
 				height:'250px',
@@ -96,9 +124,11 @@ var filetypes = ["gif","jpg","png","jpeg"];
        <div class='wst-page-content'>
        <div id='tab' class="wst-tab-box">
 		<ul class="wst-tab-nav">
-	    	<li>商品信息</li>
-	    	<li>属性</li>
-	        <li>商品相册</li>
+	    	<li>宝贝信息</li>
+	    	
+	    	<li style="display:none;">属性</li>
+	  
+	        <li>宝贝相册</li>
 	    </ul>
     	<div class="wst-tab-content" style='width:99%;margin-bottom: 10px;'>
     	 
@@ -106,7 +136,7 @@ var filetypes = ["gif","jpg","png","jpeg"];
     	<!-- 商品基础信息 -->
     	<div class='wst-tab-item' style="position: relative;style='display:none'">
     		<iframe name="upload" style="display:none"></iframe>
-			<form id="uploadform_Filedata" autocomplete="off" style="position:absolute;top:155px;left:417px;z-index:10;" enctype="multipart/form-data" method="POST" target="upload" action="{:U('Home/Shops/uploadPic')}" >
+			<form id="uploadform_Filedata" autocomplete="off" style="position:absolute;top:100px;left:300px;z-index:10;" enctype="multipart/form-data" method="POST" target="upload" action="{:U('Home/Shops/uploadPic')}" >
 				<div style="position:relative;">
 				<input id="goodsImg" name="goodsImg" type="text" value="{$object.goodsImg}" readonly style="margin-right:4px;float:left;margin-left:8px;width:140px;"/>
 				<div class="div1">
@@ -124,59 +154,137 @@ var filetypes = ["gif","jpg","png","jpeg"];
 				
 				</div>
 			</form>
-	       <form name="myform" method="post" id="myform" autocomplete="off">
+	       <form name="myform" method="get" id="myform" autocomplete="off">
 	        <input type='hidden' id='id' value='{$object.goodsId}'/>
 	      
 	        <input type='hidden' id='goodsThumbs' value='{$object.goodsThums}'/>
 	        <table class="wst-form" >
-	           <tr>
+	            <tr style="display:none;">
 	             <th width='120'>商品编号<font color='red'>*</font>：</th>
 	             <td width='300'>
 	             <input type='text' id='goodsSn' name='goodsSn' class="form-control wst-ipt" value='{$object.goodsSn}' maxLength='25'/>
 	             </td>
-	             <td rowspan='7' valign='top'>
+	            </tr>
+
+	            <tr>
+	              <th width='120'>标题<font color='red'>*</font>：</th>
+	              <td><input type='text' style="width:138px" id='goodsName' name='goodsName' class="form-control wst-ipt" value='{$object.goodsName}' maxLength='100'/></td>
+	            </tr>
+				<tr>
+	             <th width='120'>宝贝图片<font color='red'>*</font>：</th>
+	             <td valign='top'>
 	               <div id="preview_Filedata">
 		           <img id='goodsImgPreview' src='<if condition="$object['goodsImg'] =='' ">__ROOT__/{$CONF['goodsImg']}<else/>__ROOT__/{$object['goodsImg']}</if>' height='152'/><br/>
 	               </div>
 	             </td>
-	           </tr>
-	           <tr>
-	             <th width='120'>商品名称<font color='red'>*</font>：</th>
-	             <td><input type='text' id='goodsName' name='goodsName' class="form-control wst-ipt" value='{$object.goodsName}' maxLength='100'/></td>
-	           </tr>
-	            <tr>
-	             <th width='120'>市场价格<font color='red'>*</font>：</th>
-	             <td>
-	             	<input type='text' id='marketPrice' name='marketPrice' class="form-control wst-ipt" value='{$object.marketPrice}' onkeypress="return WST.isNumberdoteKey(event)" onkeyup="javascript:WST.isChinese(this,1)" maxLength='10'/>
+	            </tr>
+				<tr>
+	             <th width='120'>类别<font color='red'>*</font>：</th>
+	             <td colspan='3'>
+	             <select id='goodsCatId1' onchange='javascript:getCatListForEdit("goodsCatId2",this.value,0)'>
+	                <option value=''>请选择</option>
+	                <volist name="goodsCatsList" id="vo">
+	                <option value='{$vo['catId']}' <if condition="$object['goodsCatId1'] == $vo['catId'] ">selected</if>>{$vo['catName']}</option>
+	                </volist>
+	             </select>
+	             <select id='goodsCatId2' onchange='javascript:getCatListForEdit("goodsCatId3",this.value,1);'>
+	                <option value=''>请选择</option>
+	             </select>
+	             <select id='goodsCatId3'>
+	                <option value=''>请选择</option>
+	             </select>
 	             </td>
 	           </tr>
-	            <tr>
-	             <th width='120'>店铺价格<font color='red'>*</font>：</th>
+
+				<!-- 2016 0131 2347 添加 新旧-->
+				<tr>
+	              <th width='120'>新旧<font color='red'>*</font>：</th>
+				  <td colspan='3'>
+		            <label>
+		             <input type='radio' id='oldAndNew0' name='oldAndNew' <if condition="$object['oldAndNew'] ==0 ">checked</if> value='0'/>非全新
+		             <input type='radio' id='oldAndNew1' name='oldAndNew' <if condition="$object['oldAndNew'] ==1 ">checked</if> value='1'/>全新
+		             </label>
+		             <label>
+		            </label>
+	              </td>
+
+	            </tr>
+	           	<tr>
+	             <th width='120'>转让价<font color='red'>*</font>：</th>
 	             <td>
 	             	<if condition="$object.recommPrice gt 0">
-	             		<input type='text' id='shopPrice' name='shopPrice' disabled="disabled" class="form-control wst-ipt" value='{$object.recommPrice}' onkeypress="return WST.isNumberdoteKey(event)" onkeyup="javascript:WST.isChinese(this,1)" maxLength='10'/>
+	             		<input type='text' style="width:138px" style="width:138px" id='shopPrice' name='shopPrice' disabled="disabled" class="form-control wst-ipt"  value='{$object.recommPrice}' onkeypress="return WST.isNumberdoteKey(event)" onkeyup="javascript:WST.isChinese(this,1)" maxLength='10'/>
 	             	<else/>
-	             		<input type='text' id='shopPrice' name='shopPrice' class="form-control wst-ipt" value='{$object.shopPrice}' onkeypress="return WST.isNumberdoteKey(event)" onkeyup="javascript:WST.isChinese(this,1)" maxLength='10'/>
+	             		<input type='text' style="width:138px" id='shopPrice' name='shopPrice' class="form-control wst-ipt" value='{$object.shopPrice}' onkeypress="return WST.isNumberdoteKey(event)" onkeyup="javascript:WST.isChinese(this,1)" maxLength='10'/>
 	             	</if>
 	             	
 	             </td>
-	           </tr>
+	            </tr>
+
 	            <tr>
+	             <th width='120'>原价<font color='red'>*</font>：</th>
+	             <td>
+	             	<input type='text' style="width:138px" id='marketPrice' name='marketPrice' class="form-control wst-ipt" value='{$object.marketPrice}' onkeypress="return WST.isNumberdoteKey(event)" onkeyup="javascript:WST.isChinese(this,1)" maxLength='10'/>
+	             </td>
+	           </tr>
+				
+				<!-- 2016 0131 2348 添加 讲价-->
+				<tr>
+	              <th width='120'>讲价<font color='red'>*</font>：</th>
+	              <td colspan='3'>
+		            <label>
+		             <input type='radio' id='bargain0' name='bargain' <if condition="$object['bargain'] ==0 ">checked</if> value='0'/>拒绝
+		             <input type='radio' id='bargain1' name='bargain' <if condition="$object['bargain'] ==1 ">checked</if> value='1'/>接受
+		             </label>
+		             <label>
+		            </label>
+	              </td>
+	            </tr>
+
+	            <tr style="display:none;">
 	             <th width='120'>商品库存<font color='red'>*</font>：</th>
-	             <td><input type='text' id='goodsStock' name='goodsStock' class="form-control wst-ipt" value='{$object.goodsStock}' onkeypress="return WST.isNumberKey(event)" onkeyup="javascript:WST.isChinese(this,1)" maxLength='25' <if condition="count($object['priceAttrs']) gt 0 ">disabled</if> /></td>
-	           </tr>
-	           <tr>
+	             <td><input type='text' id='goodsStock' name='goodsStock' class="form-control wst-ipt" value='{$object.goodsStock}' onkeypress="return WST.isNumberKey(event)" onkeyup="javascript:WST.isChinese(this,1)" maxLength='25' <if condition="count($object['priceAttrs']) gt 0 ">disabled</if> />
+	             </td>
+	           	</tr>
+				
+	           	<!--2016 0131 2330 去掉宝贝计量单位-->
+	           <tr style="display:none;">
 	             <th width='120'>单位<font color='red'>*</font>：</th>
-	             <td><input type='text' id='goodsUnit' name='goodsUnit' class="form-control wst-ipt" value='{$object.goodsUnit}'  maxLength='25'/></td>
+	             <empty name="name">
+	             	<td><input type='text' id='goodsUnit' name='goodsUnit' class="form-control wst-ipt" value='件'  maxLength='25'/></td>
+				 	<else />
+				 	<td><input type='text' id='goodsUnit' name='goodsUnit' class="form-control wst-ipt" value='{$object.goodsUnit}'  maxLength='25'/></td>
+				 </empty>
+	             
 	           </tr>
 	           <tr>
-	             <th width='120'>商品SEO关键字：</th>
+	             <th width='120'>宝贝关键字：</th>
 	             <td colspan='3'>
-	             <input type='text' style="width:788px" id='goodsKeywords' name='goodsKeywords' value='{$object.goodsKeywords}' maxlength="100">
+	             <input type='text' style="width:138px" id='goodsKeywords' name='goodsKeywords' value='{$object.goodsKeywords}' maxlength="100">
+	             </td>
+	           </tr>
+			   <tr>
+	             <th width='120'>联系方式：</th>
+	             <td colspan='3'>
+	             <div class="input-prepend">
+            		<label class="add-on" for="phone">&nbsp;手&nbsp;机：</label>
+            		<input id="phone" type="text" class="input mobile" name="phone" value="" maxlength="11">
+            	 </div>
+	             </td>
 	             </td>
 	           </tr>
 	           <tr>
-	             <th width='120'>商品信息：</th>
+	             <th width='120'></th>
+	             <td colspan='3'>
+	             <div class="input-prepend">
+            		<label class="add-on" for="sellerName">&nbsp;名&nbsp;字：</label>
+            		<input id="sellerName" type="text" class="input mobile" name="sellerName" value="" placeholder="某先生/女士">
+            	 </div>
+	             </td>
+	           </tr>
+	           <!--2016 0131 2332 去掉商品信息-->
+	           <tr style="display:none;">
+	             <th width='120'>宝贝信息：</th>
 	             <td colspan='3'>
 	             <textarea rows="2" style="width:788px" id='goodsSpec' name='goodsSpec'>{$object.goodsSpec}</textarea>
 	             </td>
@@ -192,7 +300,7 @@ var filetypes = ["gif","jpg","png","jpeg"];
 	             </label>
 	             </td>
 	           </tr>
-	           <tr>
+	           <tr style="display:none;">
 	             <th width='120'>商品属性：</th>
 	             <td colspan='3'>
 	             <label>
@@ -209,24 +317,9 @@ var filetypes = ["gif","jpg","png","jpeg"];
 	             </label>
 	             </td>
 	           </tr>
-	           <tr>
-	             <th width='120'>商城分类<font color='red'>*</font>：</th>
-	             <td colspan='3'>
-	             <select id='goodsCatId1' onchange='javascript:getCatListForEdit("goodsCatId2",this.value,0)'>
-	                <option value=''>请选择</option>
-	                <volist name="goodsCatsList" id="vo">
-	                <option value='{$vo['catId']}' <if condition="$object['goodsCatId1'] == $vo['catId'] ">selected</if>>{$vo['catName']}</option>
-	                </volist>
-	             </select>
-	             <select id='goodsCatId2' onchange='javascript:getCatListForEdit("goodsCatId3",this.value,1);'>
-	                <option value=''>请选择</option>
-	             </select>
-	             <select id='goodsCatId3'>
-	                <option value=''>请选择</option>
-	             </select>
-	             </td>
-	           </tr>
-	           <tr>
+
+	           <!--2016 0131 2317 去掉本店分类-->
+	           <tr style="display:none;">
 	             <th width='120'>本店分类<font color='red'>*</font>：</th>
 	             <td colspan='3'>
 	             <select id='shopCatId1' onchange='javascript:getShopCatListForEdit(this.value,"{$object['shopCatId2']}")'>
@@ -240,7 +333,9 @@ var filetypes = ["gif","jpg","png","jpeg"];
 	             </select>
 	             </td>
 	           </tr>
-	           <tr>
+	           <!--2016 0131 2317 去掉品牌-->
+	           <tr style="display:none;">
+
 	             <th width='120' align='right'>品牌：</th>
 	             <td>
 	             <select id='brandId' dataVal='{$object["brandId"]}'>
@@ -249,9 +344,20 @@ var filetypes = ["gif","jpg","png","jpeg"];
 	             </td>
 	           </tr>
 	           <tr>
-	             <th width='120'>商品描述<font color='red'>*</font>：</th>
+	           	<!--2016 0131 2316 商品修改为宝贝-->
+	             <th width='120'>宝贝描述<font color='red'>*</font>：</th>
 	             <td colspan='3'>
-	             <textarea rows="2" cols="60" id='goodsDesc' name='goodsDesc'>{$object.goodsDesc}</textarea>
+	             <empty name="object.goodsDesc">
+					<textarea rows="2" cols="60" id='goodsDesc' name='goodsDesc'>
+						1. 使用时长：<br/>
+						2. 新旧程度描述：<br/>
+						3. 存在的问题：<br/>
+						4. 到手时间/有效期/适用条件：<br/>
+					</textarea>
+				 <else />
+				 <textarea rows="2" cols="60" id='goodsDesc' name='goodsDesc'>{$object.goodsDesc}</textarea>
+				 </empty>
+	             
 	             </td>
 	           </tr>
 	           <tr>
@@ -266,7 +372,7 @@ var filetypes = ["gif","jpg","png","jpeg"];
 	        </form>
 	      </div>
 	     
-	      <div class='wst-tab-item'>
+	      <div class='wst-tab-item' style="display:none;">
 	      商品类型：<select id='attrCatId' onchange='javascript:getAttrList(this.value)'>
 	         <option value='0'>请选择</option>
 	         <volist name="attributeCatsCatsList" id="vo">
@@ -338,7 +444,7 @@ var filetypes = ["gif","jpg","png","jpeg"];
 	      </div>
 	      
 	      <!-- 相册 -->
-	      <div class='wst-tab-item' style='display:none'>
+	      <div class='wst-tab-item' style="display:none;">
 	      <!-- 
 	       <div><input type='text' id='galleryImgUpload'/></div>
 	        -->

@@ -30,12 +30,18 @@
 	<!----加载商品楼层start----->
 	<div class="wst-container">
 		<!-------------F1层---------------->
+		<!-- catList：分类列表 -->
+
+      	
 		<volist name="catList" key="k1" id="vo1">
 		<div class="wst-floor">
+			<!--商品列表 左边-->
 			<div class="wst-fl-left wst-fl{$k1}" style="position: relative;">
 				<div
 					style="position: absolute; top: 40px; width: 210px; height: 275px;">
+					<!-- catAds:首页主广告 -->
 					<volist name="catAds[$vo1['catId']]" id="vo" key="kv"> 
+
 					<a onclick="addAccess({$vo['adId']})" href="{$vo['adURL']}" target="_blank"> 
 						<img class='lazyImg' data-original="__ROOT__/{$vo['adFile']}" height="275" width="210" title="{$vo['adName']}" />
 					</a> 
@@ -59,6 +65,8 @@
 
 				</div>
 			</div>
+
+			<!--商品列表 右边-->
 			<div class="wst-fl-right">
 				<div class="wst-fl-nvg{$k1}">
 					<ul>
@@ -88,9 +96,11 @@
 								</div>
 								<div>
 									<em class="wst-left wst-goods-price" id='shopGoodsPrice_{$vo2["goodsId"]}' dataId='{$vo2["goodsAttrId"]}'>￥{$vo2['shopPrice']|number_format=2}</em>
+									<!--
 									<a href="javascript:addCart({$vo2['goodsId']},0,'{$vo2['goodsThums']}')" class="wst-right btnCart"> 
 									<img src="__ROOT__/Apps/Home/View/default/images/btn_addcart.png" width="85" />
 									</a>
+									-->
 									<div class='wst-clear'></div>
 								</div>
 							</div>

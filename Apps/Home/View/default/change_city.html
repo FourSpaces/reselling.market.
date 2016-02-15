@@ -4,7 +4,7 @@
   		<meta charset="utf-8">
       	<meta http-equiv="X-UA-Compatible" content="IE=edge">
       	<meta name="viewport" content="width=device-width, initial-scale=1">
-      	<title>店铺街 - {$CONF['mallTitle']}</title>
+      	<title>{$CONF['mallTitle']}</title>
       	<meta name="keywords" content="{$CONF['mallKeywords']}" />
       	<meta name="description" content="{$CONF['mallDesc']},切换城市" />
       	<link rel="stylesheet" href="__ROOT__/Apps/Home/View/default/css/common.css" />
@@ -14,7 +14,7 @@
    	<body>
 		<include file="./Apps/Home/View/default/header_common.html" />
 
-		<!----加载商品楼层start----->
+		<!----加载商品楼层start -->
 		<div class="wst-container">
 			<div class="wst-shadow">
 				<div class="other-main">
@@ -22,7 +22,7 @@
                 <h2>进入<a href="javascript:;" onclick="changeCity({$area['areaId']});">{$area["areaName"]}</a></h2>
                 <div class="shortcut">
                 
-                    <span>按省份选择：</span>
+                    <span>按城市选择：</span>
                     <div class="shortcut-select shortcut-select-p">
                         <!--  div class="ss-value"><em pid="17">湖南</em><i class="triangle"></i></div> -->
                         <select id="provinceId" onchange="getCitys(this);">
@@ -33,7 +33,7 @@
                     </div>
                     <div class="shortcut-select shortcut-select-city">
                         <select id="cityId">
-                        	<option>选择城市</option>
+                        	<option>选择学校</option>
                         </select>
                     </div>    
                     <input type="button" class="button" value="确 定" onclick="changeCity();">
@@ -93,7 +93,7 @@
 	    			}
 	    		}
 	    		if(!json.length){
-	    			citys.push("<option>选择城市</option>");
+	    			citys.push("<option>选择学校</option>");
 	    		}
 	    		$("#cityId").html(citys.join(""));
 	    	});

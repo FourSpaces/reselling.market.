@@ -35,6 +35,20 @@
 .des-chux span {
 	font-weight: bolder;
 	color: #fb4f1c;
+
+}
+
+.underline-chux {
+	font-weight: 400;
+	border-bottom:thin inset #dadada;
+	padding-bottom:10px;
+	margin-bottom:10px;
+	margin-top:10px;
+}
+
+.underline-chux span {
+	font-weight: 400;
+	font-size: 14px;
 }
 
 .goods-des-tab .des-title-span {
@@ -55,8 +69,9 @@
 }
 
 .goods-des-box .goods-des-tab {
-	width: 600px;
-	font-size: 13px;
+	width: 500px;
+	font-size: 14px;
+	font-weight: 400;
 }
 
 .goods-des-box .goods-des-tab tr {
@@ -295,7 +310,7 @@
 	border-top-right-radius: 5px;
 	color: #ffffff;
 	cursor: pointer;
-	background-color: #e23e3d;
+	background-color: #ff6600;
 }
 
 .tab {
@@ -326,17 +341,17 @@
 }
 
 .wst-goods-pdetails-right .tab {
-	border-bottom: 2px solid #BE0000;
+	border-bottom: 2px solid #FF4400;
 	margin-bottom: 10px;
 }
 
 .wst-goods-pdetails-right .tab li {
 	position: relative;
-	height: 24px;
-	padding: 3px 12px 0;
+	height: 30px;
+	padding: 4px 12px 0;
 	overflow: hidden;
 	margin-right: 3px;
-	line-height: 24px;
+	line-height: 30px;
 }
 
 .wst-goods-pdetails-right .tab span {

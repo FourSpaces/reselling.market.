@@ -71,7 +71,7 @@ var WST = ThinkPHP = window.Think = {
 			<li class="fore2 ld"><s></s>
 			<?php if(session('WST_USER.userId')>0){ ?>
 				<?php if(session('WST_USER.userType')==0){ ?>
-				    <a href="<?php echo U('Home/Shops/toOpenShopByUser');?>" rel="nofollow">我要开店</a>
+				    <a href="<?php echo U('Home/Shops/toOpenShopByUser');?>" rel="nofollow">成为服务商</a>
 				<?php }else{ ?>
 				    <?php if(session('WST_USER.loginTarget')==0){ ?>
 				        <a href="<?php echo U('Home/Shops/index');?>" rel="nofollow">卖家中心</a>
@@ -80,7 +80,7 @@ var WST = ThinkPHP = window.Think = {
 				    <?php } ?>
 				<?php } ?>
 			<?php }else{ ?>
-			    <a href="<?php echo U('Home/Shops/toOpenShop');?>" rel="nofollow">我要开店</a>
+			    <a href="<?php echo U('Home/Shops/toOpenShop');?>" rel="nofollow">成为服务商</a>
 			<?php } ?>
 			</li>
 		</ul>
@@ -211,10 +211,15 @@ var WST = ThinkPHP = window.Think = {
 	<!----加载商品楼层start----->
 	<div class="wst-container">
 		<!-------------F1层---------------->
+		<!-- catList：分类列表 -->
+
+      	
 		<?php if(is_array($catList)): $k1 = 0; $__LIST__ = $catList;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo1): $mod = ($k1 % 2 );++$k1;?><div class="wst-floor">
+			<!--商品列表 左边-->
 			<div class="wst-fl-left wst-fl<?php echo ($k1); ?>" style="position: relative;">
 				<div
 					style="position: absolute; top: 40px; width: 210px; height: 275px;">
+					<!-- catAds:首页主广告 -->
 					<?php if(is_array($catAds[$vo1['catId']])): $kv = 0; $__LIST__ = $catAds[$vo1['catId']];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($kv % 2 );++$kv;?><a onclick="addAccess(<?php echo ($vo['adId']); ?>)" href="<?php echo ($vo['adURL']); ?>" target="_blank"> 
 						<img class='lazyImg' data-original="/reselling.market/<?php echo ($vo['adFile']); ?>" height="275" width="210" title="<?php echo ($vo['adName']); ?>" />
 					</a><?php endforeach; endif; else: echo "" ;endif; ?>
@@ -233,6 +238,8 @@ var WST = ThinkPHP = window.Think = {
 
 				</div>
 			</div>
+
+			<!--商品列表 右边-->
 			<div class="wst-fl-right">
 				<div class="wst-fl-nvg<?php echo ($k1); ?>">
 					<ul>
@@ -259,9 +266,11 @@ var WST = ThinkPHP = window.Think = {
 								</div>
 								<div>
 									<em class="wst-left wst-goods-price" id='shopGoodsPrice_<?php echo ($vo2["goodsId"]); ?>' dataId='<?php echo ($vo2["goodsAttrId"]); ?>'>￥<?php echo (number_format($vo2['shopPrice'],2)); ?></em>
+									<!--
 									<a href="javascript:addCart(<?php echo ($vo2['goodsId']); ?>,0,'<?php echo ($vo2['goodsThums']); ?>')" class="wst-right btnCart"> 
 									<img src="/reselling.market/Apps/Home/View/default/images/btn_addcart.png" width="85" />
 									</a>
+									-->
 									<div class='wst-clear'></div>
 								</div>
 							</div>

@@ -21,6 +21,7 @@ class MessagesAction extends BaseAction{
     	$page['pager'] = $pager->show();
     	$this->assign('Page',$page);
     	$this->assign("umark","queryMessageByPage");
+        $this->assign('userType',$USER['userType']);
     	if($USER['loginTarget']=='User'){
             $this->display("default/users/messages/list");
     	}else{
@@ -35,6 +36,7 @@ class MessagesAction extends BaseAction{
         $info = D('Home/Messages')->get();
         $USER = session('WST_USER');
         $this->assign('info',$info);
+        $this->assign('userType',$USER['userType']);
         if($USER['loginTarget']=='User'){
             $this->display("default/users/messages/show");
         }else{

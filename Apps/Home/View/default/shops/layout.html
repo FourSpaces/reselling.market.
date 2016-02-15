@@ -43,8 +43,16 @@
 			</div>
 			<div class="wst-shop-nav">
 				<div class="wst-nav-box">
-					<li class="liselect"><a href="{:U('Home/Shops/index')}" style='color:#FFFFFF;'>我是卖家</a></li>
+					<li class="liselect">
+            <if condition="($userType eq 1)">
+              <a href="{:U('Home/Shops/index')}" style='color:#FFFFFF;'>卖家首页</a>
+            <else/>
+              <a href="{:U('Home/Orders/queryByPage')}">买家首页</a>
+            </if>
+           
+          </li>
 					<div class="wst-clear"></div>
+           {$userType}
 				</div>
 			</div>
 			<div class="wst-clear;"></div>
@@ -52,26 +60,35 @@
           <div class='wst-nav'></div>
           <div class='wst-main'>
             <div class='wst-menu'>
-            	<span class='wst-menu-title'><span></span>交易管理</span>
+            	<span class='wst-menu-title' style="display:none;"><span></span>交易管理</span>
             
-              	<a href='{:U("Home/Orders/toShopOrdersList")}'><li id='li_toShopOrdersList' <if condition='$umark eq "toShopOrdersList"'> class='liselect'</if>>订单管理<span style="display:none;" class="wst-msg-tips-box"></span></li></a>
+              	<a style="display:none;" href='{:U("Home/Orders/toShopOrdersList")}'><li id='li_toShopOrdersList' <if condition='$umark eq "toShopOrdersList"'> class='liselect'</if>>订单管理<span style="display:none;" class="wst-msg-tips-box"></span></li></a>
             	<span class='wst-menu-title' style='border-top:0px;'><span></span>商品管理</span>
             
-               	<a href="{:U('Home/ShopsCats/index/')}"><li <if condition='$umark eq "index"'> class='liselect'</if>>商品分类</li></a>
-              	<a href="{:U('Home/Goods/queryOnSaleByPage/')}"><li <if condition='$umark eq "queryOnSaleByPage"'> class='liselect'</if>>出售中的商品</li></a>
-               	<a href="{:U('Home/Goods/queryPenddingByPage/')}"><li <if condition='$umark eq "queryPenddingByPage"'> class='liselect'</if>>待审核商品</li></a>
-               	<a href="{:U('Home/Goods/queryUnSaleByPage/')}"><li <if condition='$umark eq "queryUnSaleByPage"'> class='liselect'</if>>仓库中的商品</li></a>
-               	<a href="{:U('Home/Goods/toEdit/',array('umark'=>'toEditGoods'))}"><li <if condition='$umark eq "toEditGoods"'> class='liselect'</if>>新增商品</li></a>
-               	<a href="{:U('Home/GoodsAppraises/index/')}"><li <if condition='$umark eq "GoodsAppraises"'> class='liselect'</if>>评价管理</li></a>
+               	<a style="display:none;" href="{:U('Home/ShopsCats/index/')}"><li <if condition='$umark eq "index"'> class='liselect'</if>>商品分类</li></a>
+               	<a  style="display:none;" href="{:U('Home/Goods/queryPenddingByPage/')}"><li <if condition='$umark eq "queryPenddingByPage"'> class='liselect'</if>>待审核商品</li></a>
+               	<a  style="display:none;" href="{:U('Home/Goods/queryUnSaleByPage/')}"><li <if condition='$umark eq "queryUnSaleByPage"'> class='liselect'</if>>仓库中的商品</li></a>
+                <a style="display:none;" href="{:U('Home/GoodsAppraises/index/')}"><li <if condition='$umark eq "GoodsAppraises"'> class='liselect'</if>>评价管理</li></a>
 
-               	<a href="{:U('Home/AttributeCats/index')}"><li <if condition='$umark eq "AttributeCats"'> class='liselect'</if>>商品类型</li></a>
-               	<a href="{:U('Home/Imports/index')}"><li <if condition='$umark eq "Imports"'> class='liselect'</if>>数据导入</li></a>
-			
-              	<span class='wst-menu-title'><span></span>网店设置</span>
-            	<a href="{:U('Home/Shops/toEdit/')}"><li <if condition='$umark eq "toEdit"'> class='liselect'</if>>店铺资料</li></a>
-              	<a href="{:U('Home/Shops/toShopCfg/')}"><li <if condition='$umark eq "setShop"'> class='liselect'</if>>店铺设置</li></a>
-              	<a href="{:U('Home/Messages/queryByPage/')}"><li id='li_queryMessageByPage' <if condition='$umark eq "queryMessageByPage"'> class='liselect'</if>>商城消息<span style="display:none;" class="wst-msg-tips-box"></span></li></a>
-              	<a href="{:U('Home/Shops/toEditPass')}"><li <if condition='$umark eq "toEditPass"'> class='liselect'</if>>修改密码</li></a>
+                <a style="display:none;" href="{:U('Home/AttributeCats/index')}"><li <if condition='$umark eq "AttributeCats"'> class='liselect'</if>>商品类型</li></a>
+                
+                <!--分割线，上面的弃用 -->
+                <a href="{:U('Home/Goods/queryOnSaleByPage/')}"><li <if condition='$umark eq "queryOnSaleByPage"'> class='liselect'</if>>出售中的宝贝</li></a>
+               	<a href="{:U('Home/Goods/toEdit/',array('umark'=>'toEditGoods'))}"><li <if condition='$umark eq "toEditGoods"'> class='liselect'</if>>新增宝贝</li></a>
+               	
+               	<a style="display:none;" href="{:U('Home/Imports/index')}"><li <if condition='$umark eq "Imports"'> class='liselect'</if>>数据导入</li></a>
+			          <if condition="($userType eq 1)">
+                  <span class='wst-menu-title'><span></span>网店设置</span>
+                  <a href="{:U('Home/Shops/toEdit/')}"><li <if condition='$umark eq "toEdit"'> class='liselect'</if>>店铺资料</li></a>
+                  <a href="{:U('Home/Shops/toShopCfg/')}"><li <if condition='$umark eq "setShop"'> class='liselect'</if>>店铺设置</li></a>
+                 
+                </if>
+              	  
+                  <span class='wst-menu-title'><span></span>个人中心</span>
+                  <a  href="{:U('Home/Favorites/queryByPage/')}"><li <if condition='$umark eq "queryFavoritesByPage"'> class='selected'</if>>我的关注</li></a>
+                  <a href="{:U('Home/Messages/queryByPage/')}"><li id='li_queryMessageByPage' <if condition='$umark eq "queryMessageByPage"'> class='liselect'</if>>商城消息<span style="display:none;" class="wst-msg-tips-box"></span></li></a>
+                  <a href="{:U('Home/Users/toEdit/')}"><li <if condition='$umark eq "toEditUser"'> class='selected'</if>>个人资料</li></a>
+                  <a href="{:U('Home/Users/toEditPass/')}"><li <if condition='$umark eq "toEditPass"'> class='selected'</if>>修改密码</li></a>
             </div>
             <div class='wst-content'>
             <block name="content"><div class="result">卖家中心</div></block>
@@ -85,7 +102,7 @@
         </div>
     </body>
       	<script src="__PUBLIC__/plugins/formValidator/formValidator-4.1.3.js"></script>
-     	<script src="__PUBLIC__/js/common.js"></script>
+     	  <script src="__PUBLIC__/js/common.js"></script>
       	<script src="__ROOT__/Apps/Home/View/default/js/shopcom.js"></script>
       	<script src="__ROOT__/Apps/Home/View/default/js/head.js"></script>
       	<script src="__ROOT__/Apps/Home/View/default/js/common.js"></script>

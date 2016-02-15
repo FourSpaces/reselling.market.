@@ -296,6 +296,9 @@ function WSTUnlinkFile($aimUrl) {
 }
 
 function  WSTLogResult($filepath,$word){
+	if(!empty($filepath)){
+		$filepath = LOG_PATH.'/home.txt';
+	}
 	if(!file_exists_case($filepath)){
 		WSTCreateFile($filepath);
 	}

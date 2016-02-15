@@ -121,11 +121,19 @@ class ShopsAction extends BaseAction {
      */
 	public function login(){
 		$USER = session('WST_USER');
+		/*
 		if(!empty($USER) && $USER['userType']>=1){
 			$this->redirect("Shops/index");
 		}else{
             $this->display("default/shop_login");
 		}
+		*/
+		if(!empty($USER)){
+			$this->redirect("Users/index");
+		}else{
+			$this->display('default/login');
+		}
+
 	}
 	
 	/**
@@ -160,13 +168,14 @@ class ShopsAction extends BaseAction {
 	public function index(){
 		$this->isShopLogin();
 		$spm = D('Home/Shops');
+		$USER = session('WST_USER');
 		$data['shop'] = $spm->loadShopInfo(session('WST_USER.userId'));
 		$obj["shopId"] = $data['shop']['shopId'];
 		$details = $spm->getShopDetails($obj);
 		$data['details'] = $details;
 		
 		$this->assign('shopInfo',$data);
-		
+		$this->assign('userType',$USER['userType']);
 		$this->display("default/shops/index");
 	}
 	/**
@@ -182,6 +191,7 @@ class ShopsAction extends BaseAction {
 		$m = D('Home/Shops');
 		$this->assign('object',$m->get((int)$USER['shopId']));
 		$this->assign("umark","toEdit");
+		$this->assign('userType',$USER['userType']);
 		$this->display("default/shops/edit_shop");
 	}
 	
@@ -195,6 +205,7 @@ class ShopsAction extends BaseAction {
 		$m = D('Home/Shops');
 		$this->assign('object',$m->getShopCfg((int)$USER['shopId']));
 		$this->assign("umark","setShop");
+		$this->assign('userType',$USER['userType']);
 		$this->display("default/shops/cfg_shop");
 	}
 	
@@ -367,6 +378,9 @@ class ShopsAction extends BaseAction {
     	$this->ajaxReturn($rs);
 	}
 
+	public function openShopWay(){
+		
+	}
 	/**
 	 * 获取店铺搜索提示列表
 	 */

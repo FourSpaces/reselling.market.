@@ -90,14 +90,22 @@ class BaseAction extends Controller {
 	 */
 	public function isShopLogin(){
 		$USER = session('WST_USER');
-	    if (empty($USER) || $USER['userType']<1)$this->redirect("Shops/login");
+		//2016 0211 2312 去掉了商户验证
+	    //if (empty($USER) || $USER['userType']<1)$this->redirect("Shops/login");
+	    if (empty($USER))$this->redirect("Shops/login");
 	}
 	/**
 	 * 商家ajax登录验证
 	 */
 	public function isShopAjaxLogin(){
 		$USER = session('WST_USER');
+		/*
 		if (empty($USER) || $USER['userType']<1){
+			die("{status:-999,url:'Shops/login'}");
+		}
+		*/
+		//2016 0211 2312 去掉了商户验证
+		if (empty($USER)){
 			die("{status:-999,url:'Shops/login'}");
 		}
 	}

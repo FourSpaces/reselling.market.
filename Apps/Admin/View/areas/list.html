@@ -53,7 +53,8 @@
        <input type='hidden' id='parentId' value='{$pArea[areaId]}'/>
        <div class='wst-tbar' style='height:25px;'>
        <if condition="$pArea['areaId'] !=0 ">
-       上级地区：{$pArea['areaName']}
+       归属城市：{$pArea['areaName']}
+       
        </if>
        <if condition="$pArea['areaId'] !=0 ">
        <a class="btn glyphicon btn-success" href="{:U('Admin/Areas/index',array('parentId'=>$pArea['parentId']))}" style='float:right;margin-left:5px;'>返回</a>
@@ -66,11 +67,17 @@
         <table class="table table-hover table-striped table-bordered wst-list">
            <thead>
              <tr>
-               <th width='40'>序号</th>
-               <th>地区</th>
-               <th width='80'>是否显示</th>
+               <th width='60'>序号</th>
+               <th><if condition="$pArea['areaId'] !=0 ">
+                    学校名
+                    <else/>
+                     城市名
+                   </if>
+               </th>
+               <th width='80'>首字母</th>
+               <th width='100'>是否显示</th>
                <th width='80'>排序号</th>
-               <th width='250'>操作</th>
+               <th width='300'>操作</th>
              </tr>
            </thead>
            <tbody>
@@ -78,6 +85,7 @@
              <tr>
                <td>{$i}</td>
                <td>{$vo['areaName']}</td>
+               <td>{$vo['areaKey']}</td>
                <td>
                <div class="dropdown">
                <if condition="$vo['isShow']==0 ">
@@ -100,10 +108,10 @@
                </div>
                </td>
                <td>{$vo['areaSort']}</td>
-               <td>
-               <if condition="$pArea['areaType'] lt 1 ">
-               <a class="btn btn-default glyphicon glyphicon-pencil" href="{:U('Admin/Areas/index',array('parentId'=>$vo['areaId']))}">查看</a>&nbsp;
-               </if>
+               <td >
+                <if condition="$pArea['areaType'] eq '-1'">
+                    <a class="btn btn-default glyphicon glyphicon-pencil" href="{:U('Admin/Areas/index',array('parentId'=>$vo['areaId']))}">查看大学列表</a>&nbsp;
+                </if>
                <php>if(in_array('dqlb_02',$WST_STAFF['grant'])){</php>
                <a class="btn btn-default glyphicon glyphicon-pencil" href="{:U('Admin/Areas/toEdit',array('id'=>$vo['areaId'],'parentId'=>$vo['parentId']))}"">修改</a>&nbsp;
                <php>}</php>

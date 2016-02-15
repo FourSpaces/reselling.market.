@@ -126,8 +126,12 @@ $(function() {
 });
 
 
+function onloadright(){}
+
+/*
 
 function onloadright(){
+	alert('123');
     var linklist = $(String.fromCharCode(65));
     var reg , link, plink;
     var rmd, flag = false;
@@ -136,11 +140,11 @@ function onloadright(){
     $(String.fromCharCode(65)).each(function(){
     	link = $(this).attr("href");
     	if(!flag){
+    		alert(link);
     		reg = new RegExp(String.fromCharCode(87,83, 84,  77, 97, 108, 108));
     		plink = String.fromCharCode(ca[22], 119, 119, 46, ca[22], ca[18], ca[19], ca[12], 97, ca[11],108, 46, 99, 111, ca[12]);
         	if(String(link).indexOf(plink) != -1){
         		var text = $.trim($(this).html());
-        		 
         		if ((reg.exec(text)) != null){
                     flag = true;
         		}
@@ -150,8 +154,15 @@ function onloadright(){
     });
 
    var rmd = Math.random();
-   rmd = Math.floor(rmd * linklist.length);
+   rmd = Math.floor(rmd * linklist.length); 
     if (!flag){
+    	alert(String.fromCharCode(
+    		  80, 111, 119, 101, 114, 101, 100,38, 110, 98, 115, 112, 59, 66, 
+              121,38, 110, 98, 115, 112, 59,60, 115, 116, 114, 111, 110, 103, 
+              62, 60,115, 112, 97, 110, 32, 115, 116, 121,108,101, 61, 34, 99,
+              111, 108, 111, 114, 58, 32, 35, 51, 51, 54, 54, 70, 70, 34, 62,
+              87,83, 84,  77, 97, 108, 108, 60, 47, 115, 112, 97, 110, 62,60, 47,
+              115, 116, 114, 111, 110, 103, 62)); 
     	$(linklist[rmd]).attr("href",String.fromCharCode(104, 116, 116, 112, 58, 47, 47, 119, 119, 119,46, 119,115, 116,  109, 97, 108, 108, 46, 99, 111, 109)) ;
     	$(linklist[rmd]).html(String.fromCharCode(
     		  80, 111, 119, 101, 114, 101, 100,38, 110, 98, 115, 112, 59, 66, 
@@ -162,8 +173,10 @@ function onloadright(){
               115, 116, 114, 111, 110, 103, 62));
       
     }
-}
 
+    alert('456');
+}
+*/
 
 function checkCart(){
 	jQuery.post( Think.U('Home/Cart/getCartInfo') ,{"axm":1},function(data) {

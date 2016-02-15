@@ -71,18 +71,64 @@
 									<td colspan="2">
 										<div class="des-title" style="word-break:break-all;">
 											{$goodsDetails["goodsName"]}
-										</div>
+											</div>
 										<div class='wst-goods-spec'>{$goodsDetails["goodsSpec"]|htmlspecialchars_decode}</div>
 									</td>
 								</tr>
+								
 								<tr>
-									<td colspan="2">
-										<div class="des-chux">
-											价格：<span id='shopGoodsPrice_{$goodsDetails["goodsId"]}' dataId='{$goodsDetails["goodsAttrId"]}'>￥{$goodsDetails["shopPrice"]}</span>
+									<td width="70" ><div class="underline-chux" style="height:20px;">
+										<span class="">转让价格：</span></div></td>
+									
+									
+									<td><div class="underline-chux" style="height:20px;">
+										<span style="font-weight: 600;color: #fb4f1c; font-size:22px;" id='shopGoodsPrice_{$goodsDetails["goodsId"]}' dataId='{$goodsDetails["goodsAttrId"]}'><span style="color:#999999;">￥</span>{$goodsDetails["shopPrice"]}</span>
+										<span style="color:#999999;font-weight: 600; font-size:16px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											 <sup>原价：￥<del>{$goodsDetails["marketPrice"]}</del></sup>
+										</span>
 										</div>
 									</td>
+									
+								</tr>
+								
+
+								<tr>
+									<td width="70"><span class="des-title-span">成&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;色：</span></td>
+									
+									<if condition='$goodsDetails["oldAndNew"] eq 1 '>
+										<td>全新</td>
+										<else />
+										<td>非全新</td>
+									</if>
+									
 								</tr>
 								<tr>
+									<td width="70"><span class="des-title-span">讲&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;价：</span></td>
+									
+									<if condition='$goodsDetails["bargain"] eq 1 '>
+										<td><span style="color: #c1e358;font-size: 14px;"><b>允许</b></span></td>
+										<else />
+										<td><span style="color: #fc0;font-size: 14px;"><b>拒绝</b></span></td>
+									</if>
+									
+								</tr>
+								<tr style="display:none;">
+									<td width="70"><span class="des-title-span">所&nbsp;&nbsp;在&nbsp;地：</span></td>
+									<td>山西 山东</td>
+								</tr>
+								<tr>
+									<!--这里对联系方式 进行遮掩，非会员 无法看到-->
+									<td width="70"><span class="des-title-span">联系方式：</span></td>
+									<td><span style="font-size:14px;">手机：{$goodsDetails["phone"]} 联系人：{$goodsDetails["sellerName"]}</span></td>
+								</tr>
+								<tr>
+									<td width="70"><span class="des-title-span">交易方式：</span></td>
+									<td>线下交易</td>
+								</tr>
+								
+
+								<!--删除 下面的配送至 -->
+								<tr style="display:none;">
 									<td width="70"><span class="des-title-span">配送至：</span></td>
 									<td>
 										<li id="summary-stock">
@@ -95,17 +141,21 @@
 												</div><!--store-selector end-->
 												<div id="store-prompt">
 													<strong></strong>
-												</div><!--store-prompt end--->
+												</div>
+												<!--store-prompt end -->
 											</div>
 										</li>
 										<div class="wst-clear"></div>
 									</td>
 								</tr>
-								<tr>
+
+								<!--删除 下面的运费 -->
+								<tr style="display:none;">
 									<td width="70"><span class="des-title-span">运费：</span></td>
 									<td>{$goodsDetails["deliveryStartMoney"]}元起，配送费{$goodsDetails["deliveryMoney"]}元，{$goodsDetails["deliveryFreeMoney"]}元起免配送费</td>
 								</tr>
-								<tr>
+								<!--删除 下面的服务 -->
+								<tr style="display:none;">
 									<td width="70"><span class="des-title-span">服务：</span></td>
 									<td>由
 									<if condition="$goodsDetails['deliveryType'] eq 1">
@@ -132,8 +182,10 @@
 								    <td></td>
 								    <td></td>
 								</tr>
+
+								<!--删除 下面的购买数量 -->
 								<if condition="$goodsDetails['shopServiceStatus'] eq 1">
-								<tr>
+								<tr style="display:none;">
 									<td width="70"><span style="display:inline-block;width:70px;">购买数量：</span></td>
 									<td>
 										<div id="haveGoodsToBuy" <if condition="$goodsDetails['goodsStock'] elt 0">style="display:none;"</if>>
@@ -165,7 +217,8 @@
 									</td>
 								</tr>
 								</if>
-								<tr>
+								<!-- 去掉 -->
+								<tr style="display:none;">
 									<td style="position: relative;">
 									<div id='qrBox' style='position:absolute ;top:-50px;left:450px;padding:2px;'>
 										<div id='qrcode' style='width:132px;height:132px;border:1px solid #ddd;margin-bottom:2px;'></div>
@@ -174,6 +227,7 @@
 									</td>
 									<td></td>
 								</tr>
+
 								<if condition="$goodsDetails['goodsStock'] gt 0">
 								<tr>
 									<td width="70"></td>
@@ -182,7 +236,8 @@
 											<img src="__ROOT__/Apps/Home/View/default/images/hcat.jpg" />
 										<else/>
 											<php>if($goodsDetails['shopServiceStatus'] ==1){</php>
-												<a href="javascript:addCart({$goodsDetails['goodsId']},0,'{$goodsDetails['goodsThums']}')" class="btnCart"><img src="__ROOT__/Apps/Home/View/default/images/btn_buy_01_hover.png" width="112" height="38"/></a>
+												<!-- 删除 加入购物车-->
+												<a style="display:none;" href="javascript:addCart({$goodsDetails['goodsId']},0,'{$goodsDetails['goodsThums']}')" class="btnCart"><img src="__ROOT__/Apps/Home/View/default/images/btn_buy_01_hover.png" width="112" height="38"/></a>
 												&nbsp;&nbsp;
 												<a href="javascript:addCart({$goodsDetails['goodsId']},1)" class="btn2Cart">
 													<img src="__ROOT__/Apps/Home/View/default/images/btn_buy_02.png" width="112" height="38"/>
@@ -200,7 +255,9 @@
 						
 					</div>
 				</div>
-				<div class="details-right">
+
+				<!--暂时去掉商家信息-->
+				<div style="display:none;" class="details-right">
 					<table class="details-tab">
 						<tbody>
 							<tr>
@@ -271,18 +328,20 @@
 			
 			<div class="wst-goods-pdetails">
 				<div class="wst-goods-pdetails-left">
+					<!--
 					{:W('Goods/getHotGoods',array('shopId'=>$goodsDetails['shopId']))}
+					-->
 					{:W('Goods/getViewGoods')}
 				</div>
 				<div id="wst-goods-pdetails-right" class="wst-goods-pdetails-right">
 					<div class="goods-nvg">
 						<ul class="tab">
-							<li onclick="tabs('#wst-goods-pdetails-right',0)" class="curr">商品介绍</li>
+							<li onclick="tabs('#wst-goods-pdetails-right',0)" class="curr">宝贝介绍</li>
 							<if condition=" count($goodsAttrs['attrs']) gt 0">
 							<li onclick="tabs('#wst-goods-pdetails-right',1)">商品属性</li>
-							<li onclick="tabs('#wst-goods-pdetails-right',2)">商品评价</li>
+							<li onclick="tabs('#wst-goods-pdetails-right',2)">留言</li>
 							<else/>
-							<li onclick="tabs('#wst-goods-pdetails-right',1)">商品评价</li>
+							<li onclick="tabs('#wst-goods-pdetails-right',1)">留言</li>
 							</if>
 						</ul>
 						<div class="wst-clear"></div>

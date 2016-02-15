@@ -26,6 +26,7 @@ class GoodsModel extends BaseModel {
 		if($prices != ""){
 			$pricelist = explode("_",$prices);
 		}
+		//商标
 		$brandId = I("brandId",0);
 		
 		$keyWords = urldecode(I("keyWords"));
@@ -181,20 +182,51 @@ class GoodsModel extends BaseModel {
 	 */
 	public function getGoodsDetails($obj){		
 		$goodsId = $obj["goodsId"];
+
 		$sql = "SELECT sc.catName,sc2.catName as pCatName, g.*,shop.shopName,shop.deliveryType,ga.id goodsAttrId,ga.attrPrice,ga.attrStock,
 				shop.shopAtive,shop.shopTel,shop.shopAddress,shop.deliveryTime,shop.isInvoice, shop.deliveryStartMoney,g.goodsStock,shop.deliveryFreeMoney,shop.qqNo,
 				shop.deliveryMoney ,g.goodsSn,shop.serviceStartTime,shop.serviceEndTime FROM __PREFIX__goods g left join __PREFIX__goods_attributes ga on g.goodsId=ga.goodsId and ga.isRecomm=1, __PREFIX__shops shop, __PREFIX__shops_cats sc 
 				LEFT JOIN __PREFIX__shops_cats sc2 ON sc.parentId = sc2.catId
 				WHERE g.goodsId = $goodsId AND shop.shopId=sc.shopId AND sc.catId=g.shopCatId1 AND g.shopId = shop.shopId AND g.goodsFlag = 1 ";		
+		
+		//第一次替换 去掉了 ga 表 以及表要显示的内容  // g->商品表 	shop->店铺表	 sc->类别	
+		
+		$sql ="SELECT sc.catName,sc2.catName as pCatName, g.*,shop.shopName,shop.deliveryType, shop.shopAtive,shop.shopTel,shop.shopAddress,shop.deliveryTime,shop.isInvoice, shop.deliveryStartMoney,g.goodsStock,shop.deliveryFreeMoney,shop.qqNo, shop.deliveryMoney ,g.goodsSn,shop.serviceStartTime,shop.serviceEndTime 
+FROM __PREFIX__goods g , __PREFIX__shops shop, __PREFIX__shops_cats sc LEFT JOIN __PREFIX__shops_cats sc2 ON sc.parentId = sc2.catId 
+WHERE g.goodsId = $goodsId AND shop.shopId=sc.shopId AND sc.catId=g.shopCatId1 AND g.shopId = shop.shopId AND g.goodsFlag = 1";
+		
+		//第二次替换 去掉了一个查询条件  AND shop.shopId=sc.shopId
+		$sql ="SELECT sc.catName,sc2.catName as pCatName, g.*,shop.shopName,shop.deliveryType, shop.shopAtive,shop.shopTel,shop.shopAddress,shop.deliveryTime,shop.isInvoice, shop.deliveryStartMoney,g.goodsStock,shop.deliveryFreeMoney,shop.qqNo, shop.deliveryMoney ,g.goodsSn,shop.serviceStartTime,shop.serviceEndTime 
+FROM __PREFIX__goods g , __PREFIX__shops shop, __PREFIX__shops_cats sc LEFT JOIN __PREFIX__shops_cats sc2 ON sc.parentId = sc2.catId 
+WHERE g.goodsId = $goodsId AND sc.catId=g.shopCatId1 AND g.shopId = shop.shopId AND g.goodsFlag = 1";
+		
+
+		//第三次替换 去掉了 sc表   // g->商品表 	shop->店铺表	 sc->类别
+		$sql ="SELECT g.*,shop.shopName,shop.deliveryType, shop.shopAtive,shop.shopTel,shop.shopAddress,shop.deliveryTime,shop.isInvoice, shop.deliveryStartMoney,g.goodsStock,shop.deliveryFreeMoney,shop.qqNo, shop.deliveryMoney ,g.goodsSn,shop.serviceStartTime,shop.serviceEndTime 
+FROM __PREFIX__goods g , __PREFIX__shops shop WHERE g.goodsId = $goodsId AND g.shopId = shop.shopId AND g.goodsFlag = 1";
+		
 		$rs = $this->query($sql);
 		
 		if(!empty($rs) && $rs[0]['goodsAttrId']>0){
-			$rs[0]['shopPrice'] = $rs[0]['attrPrice'];
-			$rs[0]['goodsStock'] = $rs[0]['attrStock'];
+			$rs[0]['shopPrice'] = $rs[0]['attrPrice'];  //关于标准价格的问题
+			$rs[0]['goodsStock'] = $rs[0]['attrStock'];	//关于商品库存
 		}
+		//echo($this->_sql());
+		//var_dump($sql);
+		//var_dump($rs);
 		return $rs[0];
 	}
 	
+	/**
+	 * [addPopularity 增加人气]
+	 * @param [type] $goodsId [商品id]
+	 */
+	public function addPopularity($goodsId){
+
+		$sql = "UPDATE __PREFIX__goods SET popularity = popularity+1 WHERE goodsId = '$goodsId'";
+		$rs = $this->execute($sql);
+		return $rs;
+	}
 	/**
 	 * 获取商品信息-购物车/核对订单用
 	 */
@@ -287,13 +319,14 @@ class GoodsModel extends BaseModel {
 	 */
 	public function queryOnSaleByPage(){
 		$shopId=(int)session('WST_USER.shopId');
+		$userId=(int)session('WST_USER.userId');
 		$shopCatId1 = (int)I('shopCatId1',0);
 		$shopCatId2 = (int)I('shopCatId2',0);
 		$goodsName = I('goodsName');
 		$sql = "select g.goodsId,g.goodsSn,g.goodsName,g.goodsImg,g.goodsThums,g.shopPrice,g.goodsStock,g.saleCount,g.isSale,g.isRecomm,g.isHot,g.isBest,g.isNew,ga.isRecomm as attIsRecomm from __PREFIX__goods g
 				left join __PREFIX__goods_attributes ga on g.goodsId = ga.goodsId and ga.isRecomm = 1
 				where g.goodsFlag=1 
-		     and g.shopId=".$shopId." and g.goodsStatus=1 and g.isSale=1 ";
+		     and g.shopId=".$shopId." and g.goodsStatus=1 and g.userId=".$userId." and g.isSale=1 ";
 		if($shopCatId1>0)$sql.=" and g.shopCatId1=".$shopCatId1;
 		if($shopCatId2>0)$sql.=" and g.shopCatId2=".$shopCatId2;
 		if($goodsName!='')$sql.=" and (g.goodsName like '%".$goodsName."%' or g.goodsSn like '%".$goodsName."%') ";
@@ -340,7 +373,7 @@ class GoodsModel extends BaseModel {
 	/**
 	 * 新增商品
 	 */
-	public function insert(){
+	public function insert($user){
 	 	$rd = array('status'=>-1);
 	 	//查询商家状态
 		$sql = "select shopStatus from __PREFIX__shops where shopFlag = 1 and shopId=".(int)session('WST_USER.shopId');
@@ -351,22 +384,36 @@ class GoodsModel extends BaseModel {
 		}
 	    
 		$data = array();
-		$data["goodsSn"] = I("goodsSn");
+		// goodsSn 商品编号，自动生成uuid
+		// $data["goodsSn"] = I("goodsSn");
+		$data["goodsSn"] = createGoodsSn();
 		$data["goodsName"] = I("goodsName");
 		$data["goodsImg"] = I("goodsImg");
 		$data["goodsThums"] = I("goodsThumbs");
+		// shopId 店铺id 
 		$data["shopId"] = session('WST_USER.shopId');
+		// marketPrice 原价
 		$data["marketPrice"] = (float)I("marketPrice");
+		
+		// shopPrice 转让价
 		$data["shopPrice"] = (float)I("shopPrice");
+		// 商品库存
 		$data["goodsStock"] = (int)I("goodsStock");
 		$data["isBook"] = (int)I("isBook");
 		$data["bookQuantity"] = (int)I("bookQuantity");
 		$data["warnStock"] = (int)I("warnStock");
+		// 商品单位 
 		$data["goodsUnit"] = I("goodsUnit");
 		$data["isBest"] = (int)I("isBest");
 		$data["isRecomm"] = (int)I("isRecomm");
 		$data["isNew"] = (int)I("isNew");
 		$data["isHot"] = (int)I("isHot");
+
+		$data["oldAndNew"] = (int)I("oldAndNew");
+		$data["bargain"] = (int)I("bargain");
+		$data["phone"] = I("phone");
+		$data["sellerName"] = I("sellerName");
+		$data["userId"] = $user;
 	    //如果商家状态不是已审核则所有商品只能在仓库中
 	    if($shopStatus[0]['shopStatus']==1){
 			$data["isSale"] = (int)I("isSale");
@@ -1131,3 +1178,22 @@ class GoodsModel extends BaseModel {
         return array('status'=>1,'importNum'=>$importNum);
 	}
 }
+
+/*
+
+SELECT sc.catName,sc2.catName as pCatName, g.*,shop.shopName,shop.deliveryType,ga.id goodsAttrId,ga.attrPrice,ga.attrStock, shop.shopAtive,shop.shopTel,shop.shopAddress,shop.deliveryTime,shop.isInvoice, shop.deliveryStartMoney,g.goodsStock,shop.deliveryFreeMoney,shop.qqNo, shop.deliveryMoney ,g.goodsSn,shop.serviceStartTime,shop.serviceEndTime 
+FROM rmt_goods g left join rmt_goods_attributes ga on g.goodsId=ga.goodsId and ga.isRecomm=1, rmt_shops shop, rmt_shops_cats sc LEFT JOIN rmt_shops_cats sc2 ON sc.parentId = sc2.catId 
+WHERE g.goodsId = 60 AND shop.shopId=sc.shopId AND sc.catId=g.shopCatId1 AND g.shopId = shop.shopId AND g.goodsFlag = 1
+
+ */
+
+// 商品表 和 rmt_goods_attributes 进行连接
+
+/*
+
+SELECT sc.catName,sc2.catName as pCatName, g.*,shop.shopName,shop.deliveryType, shop.shopAtive,shop.shopTel,shop.shopAddress,shop.deliveryTime,shop.isInvoice, shop.deliveryStartMoney,g.goodsStock,shop.deliveryFreeMoney,shop.qqNo, shop.deliveryMoney ,g.goodsSn,shop.serviceStartTime,shop.serviceEndTime 
+FROM rmt_goods g , rmt_shops shop, rmt_shops_cats sc LEFT JOIN rmt_shops_cats sc2 ON sc.parentId = sc2.catId 
+WHERE g.goodsId = 60 AND shop.shopId=sc.shopId AND sc.catId=g.shopCatId1 AND g.shopId = shop.shopId AND g.goodsFlag = 1
+
+
+ */

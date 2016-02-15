@@ -249,16 +249,28 @@ function editGoods(menuId){
 	   params.goodsCatId1 = $('#goodsCatId1').val();
 	   params.goodsCatId2 = $('#goodsCatId2').val();
 	   params.goodsCatId3 = $('#goodsCatId3').val();
+
+	   params.oldAndNew = $('input[name="oldAndNew"]:checked').val();
+	   params.bargain = $('input[name="bargain"]:checked').val();
+	   
+	   params.sellerName = $('#sellerName').val();
+	   params.phone = $('#phone').val();
+	   /*
 	   params.shopCatId1 = $('#shopCatId1').val();
 	   params.shopCatId2 = $('#shopCatId2').val();
+	   */
 	   params.isSale = $('input[name="isSale"]:checked').val();
-	   params.isNew = $('input[name="isNew"]:checked').val();;
-	   params.isBest = $('input[name="isBest"]:checked').val();;
-	   params.isHot = $('input[name="isHot"]:checked').val();;
-	   params.isRecomm = $('input[name="isRecomm"]:checked').val();;
+	   params.isNew = $('input[name="isNew"]:checked').val();
+	   params.isBest = $('input[name="isBest"]:checked').val();
+	   params.isHot = $('input[name="isHot"]:checked').val();
+	   params.isRecomm = $('input[name="isRecomm"]:checked').val();
+
 	   params.goodsDesc = $('#goodsDesc').val();
-	   params.attrCatId = $('#attrCatId').val();
+
+	   
 	   params.goodsKeywords = $('#goodsKeywords').val();
+	   /*
+	   params.attrCatId = $('#attrCatId').val();
 	   if(params.attrCatId>0){
 		   params.priceAttrId = $('.hiddenPriceAttr').attr('dataId');
 		   params.goodsPriceNo = $('.hiddenPriceAttr').attr('dataNo');
@@ -302,7 +314,7 @@ function editGoods(menuId){
 			   }
 		   });
 	   }
-	   
+	   */
 	   var gallery = [];
 	   $('.gallery-img').each(function(){
 		   gallery.push($(this).attr('v')+'@'+$(this).attr('iv'));

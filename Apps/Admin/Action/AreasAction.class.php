@@ -60,11 +60,14 @@ class AreasAction extends BaseAction{
 		$this->isLogin();
 		$this->checkPrivelege('dqlb_00');
 		$m = D('Admin/Areas');
-		$pArea = array('areaId'=>0,'areaName'=>'');
+		
+		$pArea = array('areaId'=>0,'areaName'=>'','areaType'=>'-1');
 		if(I('parentId',0)>0){
 			$pArea = $m->get(I('parentId',0));
 		}
-    	$page = $m->queryByPage();
+
+
+    	$page = $m->queryByPage(1);
     	$pager = new \Think\Page($page['total'],$page['pageSize']);// 实例化分页类 传入总记录数和每页显示的记录数
     	$page['pager'] = $pager->show();
     	$this->assign('Page',$page);

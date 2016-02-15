@@ -1,5 +1,6 @@
 <?php
 namespace Home\Action;
+use Think\Log;
 /**
  * ============================================================================
  * WSTMall开源商城
@@ -19,14 +20,15 @@ class GoodsAction extends BaseAction {
    		//获取默认城市及县区
    		$areaId2 = $this->getDefaultCity();
    		$districts = $mareas->getDistricts($areaId2);
-   		//获取社区
+   		//获取社区--暂时去掉 start
    		$areaId3 = (int)I("areaId3");
    		$communitys = array();
    		if($areaId3>0){
    		    $communitys = $mcommunitys->getByDistrict($areaId3);
    		}
         $this->assign('communitys',$communitys);
-   		
+   		//获取社区--暂时去掉 End
+
    		//获取商品列表
    		$obj["areaId2"] = $areaId2;
         $obj["areaId3"] = $areaId3;
@@ -105,12 +107,13 @@ class GoodsAction extends BaseAction {
 		$this->assign('goodsId',$goodsId);
 		$obj["goodsId"] = $goodsId;	
 		$goodsDetails = $goods->getGoodsDetails($obj);
+
 		if($kcode==$scrictCode || ($goodsDetails["isSale"]==1 && $goodsDetails["goodsStatus"]==1)){
 			if($kcode==$scrictCode){//来自后台管理员
 				$this->assign('comefrom',1);
 			}
 			
-			$shopServiceStatus = 1;
+			$shopServiceStatus = 1; //店服务状态
 			if($goodsDetails["shopAtive"]==0){
 				$shopServiceStatus = 0;
 			}
@@ -121,7 +124,7 @@ class GoodsAction extends BaseAction {
 			$goodsDetails["shopServiceStatus"] = $shopServiceStatus;
 			$goodsDetails['goodsDesc'] = htmlspecialchars_decode($goodsDetails['goodsDesc']);
 			
-			
+			//获得区域
 			$areas = D('Home/Areas');
 			$shopId = intval($goodsDetails["shopId"]);
 			$obj["shopId"] = $shopId;
@@ -151,13 +154,15 @@ class GoodsAction extends BaseAction {
 			if(!empty($viewGoods)){
 				cookie("viewGoods",$viewGoods,25920000);
 			}
+			//修改热度
+			$goods->addPopularity($goodsDetails["goodsId"]);
 			//获取关注信息
 			$m = D('Home/Favorites');
 			$this->assign("favoriteGoodsId",$m->checkFavorite($goodsId,0));
 			$m = D('Home/Favorites');
 			$this->assign("favoriteShopId",$m->checkFavorite($shopId,1));
 			//客户端二维码
-		$this->assign("qrcode",base64_encode("{type:'goods',content:'".$goodsId."',key:'wstmall'}"));
+			$this->assign("qrcode",base64_encode("{type:'goods',content:'".$goodsId."',key:'wstmall'}"));
 			$this->display('default/goods_details');
 		}else{
 			$this->display('default/goods_notexist');
@@ -197,19 +202,28 @@ class GoodsAction extends BaseAction {
 	public function queryOnSaleByPage(){
 		$this->isShopLogin();
 		$USER = session('WST_USER');
+		//var_dump($USER);
 		//获取商家商品分类
+		
+		//下面一块已弃用 BEGIN
 		$m = D('Home/ShopsCats');
 		$this->assign('shopCatsList',$m->queryByList($USER['shopId'],0));
+		//已弃用 END
+		
 		$m = D('Home/Goods');
     	$page = $m->queryOnSaleByPage($USER['shopId']);
     	$pager = new \Think\Page($page['total'],$page['pageSize']);
     	$page['pager'] = $pager->show();
+
+
     	$this->assign('Page',$page);
     	$this->assign("umark","queryOnSaleByPage");
     	$this->assign("shopCatId2",I('shopCatId2'));
     	$this->assign("shopCatId1",I('shopCatId1'));
     	$this->assign("goodsName",I('goodsName'));
+    	$this->assign('userType',$USER['userType']);
         $this->display("default/shops/goods/list_onsale");
+
 	}
    /**
 	* 分页查询-仓库中的商品
@@ -229,6 +243,7 @@ class GoodsAction extends BaseAction {
     	$this->assign("shopCatId2",I('shopCatId2'));
     	$this->assign("shopCatId1",I('shopCatId1'));
     	$this->assign("goodsName",I('goodsName'));
+    	$this->assign('userType',$USER['userType']);
         $this->display("default/shops/goods/list_unsale");
 	}
    /**
@@ -249,6 +264,7 @@ class GoodsAction extends BaseAction {
     	$this->assign("shopCatId2",I('shopCatId2'));
     	$this->assign("shopCatId1",I('shopCatId1'));
     	$this->assign("goodsName",I('goodsName'));
+    	$this->assign('userType',$USER['userType']);
         $this->display("default/shops/goods/list_pendding");
 	}
 	/**
@@ -258,6 +274,7 @@ class GoodsAction extends BaseAction {
 		$this->isShopLogin();
 		$USER = session('WST_USER');
 		//获取商品分类信息
+		
 		$m = D('Home/GoodsCats');
 		$this->assign('goodsCatsList',$m->queryByList());
 		//获取商家商品分类
@@ -273,23 +290,31 @@ class GoodsAction extends BaseAction {
     	}else{
     		$object = $m->getModel();
     	}
+
+    	//var_dump($USER);
     	$this->assign('object',$object);
     	$this->assign("umark",I('umark'));
+    	$this->assign('userType',$USER['userType']);
         $this->display("default/shops/goods/edit");
 	}
 	/**
 	 * 新增商品
 	 */
 	public function edit(){
+
 		$this->isShopLogin();
+		$USER = session('WST_USER');
+		
 		$m = D('Home/Goods');
     	$rs = array();
     	if((int)I('id',0)>0){
     		$rs = $m->edit();
     	}else{
-    		$rs = $m->insert();
+    		$rs = $m->insert($USER['userId']);
     	}
+    	//echo $rs;
     	$this->ajaxReturn($rs);
+    	//$this->ajaxReturn(var_export($USER,true));
 	}
 	/**
 	 * 删除商品

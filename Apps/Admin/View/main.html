@@ -19,7 +19,8 @@
     	  location.href="{:U('Admin/Index/enterLicense')}";
       }
       $(function () {
-	      WST.getWSTMAllVersion("{:U('Admin/Index/getWSTMallVersion')}");
+	     // WST.getWSTMAllVersion("{:U('Admin/Index/getWSTMallVersion')}");
+
       });
       </script>
    </head>
@@ -81,7 +82,7 @@
 	                </tr>
 	                <tr>
 	                   <td align='right'>问题反馈：</td>
-	                   <td id='webUrl'><a href="{:C('WST_FEEDBACK')}"" target='_blank'>点击反馈</a></td>
+	                   <td id='webUrl'><a href="{:C('WST_FEEDBACK')}" target='_blank'>点击反馈</a></td>
 	                   <td align='right'>授权码：</td>
 	                   <td>{$CONF['mallLicense']}</td>
 	                </tr>

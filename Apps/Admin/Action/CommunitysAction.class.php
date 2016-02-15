@@ -62,6 +62,7 @@ class CommunitysAction extends BaseAction{
 		$this->checkPrivelege('sqlb_00');
 		//获取地区信息
 		$m = D('Admin/Areas');
+		
 		$this->assign('areaList',$m->queryShowByList(0));
 		$m = D('Admin/Communitys');
     	$page = $m->queryByPage();

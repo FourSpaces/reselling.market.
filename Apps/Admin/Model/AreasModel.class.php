@@ -13,7 +13,9 @@ class AreasModel extends BaseModel {
 	  * 新增
 	  */
 	 public function insert(){
+	 	/**2016 0214 这里对 省 进行了去除  直接插入城市 城市ID 统一为 1*/
 	 	$areaType = 0;
+	 	
 	 	if(I("parentId",0)>0){
 		 	$prs = $this->get((int)I("parentId",0));
 		 	$areaType = $prs['areaType']+1;
@@ -23,6 +25,7 @@ class AreasModel extends BaseModel {
 		$data = array();
 		$data["parentId"] = (int)I("parentId",0);
 		$data["areaName"] = I("areaName");
+		$data["areaKey"] = strtoupper(I("areaKey"));
 		$data["isShow"] = (int)I("isShow",1);
 		$data["areaSort"] = (int)I("areaSort",0);
 		//$data["areaKey"] = I("areaKey");
@@ -45,6 +48,7 @@ class AreasModel extends BaseModel {
 	 	$id = (int)I("id",0);
 		$data = array();
 		$data["areaName"] = I("areaName");
+		$data["areaKey"] = strtoupper(I("areaKey"));
 		$data["isShow"] = (int)I("isShow",1);
 		$data["areaSort"] = (int)I("areaSort",0);
 		if($this->checkEmpty($data,true)){	
@@ -70,7 +74,9 @@ class AreasModel extends BaseModel {
 	  */
      public function queryByPage(){
         $m = M('areas');
+        /*alter date:20160214 */
         $parentId = I("parentId",0);
+	 	//$parentId = (I('parentId')!='')?I('parentId',0):$parentId;
 	 	$sql = "select * from __PREFIX__areas where parentId=".(int)$parentId." and areaFlag=1 order by areaSort asc,areaId asc";
 		return $m->pageQuery($sql);
 	 }

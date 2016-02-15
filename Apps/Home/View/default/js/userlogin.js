@@ -28,6 +28,8 @@ function checkLoginInfo(){
 	}
 	
 	$.post(Think.U('Home/Users/checkLogin'),{loginName:loginName,loginPwd:loginPwd,verify:verify,rememberPwd:rememberPwd},function(data,textStatus){
+		
+		//$(".wst-footer-fl").html(data);
 		var json = WST.toJson(data);
 		if(json.status=='1'){
 			location.href=json.refer;

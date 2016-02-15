@@ -97,9 +97,17 @@ class UsersModel extends BaseModel {
 		    	$m->where(" userId=".$rs['userId'])->data($data)->save();
 		    	//如果是店铺则加载店铺信息
 		    	if($rs['userType']>=1){
+		    		$shoptype = array('ShopType' => 'private');
 		    		$s = M('shops');
 			 		  $shops = $s->where('userId='.$rs['userId']." and shopFlag=1")->find();
-			 		  if(!empty($shops))$rs = array_merge($shops,$rs);
+			 		  if(!empty($shops))$rs = array_merge(array_merge($shops,$shoptype),$rs);
+			 		
+		    	}else{
+		    	//如果不是店铺 则加载公共店铺信息
+		    	    $shoptype = array('ShopType' => 'public');
+		    		$s = M('shops');
+			 		  $shops = $s->where('userId=0 and shopId=0 and shopFlag=1')->find();
+			 		  if(!empty($shops))$rs = array_merge(array_merge($shops,$shoptype),$rs);
 		    	}
 		    	//记录登录日志
 				$data = array();

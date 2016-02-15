@@ -66,6 +66,8 @@ class UsersAction extends BaseAction {
 		}else{
 			$m = D('Home/Users');			
 			$res = $m->checkLogin();
+
+			//var_dump($res);
 			if (!empty($res)){
 				if($res['userFlag'] == 1){
 					session('WST_USER',$res);
@@ -157,7 +159,9 @@ class UsersAction extends BaseAction {
     */
 	public function toEditPass(){
 		$this->isLogin();
+		$USER = session('WST_USER');
 		$this->assign("umark","toEditPass");
+		$this->assign('userType',$USER['userType']);
 		$this->display("default/users/edit_pass");
 	}
 	
@@ -176,12 +180,14 @@ class UsersAction extends BaseAction {
 	 */
 	public function toEdit(){
 		$this->isLogin();
+		$USER = session('WST_USER');
 		$m = D('Home/Users');
 		$obj["userId"] = session('WST_USER.userId');
 		$user = $m->getUserById($obj);
 	
 		$this->assign("user",$user);
 		$this->assign("umark","toEditUser");
+		$this->assign('userType',$USER['userType']);
 		$this->display("default/users/edit_user");
 	}
 	
