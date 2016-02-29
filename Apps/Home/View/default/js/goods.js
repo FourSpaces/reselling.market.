@@ -202,6 +202,12 @@ function checkStock(obj){
 	getPriceAttrInfo($(obj).attr('dataId'));
 }
 
+/**
+ * [getGoodsappraises 获得商品评价]
+ * @param  {[type]} goodsId [商品ID]
+ * @param  {[type]} p       [description]
+ * @return {[type]}         [description]
+ */
 function getGoodsappraises(goodsId,p){
 	var params = {}; 
 	params.goodsId = goodsId;
@@ -216,6 +222,7 @@ function getGoodsappraises(goodsId,p){
 			    html.push('<tr height="75" style="border:1px dotted #eeeeee;">');
 				    html.push('<td width="150" style="padding-left:6px;"><div>'+(appraises.userName?appraises.userName:"匿名")+'</div></td>');
 				    html.push('<td width="*"><div>'+appraises.content+'</div></td>');
+				    /*
 				    html.push('<td width="180">');
 				    html.push('<div>商品评分：');
 					for(var i=0;i<appraises.goodsScore;i++){
@@ -233,8 +240,15 @@ function getGoodsappraises(goodsId,p){
 					}
 					html.push('</div>');
 					html.push('</td>');
-					
+					*/
 			    html.push('</tr>');	
+			    	html.push('<div class="cmt-item clearfix" data-touserid="'+appraises.toUserId+'" data-nick="坠****渊" data-userid="'+appraises.userId+'">');
+			    	html.push('<a href="javascript:;" target="_blank" class="cmt-reply-user"> <img src="__ROOT__/Apps/Home/View/default/images/2674228161.jpg" alt=""> </a>');
+			    	html.push('<div class="cmt-cont-wrap">');	
+			    	html.push('<p class="cmt-cont"> <span class="cmt-user-name">坠****渊</span> <span class="cmt-cont-text">'+appraises.content+'</span> </p>');
+			    	html.push('<p class="cmt-date">'+appraises.createTime+'</p>');
+			    	html.push('<span class="cmt-reply-btn">回复</span>');
+			    	html.push('</div></div>');
 			}
 			$("#appraiseTab").html(html.join(""));
 			if(json.totalPage>1){

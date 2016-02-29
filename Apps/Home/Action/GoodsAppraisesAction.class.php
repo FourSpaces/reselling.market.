@@ -65,10 +65,19 @@ class GoodsAppraisesAction extends BaseAction{
     	$this->isUserAjaxLogin();
     	$USER = session('WST_USER');
     	$morders = D('Home/Goods_appraises');
+
+    	if(empty($USER)){
+    		exit("{status:-888}"); //代表用户未登录
+    	}
+
     	$obj["userId"] = $USER['userId'];
-    	$obj["orderId"] = (int)I("orderId");
+    	$obj["toUserId"] = (int)I("toUserId");
     	$obj["goodsId"] = (int)I("goodsId");
-    	$obj["goodsAttrId"] = (int)I("goodsAttrId");
+    	$obj["parentId"] = (int)I("parentId",0);
+    	$obj["content"] = I("content");
+    	
+    	
+
 		$rs = $morders->addGoodsAppraises($obj);
 		$this->ajaxReturn($rs);
 	}	
@@ -79,10 +88,23 @@ class GoodsAppraisesAction extends BaseAction{
     	$this->isUserLogin();
     	$USER = session('WST_USER');
     	$morders = D('Home/Goods_appraises');
-    	$obj["userId"] = $USER['userId'];
+    	$speechType = I("speechType");
+    	if(empty($speechType)){
+    		exit();
+    	} elseif($speechType=='receive'){
+    		$obj["userId"] = $USER['userId'];
+    		$appraiseList = $morders->getAppraisesList($obj);
+			$this->assign("appraiseList",$appraiseList);
+    	} elseif($speechType=='send'){
+    		$obj["userId"] = $USER['userId'];
+    		$appraiseList = $morders->getAppraisesList($obj,false);
+			$this->assign("appraiseList",$appraiseList);
+    	}
+
+    	//$obj["userId"] = $USER['userId'];
     	$this->assign("umark","getAppraisesList");
-		$appraiseList = $morders->getAppraisesList($obj);
-		$this->assign("appraiseList",$appraiseList);
+    	$this->assign("speechType",$speechType );
+		
 		$this->display("default/users/orders/list_appraise_manage");
 	} 
 	/**
@@ -92,6 +114,7 @@ class GoodsAppraisesAction extends BaseAction{
 		$goods = D('Home/Goods_appraises');
 		$goodsAppraises = $goods->getGoodsAppraises();
 		$this->ajaxReturn($goodsAppraises);
+		
 	}
 };
 ?>

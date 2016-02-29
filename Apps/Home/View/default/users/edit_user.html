@@ -1,7 +1,8 @@
 <extend name="./Apps/Home/View/default/users/layout.html" />
 <block name="content">
 <style>
-
+input[type="text"]{width:160px;}
+.shortcut { border-left: 1px solid #fff; padding: 0px;}
 </style>
 <script>
 $(function () {
@@ -11,7 +12,7 @@ $(function () {
 			       return false;
 			},onError:function(msg){
 		}});
-	   $("#userName").formValidator({onShow:"",onFocus:"",onCorrect:"输入正确"}).inputValidator({min:6,max:20,onError:"用户昵称长度为6到20位"});
+	   $("#userName").formValidator({onShow:"",onFocus:"",onCorrect:"输入正确"}).inputValidator({min:4,max:20,onError:"昵称长度为4到20位"});
 	   $("#userPhone").inputValidator({min:0,max:25,onError:"你输入的手机号码非法,请确认"}).regexValidator({
 			regExp:"mobile",dataType:"enum",onError:"手机号码格式错误"
 		}).ajaxValidator({
@@ -68,15 +69,38 @@ $(function () {
 });
 
 var filetypes = ["gif","jpg","png","jpeg"];
+
+
 </script>
-	
+<script>
+	function getCitys(){
+    	var provinceId = $("#provinceId").val();
+    	jQuery.post("{:U('Home/Areas/getCityListByProvince/')}",{provinceId:provinceId},function(rsp) {
+    		var json = WST.toJson(rsp);
+    		var citys = new Array();
+    		
+    		for(var i=0;i<json.length;i++){
+    			var city = json[i];
+    			if(city.areaId=='{$areaId2}'){
+    				citys.push("<option value='"+city.areaId+"' selected>"+city.areaName+"</option>");
+    			}else{
+    				citys.push("<option value='"+city.areaId+"'>"+city.areaName+"</option>");
+    			}
+    		}
+    		if(!json.length){
+    			citys.push("<option>选择学校</option>");
+    		}
+    		$("#cityId").html(citys.join(""));
+    	});
+    }
+</script>
    	<div class="wst-body"> 
        <div class='wst-page-header'>买家中心 > 个人资料</div>
        <div class='wst-page-content' style="position:relative;">
        		<iframe name="upload" style="display:none"></iframe>
-			<form id="uploadform_Filedata" autocomplete="off" style="position:absolute;left:388px;z-index:10;" enctype="multipart/form-data" method="POST" target="upload" action="{:U('Home/Shops/uploadPic')}" >
+			<form id="uploadform_Filedata" autocomplete="off" style="position:absolute;left:400px;z-index:10;margin: 10px;" enctype="multipart/form-data" method="POST" target="upload" action="{:U('Home/Shops/uploadPic')}" >
 				<div id="preview_Filedata" >
-             	<img id='preview' src='<if condition="$user['userPhoto'] =='' ">__ROOT__/{$CONF['goodsImg']}<else/>__ROOT__/{$user.userPhoto}</if>' height='150' />
+             	<img id='preview' src='<if condition="$user['userPhoto'] =='' ">__ROOT__/{$CONF['goodsImg']}<else/>__ROOT__/{$user.userPhoto}</if>' width="140" height='140' />
                 </div>
 				<div style="position:relative;left: -4px;">
 				<input id="userPhoto" name="userPhoto" type="text" value="{$user.userPhoto}" readonly style="float:left;width:140px;"/>
@@ -85,9 +109,9 @@ var filetypes = ["gif","jpg","png","jpeg"];
 					<input type="file" class="inputstyle" id="Filedata" name="Filedata" onchange="updfile('Filedata');" >
 				</div>
 				<div style="clear:both;"></div>
-				<div >&nbsp;图片大小:150 x 150 (px)(格式为 gif, jpg, jpeg, png)</div>
+				<div >&nbsp;图片大小:140 x 140 (px)(格式为 gif, jpg, jpeg, png)</div>
 				<input type="hidden" name="dir" value="users">
-				<input type="hidden" name="width" value="150">
+				<input type="hidden" name="width" value="140">
 				<input type="hidden" name="folder" value="Filedata">
 				<input type="hidden" name="sfilename" value="Filedata">
 				<input type="hidden" name="fname" value="userPhoto">
@@ -111,10 +135,32 @@ var filetypes = ["gif","jpg","png","jpeg"];
              	<label><input type='radio' name='userSex' value="3" <if condition="$user['userSex'] eq 3">checked</if>/>保密</label>
              </td>
            </tr>
-            <tr>
+            <tr style="display:none;">
              <th align='right'>用户QQ ：</th>
              <td>
              <input type='text' id='userQQ' name='userQQ' value="{$user['userQQ']}"/>
+             </td>
+           </tr>
+           <tr style="">
+             <th align='right'>学校<font color='red'>*</font>：</th>
+             <td>
+	            <div class="shortcut">
+                    <div class="shortcut-select shortcut-select-p">
+                        <select id="provinceId" onchange="getCitys(this);" width="70">
+                        	<volist name="parentList" key="k" id="province">
+                        		<option <if condition="$province['areaId'] eq $parentId">selected</if> value="{$province['areaId']}">{$province["areaName"]}</option>
+                        	</volist>
+                        </select>
+                    </div>
+                    <div class="shortcut-select shortcut-select-city">
+                        <select id="cityId" width="">
+                        	<volist name="areasList" key="k" id="province">
+                        		<option <if condition="$province['areaId'] eq $areasId">selected</if> value="{$province['areaId']}">{$province["areaName"]}</option>
+                        	</volist>
+                        </select>
+                    </div>    
+                    <input style="display:none;" type="button" class="button" value="确 定" onclick="changeCity();">
+                </div>  
              </td>
            </tr>
            <tr>
@@ -126,7 +172,7 @@ var filetypes = ["gif","jpg","png","jpeg"];
            <tr>
              <th align='right'>邮箱<font color='red'>*</font>：</th>
              <td>
-             <input type='text' id='userEmail' name='userEmail' value="{$user['userEmail']}" maxlength="25" style='width:250px'/>
+             <input type='text' id='userEmail' name='userEmail' value="{$user['userEmail']}" maxlength="25" />
              </td>
            </tr>
            <tr>

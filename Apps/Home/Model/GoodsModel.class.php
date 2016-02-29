@@ -35,7 +35,7 @@ class GoodsModel extends BaseModel {
 			$words = explode(" ",$keyWords);
 		}
 		
-		$sql = "SELECT  g.goodsId,goodsSn,goodsName,goodsThums,goodsStock,g.saleCount,p.shopId,marketPrice,shopPrice,ga.id goodsAttrId 
+		$sql = "SELECT  g.goodsId,goodsSn,goodsName,goodsThums,goodsStock,g.saleCount,g.createTime,g.popularity,p.shopId,marketPrice,shopPrice,ga.id goodsAttrId 
 				FROM __PREFIX__goods g left join __PREFIX__goods_attributes ga on g.goodsId=ga.goodsId and ga.isRecomm=1, __PREFIX__shops p ";
 	    if($communityId>0){
 			$sql .=" , __PREFIX__shops_communitys sc ";

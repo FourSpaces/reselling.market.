@@ -60,7 +60,10 @@ var WST = ThinkPHP = window.Think = {
 			<li class="fore2 ld"><s></s>
 			<PHP>if(session('WST_USER.userId')>0){</PHP>
 				<PHP>if(session('WST_USER.userType')==0){</PHP>
+					<!--
 				    <a href="{:U('Home/Shops/toOpenShopByUser')}" rel="nofollow">成为服务商</a>
+				-->
+				    <a href="javascript:alert('详情请联系我们的客服人员')" rel="nofollow">成为服务商</a>
 				<PHP>}else{</PHP>
 				    <PHP>if(session('WST_USER.loginTarget')==0){</PHP>
 				        <a href="{:U('Home/Shops/index')}" rel="nofollow">卖家中心</a>
@@ -69,7 +72,11 @@ var WST = ThinkPHP = window.Think = {
 				    <PHP>}</PHP>
 				<PHP>}</PHP>
 			<PHP>}else{</PHP>
+				<!--
 			    <a href="{:U('Home/Shops/toOpenShop')}" rel="nofollow">成为服务商</a>
+				-->
+
+			    <a href="javascript:alert('详情请联系我们的客服人员')" rel="nofollow">成为服务商</a>
 			<PHP>}</PHP>
 			</li>
 		</ul>

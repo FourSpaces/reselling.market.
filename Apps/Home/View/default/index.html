@@ -71,7 +71,7 @@
 				<div class="wst-fl-nvg{$k1}">
 					<ul>
 						<li id="fl_{$k1}_0" style="line-height: 32px; width: 100px;"
-							onmouseover="gpanelOver(this);">精品推荐</li>
+							onmouseover="gpanelOver(this);" class="selectli">最新闲置</li>
 						<volist name="vo1['catChildren']" key="k2" id="vo2">
 						<li id="fl_{$k1}_{$k2}" style="line-height: 32px; width: 100px;"
 							onmouseover="gpanelOver(this);">{$vo2["catName"]}</li>
@@ -128,10 +128,12 @@
 								</div>
 								<div>
 									<em class="wst-left wst-goods-price" id='shopGoodsPrice_{$vo3["goodsId"]}' dataId='{$vo3["goodsAttrId"]}'>￥{$vo3['shopPrice']|number_format=2}</em>
+									<!--
 									<a href="javascript:addCart({$vo3['goodsId']},0,'{$vo3['goodsThums']}')" class="wst-right btnCart" > <img
 										src="__ROOT__/Apps/Home/View/default/images/btn_addcart.png"
 										width="85" />
 									</a>
+									-->
 									<div class='wst-clear'></div>
 								</div>
 							</div>
@@ -143,14 +145,17 @@
 					</volist>
 					<div style="float: right; width: 180px; height: 180px;">
 						<volist name="vo1['recommendShops']" key="k2" id="vo2">
-						<div style="width: 180px; margin-top: 10px;">
-							<div style="width: 180px;">
-								<a
-									href="{:U('Home/Shops/toShopHome/',array('shopId'=>$vo2['shopId']))}">
-									<img class='lazyImg' data-original="__ROOT__/{$vo2['shopImg']}" height="120" width="180" />
-								</a>
-							</div>
-						</div>
+							<if condition="$vo2['shopId'] gt 1"> 
+								<div style="width: 180px; margin-top: 10px;">
+									<div style="width: 180px;">
+										<a
+											href="{:U('Home/Shops/toShopHome/',array('shopId'=>$vo2['shopId']))}">
+											<img class='lazyImg' data-original="__ROOT__/{$vo2['shopImg']}" height="120" width="180" />
+										</a>
+									</div>
+								</div>
+							</if>
+						
 						</volist>
 					</div>
 				</div>

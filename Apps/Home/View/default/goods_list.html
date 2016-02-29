@@ -138,11 +138,11 @@
 							<div class="goods-price"><span class="span1" id="shopGoodsPrice_{$goods['goodsId']}" dataId="{$goods['goodsAttrId']}">￥{$goods['shopPrice']}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="span2">￥{$goods['marketPrice']}</span></div>
 							<div class="goods-buy">
 								<div class="goods-left">
-									<span style="color:green;font-weight:bolder;margin-left:2px;">{$goods["saleCount"]}</span>人已购买
+									<span style="color:green;font-weight:bolder;margin-left:2px;">{$goods["popularity"]}</span>人查看过此商品
 								</div>
 								<div class="goods-right">
 								    <if condition="$goods['goodsStock'] gt 0">
-								    	<a href="javascript:addCart({$goods['goodsId']},0,'{$goods['goodsThums']}')" class="btnCart">
+								    	<a class="hide" href="javascript:addCart({$goods['goodsId']},0,'{$goods['goodsThums']}')" class="btnCart">
 										<img src="__ROOT__/Apps/Home/View/default/images/btn_addcart.png" width="85"/>
 										</a>
 									<else/>

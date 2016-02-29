@@ -56,10 +56,10 @@
                <a style="display:none;" href="{:U('Home/UserAddress/queryByPage/')}"><li <if condition='$umark eq "addressQueryByPage"'> class='selected'</if>>收货地址</li></a>
 
 
-               <a style="display:none;" href="{:U('Home/GoodsAppraises/getAppraisesList/')}"><li <if condition='$umark eq "getAppraisesList"'> class='selected'</if>>评价管理</li></a>
+              
               
               <span class='wst-menu-title' style='border-top:0px;'><span></span>商品管理</span>
-            
+              <a style="" href="{:U('Home/GoodsAppraises/getAppraisesList/',array('speechType'=>'receive'))}"><li <if condition='$umark eq "getAppraisesList"'> class='selected'</if>>留言管理</li></a>
               <a href="{:U('Home/Goods/queryOnSaleByPage/')}"><li <if condition='$umark eq "queryOnSaleByPage"'> class='liselect'</if>>出售中的宝贝</li></a>
               <a href="{:U('Home/Goods/toEdit/',array('umark'=>'toEditGoods'))}"><li <if condition='$umark eq "toEditGoods"'> class='liselect'</if>>发布宝贝</li></a>
               

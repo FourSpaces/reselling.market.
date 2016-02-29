@@ -34,6 +34,25 @@ dl.areaSelect:hover{border:1px solid #E5CD29;}
 dl.areaSelect:hover dd{display: block;}
 dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
 .hide{display:none;}
+#panel {
+    position: relative;
+    background-color: white;
+    max-height: 92%;
+    overflow-y: auto;
+    z-index: 99;
+    float: right;
+    top: 10px;
+    right: 10px;
+    width: 240px;
+}
+
+.amap_lib_placeSearch .poibox {
+   
+}
+.amap_lib_placeSearch .poibox .poi-title {
+     margin-top: 8px;
+    margin-bottom: 6px;
+}
 </style>
    <script>
    var shopMap = null;
@@ -122,13 +141,18 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
 		ShopMapInit();
 		<if condition="$object['shopId'] !=0 ">
 		   getAreaList("areaId2",{$object.areaId1},0,{$object.areaId2});
-		   getAreaList("areaId3",{$object.areaId2},1,{$object.areaId3});
+		   //getAreaList("areaId3",{$object.areaId2},1,{$object.areaId3});
 		</if>
 		
 		initTime('serviceStartTime','{$object['serviceStartTime']}');
 		initTime('serviceEndTime','{$object['serviceEndTime']}');
-		getCommunitys();
-
+		
+		<if condition="$object['shopId'] !=0 ">
+		   getCommunitys();
+		   //这里使用另一个方法来对选择的数据进行选择重现
+		   //使用拼接id 的方法
+		</if>
+        
 		if ($("input[name='shopStatus']:checked").val() <= -1) {
 			yj_unformValidator();
 		};
@@ -144,7 +168,10 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
 			}
 		});	
    });
-	//取消校验
+	/**
+	 * [yj_unformValidator 取消校验]
+	 * @return {[type]} [description]
+	 */
 	function yj_unformValidator(){
 		$("#loginName").attr("disabled",true).unFormValidator(true); //解除校验
 		$("#loginPwd").attr("disabled",true).unFormValidator(true); //解除校验
@@ -156,12 +183,15 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
 		$("#shopAddress").attr("disabled",true).unFormValidator(true); //解除校验
 		$("#areaId2").attr("disabled",true).unFormValidator(true); //解除校验
 		$("#goodsCatId3").attr("disabled",true).unFormValidator(true); //解除校验
-		$("#bankId").attr("disabled",true).unFormValidator(true); //解除校验
+		//$("#bankId").attr("disabled",true).unFormValidator(true); //解除校验
 		$("#bankNo").attr("disabled",true).unFormValidator(true); //解除校验
 		$("#serviceStartTime").attr("disabled",true).unFormValidator(true); //解除校验
 		$("#serviceEndTime").attr("disabled",true).unFormValidator(true); //解除校验
 	}
-	//恢复校验
+	/**
+	 * [reformValidator 恢复校验]
+	 * @return {[type]} [description]
+	 */
 	function reformValidator(){
 		$("#loginName").attr("disabled",false).unFormValidator(false); //解除校验
 		$("#loginPwd").attr("disabled",false).unFormValidator(false); //解除校验
@@ -173,18 +203,23 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
 		$("#shopAddress").attr("disabled",false).unFormValidator(false); //解除校验
 		$("#areaId2").attr("disabled",false).unFormValidator(false); //解除校验
 		$("#goodsCatId3").attr("disabled",false).unFormValidator(false); //解除校验
-		$("#bankId").attr("disabled",false).unFormValidator(false); //解除校验
+		//$("#bankId").attr("disabled",false).unFormValidator(false); //解除校验
 		$("#bankNo").attr("disabled",false).unFormValidator(false); //解除校验
 		$("#serviceStartTime").attr("disabled",false).unFormValidator(false); //解除校验
 		$("#serviceEndTime").attr("disabled",false).unFormValidator(false); //解除校验
 	}
+	/**
+	 * [ShopMapInit 商店地图初始化]
+	 * @param {[type]} option [description]
+	 */
    function ShopMapInit(option){
 	   var opts = {zoom:$('#mapLevel').val(),longitude:$('#longitude').val(),latitude:$('#latitude').val()};
 	   if(shopMap)return;
 	   $('#shopMap').show();
 	   shopMap = new AMap.Map('mapContainer', {
 			view: new AMap.View2D({
-				zoom:opts.zoom
+				zoom:opts.zoom,
+				resizeEnable: true
 			})
 	   });
 	   if(opts.longitude!='' && opts.latitude!=''){
@@ -195,6 +230,7 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
 		   });
 		   marker.setMap(shopMap);
 	   }
+	   //工具条插件
 	   shopMap.plugin(["AMap.ToolBar"],function(){		
 			toolBar = new AMap.ToolBar();
 			shopMap.addControl(toolBar);	
@@ -210,25 +246,84 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
 				icon:"http://webapi.amap.com/images/marker_sprite.png"
 			});
 			marker.setMap(shopMap);
+			//$('#coordinates').val("经纬度：["+e.lnglat.getLng()+','+e.lnglat.getLat()+"]");
+	   		openInfo(e.lnglat.getLng(),e.lnglat.getLat())
 	   });
 	   AMap.event.addListener(shopMap,'zoomchange',function(e){
 		   $('#mapLevel').val(this.getZoom());
 	   })
    }
+
+    //在指定位置打开信息窗体
+    function openInfo(Lng,Lat) {
+        //构建信息窗体中显示的内容
+        var info = [];
+
+        info.push("<div style=\"padding:0px 0px 0px 4px;\"><b>当前点经纬度</b>");
+        info.push("经度 :"+Lng);
+        info.push("维度 :"+Lat+"</div>");
+        infoWindow = new AMap.InfoWindow({
+            content: info.join("<br/>")  //使用默认信息窗体框样式，显示信息内容
+        });
+         // 设置缩放级别和中心点
+        //shopMap.setZoomAndCenter(shopMap.getzoom(), [Lng, Lat]);
+        var Center = Array(Lng,Lat); 
+        //alert(Center);
+        infoWindow.open(shopMap,Center);
+    }
+
+   function placeSearchs(Keyword){
+   		var cityName =  $('#areaId1').find("option:selected").text();
+   		var cityvalue =  $('#areaId1').find("option:selected").val();
+
+   		//alert(cityName+'||'+cityvalue);
+   		if(cityName=="请选择" || cityvalue==""){
+   			alert('请先选择你所在的地区');
+   		}
+   		AMap.service(["AMap.PlaceSearch"], function() {
+        var placeSearch = new AMap.PlaceSearch({ //构造地点查询类
+        	pageSize: 4,
+            pageIndex: 1,
+            city: cityName, //城市
+            map: shopMap,
+            panel:"panel"
+        });
+        //关键字查询
+        placeSearch.search(Keyword);
+
+    });
+   		 shopMap.setZoom(14);
+   }
+
+   /**
+    * [getAreaList  获得区域列表]
+    * @param  {[type]} objId    [description]
+    * @param  {[type]} parentId [description]
+    * @param  {[type]} t        [description]
+    * @param  {[type]} id       [description]
+    * @return {[type]}          [description]
+    */
    function getAreaList(objId,parentId,t,id){
 	   var params = {};
 	   params.parentId = parentId;
 	   $('#'+objId).empty();
+	   /*
 	   if(t<1){
 		   $('#areaId3').empty();
 		   $('#areaId3').html('<option value="">请选择</option>');
 	   }else{
 		   if(t==1 && $('#areaId2').find("option:selected").text()!=''){
-			   shopMap.setZoom();
+			   shopMap.setZoom(); //地图设置变焦
 			   shopMap.setCity($('#areaId2').find("option:selected").text());
 			   $('#showLevel').val(shopMap.getZoom());
 		   }
 	   }
+		*/
+	 	if(t==0 && $('#areaId1').find("option:selected").text()!=''){
+			   shopMap.setZoom();
+			   shopMap.setCity($('#areaId1').find("option:selected").text());
+			   $('#showLevel').val(shopMap.getZoom());
+		   }
 	   var html = [];
 	   $.post("{:U('Admin/Areas/queryShowByList')}",params,function(data,textStatus){
 		    html.push('<option value="">请选择</option>');
@@ -248,9 +343,13 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
    var relateCommunity = "{$object['relateCommunity']}".split(',');
    var relateArea = "{$object['relateArea']}".split(',');
    //修改部分 2015-4-23 lijingwei
+   /**
+    * [getCommunitys 得到社区]
+    * @return {[type]} [description]
+    */
    function getCommunitys(){
 		$('#areaTree').empty();
-		var v = $('#areaId2').val();
+		var v = $('#areaId1').val();
 		if(v!==-1){
 			$.post("{:U('Admin/Areas/queryAreaAndCommunitysByList')}",{areaId:v},function(data,textStatus){
 				var json = data;
@@ -283,6 +382,12 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
 			});
 		}
 	}
+
+	/**
+	 * [selectArea 选择地区]
+	 * @param  {[type]} v [description]
+	 * @return {[type]}   [description]
+	 */
    function selectArea(v){
 		count = 0;
 		if($(v).attr('all')=='1'){
@@ -299,6 +404,11 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
 		$(v).closest('dl').find('.count:first').html(count);
 	}
 	//修改结束 2015-4-23
+	
+	/**
+	 * [edit 编辑内容并提交]
+	 * @return {[type]} [description]
+	 */
    function edit(){
 	   var params = {};
 	   params.id = $('#id').val();
@@ -311,7 +421,7 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
 	   params.shopSn = $('#shopSn').val();
 	   params.areaId1 = $('#areaId1').val();
 	   params.areaId2 = $('#areaId2').val();
-	   params.areaId3 = $('#areaId3').val();//地区
+	   //params.areaId3 = $('#areaId3').val();//地区
 	   params.goodsCatId1 = $('#goodsCatId1').val();
 	   params.isSelf = $("input[name='isSelf']:checked").val();
 	   params.shopName = $('#shopName').val();
@@ -329,14 +439,14 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
 	   params.shopTel = $('#shopTel').val();
 	   params.qqNo = $('#qqNo').val();
 	   params.shopAddress = $('#shopAddress').val();
-	   params.deliveryFreeMoney = $('#deliveryFreeMoney').val();
-	   params.deliveryMoney = $('#deliveryMoney').val();
-	   params.avgeCostMoney = $('#avgeCostMoney').val();
+	   //params.deliveryFreeMoney = $('#deliveryFreeMoney').val();
+	   //params.deliveryMoney = $('#deliveryMoney').val();
+	   //params.avgeCostMoney = $('#avgeCostMoney').val();
 	   params.deliveryCostTime = $('#deliveryCostTime').val();
 	   params.deliveryStartMoney = $('#deliveryStartMoney').val();
-	   params.bankId = $('#bankId').val();
-	   params.bankNo = $('#bankNo').val();
-	   params.isInvoice = $("input[name='isInvoice']:checked").val();
+	   //params.bankId = $('#bankId').val();
+	   //params.bankNo = $('#bankNo').val();
+	   //params.isInvoice = $("input[name='isInvoice']:checked").val();
 	   params.invoiceRemarks = $('#invoiceRemarks').val();
 	   params.serviceStartTime = $('#serviceStartTime').val();
 	   params.serviceEndTime = $('#serviceEndTime').val();	   
@@ -367,7 +477,7 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
 	   params.relateAreaId=relateArea.join(',');
 	   params.relateCommunityId=relateCommunity.join(',');
 	   if(params.relateAreaId=='0' && params.relateCommunityId=='0' && params.shopStatus!=-1){
-		   Plugins.Tips({title:'信息提示',icon:'error',content:'请选择配送区域!',timeout:1000});
+		   Plugins.Tips({title:'信息提示',icon:'error',content:'请选择送货区域!',timeout:1000});
 		   return;
 	   }
 	   //拒绝的时候要求写备注
@@ -391,6 +501,13 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
 			}
 		});
    }
+
+   /**
+    * [initTime 初始化时间]
+    * @param  {[type]} objId [description]
+    * @param  {[type]} val   [description]
+    * @return {[type]}       [description]
+    */
    function initTime(objId,val){
 	   val = parseInt(val,10);
 	   for(var i=0;i<24;i++){
@@ -398,6 +515,12 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
 		   $('<option value="'+(i+".5")+'" '+((val==(i+".5"))?"selected":'')+'>'+i+':30</option>').appendTo($('#'+objId));
 	   }
    }
+
+   /**
+    * [isInvoce 是否发票]
+    * @param  {[type]}  v [description]
+    * @return {Boolean}   [description]
+    */
    function isInvoce(v){
 		  if(v){
 			  $('#invoiceRemarkstr').show();
@@ -406,6 +529,12 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
 		  }
    }
    
+   //***事件/
+   function addressLabels(){
+   	  alert($("#shopAddress").val());
+	  placeSearchs( $("#shopAddress").val());
+   }
+  
    </script>
    <body class="wst-page" style="position:relative;">
    		<iframe name="upload" style="display:none"></iframe>
@@ -491,31 +620,35 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
             <tr>
              <th align='right'>所属地区<font color='red'>*</font>：</th>
              <td>
-             <select id='areaId1' onchange='javascript:getAreaList("areaId2",this.value,0)'>
+             <select id='areaId1' onchange='javascript:getAreaList("areaId2",this.value,0);getCommunitys();'>
                <option value=''>请选择</option>
                <volist name="areaList" id="vo">
                <option value='{$vo['areaId']}' <if condition="$object['areaId1'] == $vo['areaId'] ">selected</if>>{$vo['areaName']}</option>
                </volist>
              </select>
-             <select id='areaId2'>
+             <select id='areaId2' onchange='javascript:placeSearchs($("#areaId2").find("option:selected").text())'>
                <option value=''>请选择</option>
              </select>
-            
              </td>
            </tr>
            <tr>
              <th align='right'>店铺地址<font color='red'>*</font>：</th>
-             <td><input type='text' id='shopAddress' class="form-control wst-ipt" value='{$object.shopAddress}' maxLength='120'/></td>
+             <td><input type='text' id='shopAddress' class="form-control wst-ipt" value='{$object.shopAddress}' maxLength='120' onblur='addressLabels()' />
+
+             </td>
            </tr>
            <tr id='shopMap' style='display:none'>
              <td>&nbsp;</td>
              <td>
-             <div id="mapContainer" style='height:400px;width:90%;'>等待地图初始化...</div>
+             <div id="mapContainer" style='height:400px;width:90%;'>等待地图初始化...	
+             	<div id="panel"></div>
+             </div>
              <div style='display:none'>
              <input type='text' id='latitude' name='latitude' value="{$object['latitude']}"/>
              <input type='text' id='longitude' name='longitude' value="{$object['longitude']}"/>
              <input type='text' id='mapLevel' name='mapLevel' value="{$object['mapLevel']}"/>
              </div>
+             
              </td>
            </tr>
            <tr>
@@ -541,7 +674,7 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
              </td>
            </tr>
            <tr>
-             <th align='right'>配送区域<font color='red'>*</font>：</th>
+             <th align='right'>送货区域<font color='red'>*</font>：</th>
              <td>
              <div class="text-gray Hide">展开全部：<input type="checkbox" id="expendAll"></div>
              <div id='areaTree'>
@@ -552,11 +685,11 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
              <th width='170' align='right'>订单配送起步价(元)<font color='red'>*</font>：</th>
              <td><input type='text' id='deliveryStartMoney' class="form-control wst-ipt" value='{$object.deliveryStartMoney}' onkeypress="return WST.isNumberdoteKey(event)" onkeyup="javascript:WST.isChinese(this,1)" maxLength='25'/></td>
            </tr>
-           <tr>
+           <tr class="hide"><!--已经可以删掉了-->
              <th align='right'>包邮起步价(元)<font color='red'>*</font>：</th>
              <td><input type='text' id='deliveryFreeMoney' class="form-control wst-ipt" value='{$object.deliveryFreeMoney}' onkeypress="return WST.isNumberdoteKey(event)" onkeyup="javascript:WST.isChinese(this,1)" maxLength='25'/></td>
            </tr>
-           <tr>
+           <tr class="hide"><!--已经可以删掉了-->
              <th align='right'>邮费(元)<font color='red'>*</font>：</th>
              <td><input type='text' id='deliveryMoney' class="form-control wst-ipt" value='{$object.deliveryMoney}' onkeypress="return WST.isNumberdoteKey(event)" onkeyup="javascript:WST.isChinese(this,1)" maxLength='25'/></td>
            </tr>
@@ -564,12 +697,12 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
              <th align='right'>平均配送时间(分钟)<font color='red'>*</font>：</th>
              <td><input type='text' id='deliveryCostTime' class="form-control wst-ipt" value='{$object.deliveryCostTime}' onkeypress="return WST.isNumberKey(event)" onkeyup="javascript:WST.isChinese(this,1)" maxLength='25'/></td>
            </tr>
-           <tr>
+           <tr  class="hide"><!--已经可以删掉了-->
              <th align='right'>平均消费金额<font color='red'>*</font>：</th>
              <td><input type='text' id='avgeCostMoney' class="form-control wst-ipt" value='{$object.avgeCostMoney}' onkeypress="return WST.isNumberdoteKey(event)" onkeyup="javascript:WST.isChinese(this,1)" maxLength='25'/></td>
            </tr>
            <!--hide date:2016 0215 2059-->
-           <tr>
+           <tr  class="hide"><!--已经可以删掉了-->
              <th align='right'>所属银行<font color='red'>*</font>：</th>
              <td>
              <select id='bankId'>
@@ -580,11 +713,11 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
              </select>
              </td>
            </tr>
-           <tr>
+           <tr  class="hide">
              <th align='right'>银行卡卡号<font color='red'>*</font>：</th>
              <td><input type='text' id='bankNo' class="form-control wst-ipt" value='{$object.bankNo}' maxLength='25'/></td>
            </tr>
-           <tr>
+           <tr  class="hide">
              <th align='right'>能否开发票<font color='red'>*</font>：</th>
              <td>
              <label>
@@ -595,7 +728,7 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
              </label>
              </td>
            </tr>
-           <tr id='invoiceRemarkstr' <if condition="$object['isInvoice'] eq 0 ">style='display:none'</if>>
+           <tr class="hide" id='invoiceRemarkstr' <if condition="$object['isInvoice'] eq 0 ">style='display:none'</if>>
              <th align='right'>发票说明<font color='red'>*</font>：</th>
              <td><input type='text' id='invoiceRemarks' class="form-control wst-ipt" value='{$object.invoiceRemarks}' maxLength='25'/></td>
            </tr>

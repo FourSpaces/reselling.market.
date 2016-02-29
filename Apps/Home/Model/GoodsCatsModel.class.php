@@ -23,6 +23,7 @@ class GoodsCatsModel extends BaseModel {
 	public function getGoodsCatsAndGoodsForIndex($areaId2){
 		$cats = S("WST_CACHE_GOODS_CAT_GOODS_WEB_".$areaId2);
 		if(!$cats){
+			//获得商品的分类
 			$sql = "select catId,catName from __PREFIX__goods_cats WHERE parentId = 0 AND isShow =1 AND catFlag = 1 order by catSort asc limit 6";
 			$rs1 = $this->query($sql);
 			$cats = array();
@@ -43,10 +44,10 @@ class GoodsCatsModel extends BaseModel {
 					$rs2[$j]["catChildren"] = $cats3;
 			
 					//查询二级分类下的商品
-					$sql = "SELECT sp.shopName, g.saleCount , sp.shopId , g.goodsId , g.goodsName,g.goodsImg, g.goodsThums,g.shopPrice, g.goodsSn,ga.id goodsAttrId,ga.attrPrice
-							FROM __PREFIX__goods g left join __PREFIX__goods_attributes ga on g.goodsId=ga.goodsId and ga.isRecomm=1, __PREFIX__shops sp
-							WHERE g.shopId = sp.shopId AND sp.shopStatus = 1 AND g.goodsFlag = 1 AND g.isSale = 1 AND g.goodsStatus = 1 AND g.goodsCatId2 = $cat2Id AND sp.areaId2=$areaId2
-							ORDER BY g.saleCount desc limit 8";
+					$sql = "SELECT sp.shopName, g.saleCount , sp.shopId , g.goodsId , g.goodsName,g.goodsImg, g.goodsThums,g.shopPrice, g.goodsSn, g.createTime, g.popularity 
+							FROM __PREFIX__goods g, __PREFIX__shops sp left join __PREFIX__shops_communitys sc on sp.shopId = sc.shopId 
+							WHERE g.shopId = sp.shopId AND sp.shopStatus = 1 AND g.goodsFlag = 1 AND g.isSale = 1 AND g.goodsStatus = 1 AND g.goodsCatId2 = $cat2Id AND sc.communityId=$areaId2
+							ORDER BY g.popularity desc limit 8";
 					$grs = $this->query($sql);
 					foreach ($grs as $gkey => $v){
 						if(intval($v['goodsAttrId'])>0)$grs[$gkey]['shopPrice'] = $v['attrPrice'];
@@ -56,19 +57,26 @@ class GoodsCatsModel extends BaseModel {
 				}
 			
 				//查询二级分类下的商品
-				$sql = "SELECT sp.shopName, g.saleCount , sp.shopId , g.goodsId , g.goodsName,g.goodsImg, g.goodsThums,g.shopPrice, g.goodsSn,ga.id goodsAttrId,ga.attrPrice
+				$sql = "SELECT sp.shopName, g.saleCount , sp.shopId , g.goodsId , g.goodsName,g.goodsImg, g.goodsThums,g.shopPrice, g.goodsSn,ga.id goodsAttrId,ga.attrPrice,g.createTime
 						FROM __PREFIX__goods g left join __PREFIX__goods_attributes ga on g.goodsId=ga.goodsId and ga.isRecomm=1, __PREFIX__shops sp
 						WHERE g.shopId = sp.shopId AND sp.shopStatus = 1 AND g.goodsFlag = 1 AND g.isAdminBest = 1 AND g.isSale = 1 AND g.goodsStatus = 1 AND g.goodsCatId1 = $cat1Id AND sp.areaId2=$areaId2
 						ORDER BY g.saleCount desc limit 8";
+				$sql = "SELECT sp.shopName, g.saleCount , sp.shopId , g.goodsId , g.goodsName,g.goodsImg, g.goodsThums,g.shopPrice, g.goodsSn, g.createTime, g.popularity 
+                        FROM __PREFIX__goods g, __PREFIX__shops sp left join __PREFIX__shops_communitys sc on sp.shopId = sc.shopId 
+                        WHERE g.shopId = sp.shopId AND sp.shopStatus = 1 AND g.goodsFlag = 1 AND g.isSale = 1 AND g.goodsStatus = 1 AND g.goodsCatId1 = $cat1Id AND sc.communityId=$areaId2 
+                        ORDER BY g.createTime desc limit 8";
 				$jgrs = $this->query($sql);
+
+
 			    foreach ($jgrs as $gkey => $v){
 					if(intval($v['goodsAttrId'])>0)$jgrs[$gkey]['shopPrice'] = $v['attrPrice'];
 				}
+				//echo $this->_sql()."<hr/>";
 				$rs1[$i]["jpgoods"] = $jgrs;
 				$rs1[$i]["catChildren"] = $cats2;
 				$cats[] = $rs1[$i];
 			}
-			S("WST_CACHE_GOODS_CAT_GOODS_WEB_".$areaId2,$cats,31536000);
+			//S("WST_CACHE_GOODS_CAT_GOODS_WEB_".$areaId2,$cats,31536000);
 		}
 		//获取每个分类推荐的店铺
 		if($cats){
@@ -100,7 +108,7 @@ class GoodsCatsModel extends BaseModel {
 		$goodsCatId1 = $obj["goodsCatId1"];
 		$sql = "SELECT  COUNT(odr.orderId) as shopcnt, shop.shopId,shop.shopName,shop.shopImg FROM __PREFIX__shops shop
 					LEFT JOIN __PREFIX__orders odr ON shop.shopId = odr.shopId
-					WHERE shop.goodsCatId1 = $goodsCatId1 AND shopFlag = 1 AND shopStatus = 1 AND shopAtive = 1 AND shop.areaId2 = $areaId2
+					WHERE shop.goodsCatId1 = $goodsCatId1 AND shopFlag = 1 AND shopStatus = 1 AND shopAtive = 1 AND shop.areaId2 = $areaId2  
 					GROUP BY shop.shopId ORDER BY shopcnt DESC limit 4 ";
 		$recommendShops = $this->query($sql);
 		return $recommendShops;

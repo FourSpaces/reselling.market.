@@ -56,6 +56,15 @@ class AreasModel extends BaseModel {
 	 	$m = M('areas');
 		return $m->where('areaFlag=1 and isShow=1 and parentId='.$parentId)->field('areaId,areaName')->select();
 	 }
+	 /**
+	  * [queryById 根据子数据获得父ID]
+	  * @param  [type] $areaId [description]
+	  * @return [type]         [description]
+	  */
+	 public function queryById($areaId){
+	 	$m = M('areas');
+	 	return $m->where('areaFlag=1 and isShow=1 and areaId='.$areaId)->getField('parentId');
+	 }
      /**
 	 * 获取区域信息
 	 */
@@ -63,6 +72,13 @@ class AreasModel extends BaseModel {
 	  	 $m = M('areas');
 		 return $m->where('areaFlag=1 and isShow=1 and areaId='.$areaId)->find();
 	 }
+	  
+
+	 public function getValue($areaId){
+	 	$m = M('areas');
+		 return $m->where('areaFlag=1 and isShow=1 and areaId='.$areaId)->find();
+	 }
+
 	  
 	/**
 	  * 获取城市下的区

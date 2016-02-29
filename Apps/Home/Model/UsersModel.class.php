@@ -106,7 +106,7 @@ class UsersModel extends BaseModel {
 		    	//如果不是店铺 则加载公共店铺信息
 		    	    $shoptype = array('ShopType' => 'public');
 		    		$s = M('shops');
-			 		  $shops = $s->where('userId=0 and shopId=0 and shopFlag=1')->find();
+			 		  $shops = $s->where('userId=1 and shopId=1 and shopFlag=1')->find();
 			 		  if(!empty($shops))$rs = array_merge(array_merge($shops,$shoptype),$rs);
 		    	}
 		    	//记录登录日志
@@ -136,10 +136,11 @@ class UsersModel extends BaseModel {
     	$rd = array('status'=>-1);	   
     	
     	$data = array();
-    	$data['loginName'] = I('loginName','');
-    	$data['loginPwd'] = I("loginPwd");
-    	$data['reUserPwd'] = I("reUserPwd");
-    	$data['protocol'] = I("protocol");
+    	$data['loginName'] = I('loginName','');	//登陆名称
+    	$data['loginPwd'] = I("loginPwd");		//登陆密码
+    	$data['reUserPwd'] = I("reUserPwd");	//重复密码
+    	$data['cityId'] = I("cityId");		
+    	$data['protocol'] = I("protocol");		//协议阅读状态
     	$loginName = $data['loginName'];
     	if($data['loginPwd']!=$data['reUserPwd']){
     		$rd['status'] = -3;
@@ -152,6 +153,7 @@ class UsersModel extends BaseModel {
     	foreach ($data as $v){
     		if($v ==''){
     			$rd['status'] = -7;
+    			$rd['data'] = var_export($data,true);
     			return $rd;
     		}
     	}
@@ -307,6 +309,7 @@ class UsersModel extends BaseModel {
 		$data["userSex"] = (int)I("userSex",0);
 		$data["userEmail"] = $userEmail;
 		$data["userPhoto"] = I("userPhoto");
+		$data["cityId"] = I("cityId");
 		$rs = $m->where(" userId=".$userId)->data($data)->save();
 	    if(false !== $rs){
 			$rd['status']= 1;
@@ -317,6 +320,7 @@ class UsersModel extends BaseModel {
 			$WST_USER['userPhone'] = $data["userPhone"];
 			$WST_USER['userEmail'] = $data["userEmail"];
 			$WST_USER['userPhoto'] = $data["userPhoto"];
+			$WST_USER['cityId'] = $data["cityId"];
 			session('WST_USER',$WST_USER);
 		}
 		return $rd;
@@ -354,4 +358,11 @@ class UsersModel extends BaseModel {
     	session('findPass',null);
     	return $rs;
 	}
+
+	function getAreaId($userId){
+    $sql ="SELECT u.userId, a.areaName FROM __PREFIX__users u LEFT JOIN __PREFIX__areas a on u.cityId = a.areaId WHERE u.userId = $userId";
+	$Model = new \Think\Model(); // 实例化一个model对象 没有对应任何数据表
+	$data = $Model->query($sql);
+	return $data;
+}
 }

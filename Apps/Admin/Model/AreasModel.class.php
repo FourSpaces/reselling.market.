@@ -97,16 +97,29 @@ class AreasModel extends BaseModel {
      /**
 	  * 获取列表[带社区]
 	  */
-	  public function queryAreaAndCommunitysByList($parentId){
-	     $m = M('areas');
-		 $rs = $m->where('areaFlag=1 and parentId='.(int)$parentId)->select();
-		 if(count($rs)>0){
-		 	$m = M('communitys');
+	  public function queryAreaAndCommunitysByList($areaId){
+	  	/*
+	     //$m = M('areas');
+		 //$rs = $m->where('areaFlag=1 and parentId='.(int)$parentId)->select();
+		 //if(count($rs)>0){
+		 	//$m = M('communitys');
+		 	
 		 	foreach ($rs as $key =>$v){
 		 		$r = $m->where('communityFlag=1 and areaId3='.$v['areaId'])->select();
 		 		if(!empty($r))$rs[$key]['communitys'] = $r;
 		 	}
-		 }
+		 	
+		   
+		 }*/
+		 	//$Model = new \Think\Model(); // 实例化一个model对象 没有对应任何数据表
+		 	$m = M('areas');
+		 	$rs = $m->where('areaFlag=1 and areaId='.(int)$areaId)->select();
+		 	$rs1 = array();
+		 	$rs1[0] = $rs;
+		    $sql = "SELECT areaId as communityId, parentId as areaId1 , 0 as areaId2, 0 as areaId3, isShow as isShow, areaName as communityName, areaSort as communitySort, areaKey as communityKey ,areaFlag as communityFlag FROM __PREFIX__areas  WHERE areaFlag = 1 and parentId = $areaId";
+		 	//$r = $m->where('communityFlag=1 and areaId3='.$v['areaId'])->select();
+		 	$r = $m->query($sql);
+		 	if(!empty($r))$rs[0]['communitys'] = $r;
 		 return $rs;
 	  }
 	  

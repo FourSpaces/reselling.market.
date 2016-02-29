@@ -41,7 +41,8 @@ $(function () {
 	   }});
 	   $.formValidator.initConfig({
 		   theme:'Default',mode:'AutoTip',formID:"myform",debug:true,submitOnce:true,onSuccess:function(){
-			       editGoods('{$umark}');
+			       //editGoods('{$umark}');
+			       editGoods('queryOnSaleByPage');
 			       return false;
 			},onError:function(msg){
 		}});
@@ -51,6 +52,9 @@ $(function () {
 	   $("#goodsName").formValidator({onShow:"",onFocus:"",onCorrect:"输入正确"}).inputValidator({min:1,max:200,onError:"请输入宝贝名称"});
 	   $("#marketPrice").formValidator({onShow:"",onFocus:"",onCorrect:"输入正确"}).inputValidator({min:1,max:50,onError:"请输入原价"});
 	   $("#shopPrice").formValidator({onShow:"",onFocus:"",onCorrect:"输入正确"}).inputValidator({min:1,max:50,onError:"请输入现价"});
+
+	   $("#phone").formValidator({onShow:"",onFocus:"",onCorrect:"输入正确"}).inputValidator({min:11,max:11,onError:"请输入手机号"});
+	   $("#sellerName").formValidator({onShow:"",onFocus:"",onCorrect:"输入正确"}).inputValidator({min:3,max:8,onError:"名字输入不合法"});
 	   /*
 	   $("#goodsStock").formValidator({onShow:"",onFocus:"",onCorrect:"输入正确"}).inputValidator({min:1,max:50,onError:"请输入库存"});
 	   */
@@ -184,8 +188,11 @@ var filetypes = ["gif","jpg","png","jpeg"];
 	             <select id='goodsCatId1' onchange='javascript:getCatListForEdit("goodsCatId2",this.value,0)'>
 	                <option value=''>请选择</option>
 	                <volist name="goodsCatsList" id="vo">
-	                <option value='{$vo['catId']}' <if condition="$object['goodsCatId1'] == $vo['catId'] ">selected</if>>{$vo['catName']}</option>
+	                  <if condition="$vo['serviceType'] eq $userType">
+	                	<option value='{$vo['catId']}' <if condition="$object['goodsCatId1'] == $vo['catId'] ">selected</if>>{$vo['catName']}</option>
+	                  </if>
 	                </volist>
+
 	             </select>
 	             <select id='goodsCatId2' onchange='javascript:getCatListForEdit("goodsCatId3",this.value,1);'>
 	                <option value=''>请选择</option>
@@ -264,7 +271,7 @@ var filetypes = ["gif","jpg","png","jpeg"];
 	             </td>
 	           </tr>
 			   <tr>
-	             <th width='120'>联系方式：</th>
+	             <th width='120'>联系方式：<font color='red'>*</font></th>
 	             <td colspan='3'>
 	             <div class="input-prepend">
             		<label class="add-on" for="phone">&nbsp;手&nbsp;机：</label>

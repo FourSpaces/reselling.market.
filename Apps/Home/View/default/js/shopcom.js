@@ -971,9 +971,9 @@ function editShop(){
 	   params.shopAddress = $('#shopAddress').val();
 	   params.deliveryCostTime = $('#deliveryCostTime').val();
 	   params.deliveryStartMoney = $('#deliveryStartMoney').val();
-	   params.deliveryMoney = $('#deliveryMoney').val();
-	   params.deliveryFreeMoney = $('#deliveryFreeMoney').val();
-	   params.avgeCostMoney = $('#avgeCostMoney').val();
+	   //params.deliveryMoney = $('#deliveryMoney').val();
+	   //params.deliveryFreeMoney = $('#deliveryFreeMoney').val();
+	   //params.avgeCostMoney = $('#avgeCostMoney').val();
 	   params.isInvoice = $("input[name='isInvoice']:checked").val();
 	   params.invoiceRemarks = $('#invoiceRemarks').val();
 	   params.serviceStartTime = $('#serviceStartTime').val();
@@ -983,8 +983,8 @@ function editShop(){
 	   params.longitude = $('#longitude').val();
 	   params.mapLevel = $('#mapLevel').val();
 	   
-	   params.bankId = $('#bankId').val();
-	   params.bankNo = $('#bankNo').val();
+	   //params.bankId = $('#bankId').val();
+	   //params.bankNo = $('#bankNo').val();
 	   
 	   params.shopAtive = $("input[name='shopAtive']:checked").val();
 	   var relateArea = [0];

@@ -38,8 +38,13 @@ class GoodsAppraisesModel extends BaseModel {
 		$sql = "SELECT ga.*, u.userName,u.loginName, od.createTime as ocreateTIme 
 				FROM __PREFIX__goods_appraises ga , __PREFIX__orders od , __PREFIX__users u 
 				WHERE ga.userId = u.userId AND ga.orderId = od.orderId AND ga.goodsId = $goodsId AND ga.isShow =1 order by id desc ";		
+		$sql = "SELECT ga.*, u1.loginName as userName ,u.loginName as toUserName FROM __PREFIX__goods_appraises ga LEFT JOIN __PREFIX__users u1 on ga.userId = u1.userId , __PREFIX__users u 
+				WHERE ga.toUserId = u.userId AND ga.goodsId = $goodsId AND ga.isShow =1 order by id desc ";		
 		$data = $this->pageQuery($sql);	
 		return $data;
+
+		//return $this->_sql();
+
 	}
 	 
  	/**
@@ -72,19 +77,28 @@ class GoodsAppraisesModel extends BaseModel {
 		$rd = array('status'=>-1);	
 		$m = M('goods_appraises');
 		$userId = $obj["userId"];
-		$orderId = $obj["orderId"];
-		$goodsId = $obj["goodsId"];
-		$goodsAttrId = $obj["goodsAttrId"];
 		
-		$goodsScore = (int)I("goodsScore");
+		$goodsId = $obj["goodsId"];
+
+		$parentId = $obj["parentId"];		//父级id
+		$toUserId = $obj["toUserId"];		//接收者id
+		$content = $obj["content"];			//内容
+
+		/*
+		$orderId = $obj["orderId"]; //订单ID
+		$goodsAttrId = $obj["goodsAttrId"];	 
+		$goodsScore = (int)I("goodsScore");  	//商品评分
 		$goodsScore = $goodsScore>5?5:$goodsScore;
 		$goodsScore = $goodsScore<1?1:$goodsScore;
-		$timeScore = (int)I("timeScore");
+		$timeScore = (int)I("timeScore");  		//时间评分
 		$timeScore = $timeScore>5?5:$timeScore;
 		$timeScore = $timeScore<1?1:$timeScore;
-		$serviceScore = (int)I("serviceScore");
+		$serviceScore = (int)I("serviceScore"); //服务评分
 		$serviceScore = $serviceScore>5?5:$serviceScore;
 		$serviceScore = $serviceScore<1?1:$serviceScore;
+		*/
+		//首先去掉订单部分 直接添加评论
+		/*
 		//检查订单是否有效
 		$sql="select isAppraises,orderFlag,shopId from __PREFIX__orders o where o.orderStatus = 4 and o.orderId=".$orderId." and o.userId=".$userId;
 		$rs = $this->query($sql);
@@ -104,22 +118,28 @@ class GoodsAppraisesModel extends BaseModel {
 			$rd['msg'] = '该商品已评价!';
 			return $rd;
 		}
-		
+		*/
 		//新增评价记录
 		$data = array();
 		
 		$data["goodsId"] = $goodsId;
-		$data["shopId"] = $shopId;
 		$data["userId"] = $userId;
-		$data["goodsScore"] = $goodsScore;
-		$data["timeScore"] = $timeScore;
-		$data["serviceScore"] = $serviceScore;
-		$data["content"] = I("content");
-		$data['goodsAttrId'] = $goodsAttrId;
+		$data["toUserId"] = $toUserId;		//接收者ID
+		$data["content"] = $content;		//内容
+		$data["parentId"] = $parentId;		//父级ID
 		$data["isShow"] = 1;
 		$data["createTime"] = date('Y-m-d H:i:s');
-		$data["orderId"] = (int)I("orderId");
+		$data["status"] = 0;
+		
+		//$data["shopId"] = $shopId;
+		//$data["goodsScore"] = $goodsScore;		//商品评分
+		//$data["timeScore"] = $timeScore;		//时间评分
+		//$data["serviceScore"] = $serviceScore;	//服务评分	
+		//$data['goodsAttrId'] = $goodsAttrId;
+		//$data["orderId"] = (int)I("orderId");	//订单ID
 		$rs = $m->add($data);
+
+		/*
 		if(false !== $rs){
 			$data["totalScore"] = $data["goodsScore"]+$data["timeScore"]+$data["serviceScore"];
 			
@@ -179,7 +199,13 @@ class GoodsAppraisesModel extends BaseModel {
 				$this->execute($sql);
 			}
 		}
-		$rd['status'] = 1;
+
+		*/
+		if(!empty($rd)){
+			$rd['data'] = var_export($data,true);
+			$rd['status'] = 1;	
+		}
+
 		return $rd;
 	}
 	/**
@@ -209,15 +235,24 @@ class GoodsAppraisesModel extends BaseModel {
 	/**
 	 * 获取商品评价列表
 	 */
-	public function getAppraisesList($obj){
+	public function getAppraisesList($obj,$tab=true){
 		$userId = $obj["userId"];
 		$pcurr = (int)I("pcurr",0);
 		$data = array();
-
-		$sql = "SELECT ga.*,o.orderNo,g.goodsName,g.goodsThums
-				FROM __PREFIX__goods_appraises ga, __PREFIX__goods g, __PREFIX__orders o 
-				WHERE ga.userId=$userId AND ga.goodsId = g.goodsId AND ga.orderId = o.orderId
+		$sql = '';
+		if($tab){
+			$sql = "SELECT ga.*,g.goodsName,g.goodsThums,u.loginName as userName 
+				FROM __PREFIX__goods_appraises ga LEFT JOIN __PREFIX__users u on ga.toUserId = u.userId , __PREFIX__goods g  
+				WHERE ga.userId = $userId AND ga.goodsId = g.goodsId 
 				ORDER BY ga.createTime DESC";
+		}else{
+			$sql = "SELECT ga.*,g.goodsName,g.goodsThums,u.loginName as userName 
+				FROM __PREFIX__goods_appraises ga LEFT JOIN __PREFIX__users u on ga.userId = u.userId , __PREFIX__goods g  
+				WHERE ga.toUserId = $userId AND ga.goodsId = g.goodsId 
+				ORDER BY ga.createTime DESC";
+		}
+
+		
 		$pages = $this->pageQuery($sql,$pcurr);	
 		return $pages;
 	}

@@ -13,6 +13,21 @@
      	<link rel="stylesheet" href="__ROOT__/Apps/Home/View/default/css/base.css" />
 		<link rel="stylesheet" href="__ROOT__/Apps/Home/View/default/css/head.css" />
      	<link rel="stylesheet" href="__ROOT__/Apps/Home/View/default/css/footer.css">
+     	<style>
+		   	.layui-layer-btn a{background:#e23c3d;}
+		   	.shortcut {
+			    border-left: 1px solid #fff;
+			    float: left;
+			    height: 27px;
+			    padding: 0px;
+			}
+		   	.form select{
+			    font-size: 14px;
+			    height: 38px;
+			    padding: 0px 5px;
+			    border: 1px solid #cccccc;
+			}
+		</style>
    	</head>
    	<body>
     <include file="./Apps/Home/View/default/header_common.html" />
@@ -49,6 +64,27 @@
 	                            <label id="pwdRepeat_succeed" class="pwdblank"></label>	                           
 	                        </div>
 	                    </div>
+	                    <div class="item" >
+	                        <span class="label">所在学校：</span>	
+	                        <div class="fl item-ifo">
+	                            <div class="shortcut">
+				                    <div class="shortcut-select shortcut-select-p">
+				                        <!--  div class="ss-value"><em pid="17">湖南</em><i class="triangle"></i></div> -->
+				                        <select id="provinceId" onchange="getCitys(this);" width="70">
+				                        	<volist name="provinceList" key="k" id="province">
+				                        	<option <if condition="$province['areaId'] eq $area['parentId']">selected</if> value="{$province['areaId']}">{$province["areaName"]}</option>
+				                        	</volist>
+				                        </select>
+				                    </div>
+				                    <div class="shortcut-select shortcut-select-city">
+				                        <select id="cityId" width="180">
+				                        	<option>选择学校</option>
+				                        </select>
+				                    </div>    
+				                    <input style="display:none;" type="button" class="button" value="确 定" onclick="changeCity();">
+				                </div>                           
+	                        </div>
+	                    </div>  
 						<div class="item" style="display:none;">
 	                        <span class="label">电子邮箱：</span>	
 	                        <div class="fl item-ifo">
@@ -120,8 +156,32 @@
     <script src="__PUBLIC__/js/common.js"></script>
     <script src="__ROOT__/Apps/Home/View/default/js/common.js"></script>
     <script src="__ROOT__/Apps/Home/View/default/js/regist.js"></script>
-    <style>
-   	.layui-layer-btn a{background:#e23c3d;}
-   	</style>
+    <script>
+    	$(document).ready(function () {
+	    	getCitys();
+	    	//$(window).unbind('scroll');
+	    });
+	    function getCitys(){
+	    	var provinceId = $("#provinceId").val();
+	    	jQuery.post("{:U('Home/Areas/getCityListByProvince/')}",{provinceId:provinceId},function(rsp) {
+	    		var json = WST.toJson(rsp);
+	    		var citys = new Array();
+	    		
+	    		for(var i=0;i<json.length;i++){
+	    			var city = json[i];
+	    			if(city.areaId=='{$areaId2}'){
+	    				citys.push("<option value='"+city.areaId+"' selected>"+city.areaName+"</option>");
+	    			}else{
+	    				citys.push("<option value='"+city.areaId+"'>"+city.areaName+"</option>");
+	    			}
+	    		}
+	    		if(!json.length){
+	    			citys.push("<option>选择学校</option>");
+	    		}
+	    		$("#cityId").html(citys.join(""));
+	    	});
+	    }
+    </script>
+
 </body>
 </html>

@@ -360,6 +360,9 @@ a:hover {
 
 #wst-slide {
 	height: 360px;
+	width: 1000px;
+    margin-left: 210px;
+    border:1px solid #E4E4F8;
 }
 
 .navCon {
@@ -408,6 +411,7 @@ a:hover {
 	clear: both;
 	margin: 0 auto;
 	height: 360px;
+	width: 1210px;
 }
 
 .wst-left {

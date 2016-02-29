@@ -16,6 +16,103 @@
      	<script src="__PUBLIC__/js/jquery.min.js"></script>
      	<script src="__PUBLIC__/js/common.js"></script>
      	<script src="__PUBLIC__/plugins/layer/layer.min.js"></script>
+     	<style type="text/css">
+     		.cmt-edit {background: #f5f5f5;}
+     		.cmt-edit-top {padding: 10px 10px 2px;}
+     		.cmt-user {
+			    float: left;
+			    width: 60px;
+			    height: 60px;
+			}
+			.cmt-user img {
+			    display: block;
+			    max-width: 100%;
+			}
+			fieldset, img {
+			    border: 0;
+			}
+			.cmt-add {
+			    float: left;
+			    margin: 0 0 5px 10px;
+			    width: 630px;
+			    height: 50px;
+			    padding: 4px;
+			    border: 1px solid #ababab;
+			    background: #fff;
+			}
+			.cmt-add textarea {
+			    border: 0;
+			    border-width: 0;
+			    overflow: auto;
+			    word-wrap: break-word;
+			    width: 100%;
+			    height: 40px;
+			    line-height: 20px;
+			    outline: 0;
+			}
+			.cmt-edit-btm { padding: 0 10px 10px;}
+			.cmt-send-el { float: right;color: #747474;margin-right: 90px;}
+			.cmt-send-el0 { float: right;color: #747474;margin-right: 50px;}
+			.cmt-send-textnum {padding-right: 5px; font-size: 12px;}
+			.cmt-send-btn {
+			    display: inline-block;
+			    width: 43px;
+			    height: 24px;
+			    line-height: 24px;
+			    text-decoration: none;
+			    color: #000;
+			    font-size: 12px;
+			    font-weight: 400;
+			    padding: 0;
+			    text-align: center;
+			    border: 1px solid #ababab;
+			    background: #ccc;
+			    background: -webkit-gradient(linear,left top,left bottom,from(#fff),to(#e5e5e5));
+			}
+
+			/***/
+			.cmt-item {
+    position: relative;
+    border-top: 1px dashed #d5d5d5;
+    padding: 10px 0;
+}
+			.cmt-reply-user {
+    display: block;
+    float: left;
+    width: 30px;
+    height: 30px;
+}			
+			.cmt-reply-user img {
+    display: block;
+    max-width: 100%;
+}
+	.cmt-cont-wrap {
+    position: relative;
+    padding-left: 50px;
+}
+	.cmt-cont {
+    margin: -2px 0 0;
+    color: #666;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+	.cmt-user-name {
+    margin-right: 5px;
+}
+	.cmt-date {
+    color: #acacac;
+}
+	.cmt-reply-btn {
+    position: absolute;
+    right: 35px;
+    bottom: 0;
+    color: #369103;
+    cursor: pointer;
+}	
+	.cmt-item .cmt-edit {
+    display: none;
+}
+     	</style>
    	</head>
    	<body>
 		<include file="./Apps/Home/View/default/header_common.html" />
@@ -112,9 +209,9 @@
 									</if>
 									
 								</tr>
-								<tr style="display:none;">
+								<tr style="">
 									<td width="70"><span class="des-title-span">所&nbsp;&nbsp;在&nbsp;地：</span></td>
-									<td>山西 山东</td>
+									<td>{$userData['areaName']}</td>
 								</tr>
 								<tr>
 									<!--这里对联系方式 进行遮掩，非会员 无法看到-->
@@ -239,7 +336,7 @@
 												<!-- 删除 加入购物车-->
 												<a style="display:none;" href="javascript:addCart({$goodsDetails['goodsId']},0,'{$goodsDetails['goodsThums']}')" class="btnCart"><img src="__ROOT__/Apps/Home/View/default/images/btn_buy_01_hover.png" width="112" height="38"/></a>
 												&nbsp;&nbsp;
-												<a href="javascript:addCart({$goodsDetails['goodsId']},1)" class="btn2Cart">
+												<a style="display:none;" href="javascript:addCart({$goodsDetails['goodsId']},1)" class="btn2Cart">
 													<img src="__ROOT__/Apps/Home/View/default/images/btn_buy_02.png" width="112" height="38"/>
 												</a>
 											<php>}else if($goodsDetails['shopServiceStatus'] ==0){</php>
@@ -365,8 +462,34 @@
 						</table>
 					</div>
 					</if>
-					<div class="tabcon"  style="display:none;">						
+					<div class="tabcon"  style="display:none;">
+				        <div class="cmt-edit-wrap">
+						    <div class="cmt-edit" >
+						        <div class="cmt-edit-top clearfix">
+						            <div class="cmt-user">
+						                <img src="__ROOT__/Apps/Home/View/default/images/2674228161.jpg" alt="">
+						            </div>
+						            <div class="cmt-add">
+						                <textarea id="content" placeholder="我也插句话..."></textarea>
+
+						            </div>
+
+						        </div>
+						        <div class="cmt-edit-btm clearfix">
+						            <span class="cmt-send-el">
+						                <em id="contenttextnum" class="cmt-send-textnum">0/140</em>
+						                <button id="comment"  class="cmt-send-btn">评论</button>
+						            </span>
+						        </div>
+						    </div>
+						</div>					
 						<table id="appraiseTab" width="100%">
+							<tr>
+								<td>
+
+		                   
+		                        </td>
+		                	</tr>
 							<tr>
 								<td>
 		                      	 	<div style="margin-top: 10px;" id="allgoodsppraises">
@@ -393,27 +516,180 @@
 <script src="__ROOT__/Apps/Home/View/default/js/common.js" type="text/javascript"></script>
 <script src="__ROOT__/Apps/Home/View/default/js/pslocation.js" type="text/javascript"></script>
 <script src="__ROOT__/Apps/Home/View/default/js/jquery.jqzoom.js" type="text/javascript"></script>
+
 <script src="__ROOT__/Apps/Home/View/default/js/magnifier.js" type="text/javascript"></script>
+<!--
 <script src="__PUBLIC__/js/qrcode.js"></script>
+-->
 <script> 
 $("#store-selector").hover(function() {
 }, function(){
 	$("#store-selector").removeClass("hover");
 });
 
+var RespondTab = false;
 
 $(function(){
-	var qr = qrcode(10, 'M');
-	qr.addData("{$qrcode}");
-	qr.make();
-	$('#qrcode').html(qr.createImgTag());
-	getGoodsappraises({$goodsDetails["goodsId"]},0);
+
+	getGoodsappraise({$goodsDetails["goodsId"]},0);
 	$("#wst_goods_desc img").each(function(){
 		if($(this).width()>940){
 			$(this).width(940);
 		}
 	});
+
+	//输入文字 内容改变事件
+	$('#content').on('input propertychange', function() {
+	    $('#contenttextnum').html($(this).val().length + '/140');
+	    //$(this).children(".cmt-send-textnum").html($(this).val().length + '/140');
+	});
+
+	//输入文字 内容改变事件
+	$(document).on('input propertychange','#rcontent', function() {
+		var id = document.querySelector('#rcontent').dataset.ids;
+	    $('#rtextnum'+id).html($(this).val().length + '/140');
+	});
 });
+
+
+
+
+//
+$('#comment').bind("click", function() {
+	//获得内容
+	var content = $('#content').val();
+	
+	//验证内容
+	if($('#content').val().length<141 && content!='' && content!=undefined && content!=null ){
+		var params = {};
+		params.toUserId = {$goodsDetails["userId"]};
+		params.goodsId = {$goodsDetails["goodsId"]};
+		params.content = content;
+		params.parentId = 0;
+		//alert(JSON.stringify(params));
+		addLetter(params);
+	}
+	else {
+		 WST.msg('留言字数 违反限制！请检查', {icon: 5,time:2500});
+	}
+  
+});
+
+function RemoveRespond(pointer){
+	$("#"+pointer).html('');
+	RespondTab = false;
+}
+
+function addRespond(element,userName,parentId,goodsId){
+	//alert(element.dataset.pointer);
+	if(!RespondTab){
+			var html = new Array();
+		//html.push('<div class="">');
+			html.push('<div class="cmt-edit-top clearfix">');
+				html.push('<div class="cmt-user">  <img src="__ROOT__/Apps/Home/View/default/images/2674228161.jpg" alt=""> </div>');
+				html.push('<div class="cmt-add">  <textarea id="rcontent" class="rcontents" placeholder="回复'+userName+'" data-ids="'+parentId+'"></textarea> </div>');
+				html.push('<a title="关闭" href="javascript:RemoveRespond(\''+element.dataset.pointer+'\')" style="background-image: url(__ROOT__/Apps/Home/View/default/images/close_bottons.png); background-size: 100%;width: 25px; height: 25px; display: block; float: right;margin-right: 20px;"></a>');
+			html.push('</div>');
+			html.push('<div class="cmt-edit-btm clearfix"> <span class="cmt-send-el0"> <em id="rtextnum'+parentId+'"   class="cmt-send-textnum">0/140</em> <button  class="cmt-send-btn" onclick="Respond('+parentId+','+goodsId+')">评论</button> </span> </div>');
+		//html.push('</div>');
+
+		$("#"+element.dataset.pointer).html(html);
+		RespondTab = true;
+	}else{
+		WST.msg('请先完成已打开的回复!', {icon: 5});
+	}
+
+
+
+}
+
+function Respond(parentId,goodsId) {
+    //alert($("#rcontent").val());
+		//获得内容
+	var content = $('#rcontent').val();
+	
+	//验证内容
+	if($('#rcontent').val().length<141 && content!='' && content!=undefined && content!=null ){
+		var params = {};
+		params.toUserId = {$goodsDetails["userId"]};
+		params.goodsId = {$goodsDetails["goodsId"]};
+		params.content = content;
+		params.parentId = parentId;
+
+		addLetter(params);
+	}
+	else {
+		 WST.msg('留言字数 违反限制！请检查', {icon: 5,time:2500});
+	}
+
+
+}
+
+function addLetter(params){
+		jQuery.post(Think.U("Home/GoodsAppraises/addGoodsAppraises") ,params,function(data){
+			var json = WST.toJson(data);
+			if(json.status=='1'){
+				WST.msg('操作成功!', {icon: 1},function(){
+					getGoodsappraise({$goodsDetails["goodsId"]},0);
+				});
+				$('#content').val('');
+				//alert(JSON.stringify(data));
+			} else if (json.status=='-888'){
+				WST.msg('请先登录后，再留言!', {icon: 5});
+				//alert(JSON.stringify(data));
+			} else {
+				WST.msg('操作失败!', {icon: 5});
+				//alert(JSON.stringify(data));
+			}
+		});
+}
+function getGoodsappraise(goodsId,p){
+	var params = {}; 
+	params.goodsId = goodsId;
+	params.p = p;
+	//加载商品评价
+	jQuery.post(Think.U("Home/GoodsAppraises/getGoodsappraises") ,params,function(data) {
+		var json = WST.toJson(data);
+		if(json.root && json.root.length){
+			var html = new Array();		    	
+			for(var j=0;j<json.root.length;j++){
+			    var appraises = json.root[j];	
+			   	
+			    	html.push('<div class="cmt-item clearfix" data-touserid="'+appraises.toUserId+'" data-nick="'+appraises.toUserName+'" data-userid="'+appraises.userId+'">');
+			    	html.push('<a href="javascript:;" target="_blank" class="cmt-reply-user"> <img src="__ROOT__/Apps/Home/View/default/images/2674228161.jpg" alt=""> </a>');
+			    	html.push('<div class="cmt-cont-wrap">');	
+			    	if(appraises.parentId==0){
+			    		html.push('<p class="cmt-cont"> <span class="cmt-user-name">'+appraises.userName+'</span> <span class="cmt-cont-text">'+appraises.content+'</span> </p>');
+			    	} else{
+			    		html.push('<p class="cmt-cont"> <span class="cmt-user-name">'+appraises.userName+'</span>回复<span class="cmt-user-name">'+appraises.toUserName+' : </span><span class="cmt-cont-text">'+appraises.content+'</span> </p>');
+			    	}
+			    	
+			    	html.push('<p class="cmt-date">'+appraises.createTime+'</p>');
+			    	html.push('<span class="cmt-reply-btn respond" data-pointer="respond_'+appraises.id+'" onclick="addRespond(this,\''+appraises.userName+'\','+appraises.id+','+goodsId+')">回复</span>');
+			    	html.push('</div></div>');
+			    	html.push('<div id="respond_'+appraises.id+'" class="cmt-edit" style="padding-left: 50px;" ></div>')
+			}
+			$("#appraiseTab").html(html.join(""));
+			if(json.totalPage>1){
+				laypage({
+				    cont: 'wst-page-items',
+				    pages: json.totalPage,
+				    curr: json.currPage,
+				    skip: true,
+				    skin: '#e23e3d',
+				    groups: 3,
+				    jump: function(e, first){
+				        if(!first){
+				        	getGoodsappraises(goodsId,e.curr);
+				        }
+				    }
+				});
+			}
+		}else{
+			$("#appraiseTab").html("<tr><td><div style='font-size:15px;text-align:center;'>没有评价信息</div></td></tr>");
+		}	
+	});
+}
 </script>
    	
 </html>

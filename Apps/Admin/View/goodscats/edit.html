@@ -33,7 +33,10 @@
 	   params.parentId = $('#parentId').val();
 	   params.catName = $('#catName').val();
 	   params.priceSection = $('#priceSection').val();
-	   params.isShow = $('input[name="isShow"]:checked').val();;
+	   params.isShow = $('input[name="isShow"]:checked').val();
+     <if condition="($object['parentId'] eq 0)">
+       params.serviceType = $('input[name="serviceType"]:checked').val();
+     </if>
 	   params.catSort = $('#catSort').val();
 	   Plugins.waitTips({title:'信息提示',content:'正在提交数据，请稍后...'});
 	   $.post("{:U('Admin/GoodsCats/edit')}",params,function(data,textStatus){
@@ -70,6 +73,21 @@
              </label>
              </td>
            </tr>
+            <if condition="($object['parentId'] eq 0)">
+              <tr>
+               {$object|var_dump}
+               <th align='right'>分类属性<font color='red'>*</font>：</th>
+               <td>
+               <label>
+               <input type='radio' id='serviceType1' value='1' name='serviceType' <if condition="$object['serviceType'] ==1 ">checked</if>/>服务商类
+               </label>
+               <label>
+               <input type='radio' id='serviceType0' value='0' name='serviceType' <if condition="$object['serviceType'] ==0 ">checked</if>/>普通分类
+               </label>
+               </td>
+              </tr>
+            </if>
+
            <tr>
              <th align='right'>排序号：</th>
              <td><input type='text' id='catSort' class="form-control wst-ipt" value='{$object.catSort}' style='width:80px' onkeypress="return WST.isNumberKey(event)" onkeyup="javascript:WST.isChinese(this,1)" maxLength='8'/></td>

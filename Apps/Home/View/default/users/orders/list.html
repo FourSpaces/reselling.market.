@@ -6,21 +6,21 @@
        
 	   <div class="wst-order-userinfo-box" style="">
 	   		<div class="wst-userimg-box">
-	   			<img src="<empty name="WST_USER['userPhoto']">__ROOT__/Apps/Home/View/default/images/logo.png<else/>__ROOT__/{$WST_USER['userPhoto']}</empty>" height="100" width="100" />
+	   			<img src="<empty name="WST_USER['userPhoto']">__ROOT__/Apps/Home/View/default/images/logo.png<else/>__ROOT__/{$WST_USER['userPhoto']}</empty>" height="100" width="140" />
 	   		</div>
 	   		<div class="wst-userlogin-box">
 	   			<div><span style="font-size:16px;">欢迎您：</span><span style="font-weight:bolder;color:#fff100;">{$WST_USER["loginName"]}</span><if condition='$WST_USER["userRank"]["rankName"] neq ""'>({$WST_USER["userRank"]['rankName']})</if></div>
 	   			<div>上次登录时间：{$WST_USER["lastTime"]}</div>
 	   			<div>上次登录IP：{$WST_USER["lastIP"]}</div>
 	   			<div class="wst-user-adr">
-	   				<a style="color:#ffffff;" href="{:U('Home/UserAddress/queryByPage/')}">我的收货地址</a>&nbsp;&nbsp;&nbsp;
+	   				<a style="color:#ffffff;display:none;" href="{:U('Home/UserAddress/queryByPage/')}">我的收货地址</a>&nbsp;&nbsp;&nbsp;
 	   				<a href="{:U('Home/Users/toEdit/')}" style="color:#ffffff;">编辑个人资料</a>
 	   			</div>
 	   		</div>
 	   		<div class="wst-clear"></div>
 	   </div>
 	   
-       <div class="wst-order-tg">
+       <div class="wst-order-tg" style="display:none;">
        		<div class="wst-oinfo-box">
        			<div style="">
        			<div style="float:left;width:110px;">待付款<a href="{:U('Home/Orders/queryPayByPage/')}"><span>{$statusList[-2]}</span></a></div>
@@ -32,7 +32,7 @@
        			</div>
        		</div>
        </div>
-       <div class="wst-mywl">
+       <div class="wst-mywl" style="display:none;">
        		<img src="__ROOT__/Apps/Home/View/default/images/icon_top_03.png"  /><span style="color:#ffffff;">&nbsp;&nbsp;&nbsp;&nbsp;我的物流</span>
        </div>
        <div style="margin-top:10px;text-align:center;padding:5px;">

@@ -15,9 +15,10 @@ class IndexAction extends BaseAction {
 	 */
     public function index(){
    		$ads = D('Home/Ads');
-      //获得默认城市
+      //获得默认学校
    		$areaId2 = $this->getDefaultCity();
    		//获取商品分类及商品
+      
 		  $gcm = D('Home/GoodsCats');
 		  $catList = $gcm->getGoodsCatsAndGoodsForIndex($areaId2);
 		  $this->assign('catList',$catList);

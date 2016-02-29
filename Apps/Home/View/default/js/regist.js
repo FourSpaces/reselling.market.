@@ -306,11 +306,14 @@ function regist(){
 	params.loginPwd = $.trim($('#loginPwd').val());
 	params.reUserPwd = $.trim($('#reUserPwd').val());
 	params.userEmail = $.trim($('#userEmail').val());
+	params.cityId = $('#cityId').val();
+	params.userName = params.loginName; //这里暂时设置用户昵称为用户的登陆名称
 	
 	params.userTaste = $('#userTaste').val();
 	//params.userQQ = $.trim($('#userQQ').val());
 	params.userPhone = $.trim($('#userPhone').val());
 	params.mobileCode = $.trim($('#mobileCode').val());
+
 	
 	params.verify = $.trim($('#authCode').val());
 	params.nameType = $("#nameType").val();
@@ -334,6 +337,7 @@ function regist(){
 			WST.msg('验证码已超过有效期!', {icon: 5});
 		}else if(json.status==-7){
 			WST.msg('注册信息不完整!', {icon: 5});
+			alert(json.data);
 		}else{
 			WST.msg('注册失败!', {icon: 5});
 		}

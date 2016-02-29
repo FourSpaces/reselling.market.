@@ -138,3 +138,4 @@ function createGoodsSn($namespace = '') {
     $guid = substr($hash,  0,  4).substr($hash, 20, 6);
     return $guid;
   }
+

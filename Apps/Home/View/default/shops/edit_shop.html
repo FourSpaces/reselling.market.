@@ -33,17 +33,17 @@ $(function () {
 			},onError:function(msg){
 		}});
 	    $("#shopName").formValidator({onShow:"",onFocus:"店铺名称不能超过20个字符",onCorrect:"输入正确"}).inputValidator({min:1,max:20,onError:"店铺名称不符合要求,请确认"});
-		$("#shopName").formValidator({onShow:"",onFocus:"店铺名称不能超过20个字符",onCorrect:"输入正确"}).inputValidator({min:1,max:20,onError:"店铺名称不符合要求,请确认"});
+		//$("#shopName").formValidator({onShow:"",onFocus:"店铺名称不能超过20个字符",onCorrect:"输入正确"}).inputValidator({min:1,max:20,onError:"店铺名称不符合要求,请确认"});
 		$("#userName").formValidator({onShow:"",onFocus:"请输入店主姓名",onCorrect:"输入正确"}).inputValidator({min:1,max:20,onError:"店主姓名不能为空,请确认"});
 		$("#shopCompany").formValidator({onShow:"",onFocus:"请输入公司名称",onCorrect:"输入正确"}).inputValidator({min:1,max:50,onError:"公司名称不能为空,请确认"});
 		$("#shopTel").formValidator({onShow:"",onFocus:"请输入店铺电话",onCorrect:"输入正确"}).inputValidator({min:1,max:50,onError:"店铺电话不能为空,请确认"});
 		$("#shopAddress").formValidator({onShow:"",onFocus:"请输入公司地址",onCorrect:"输入正确"}).inputValidator({min:1,max:50,onError:"公司地址不能为空,请确认"});
-		$("#bankNo").formValidator({onShow:"",onFocus:"请输入银行卡号",onCorrect:"输入正确"}).inputValidator({min:1,max:50,onError:"银行卡号不能为空,请确认"});
+		//$("#bankNo").formValidator({onShow:"",onFocus:"请输入银行卡号",onCorrect:"输入正确"}).inputValidator({min:1,max:50,onError:"银行卡号不能为空,请确认"});
 		$("#deliveryStartMoney").formValidator({onShow:"",onFocus:"请输入订单配送起步价",onCorrect:"输入正确"});
-		$("#deliveryFreeMoney").formValidator({onShow:"",onFocus:"请输入包邮起步价",onCorrect:"输入正确"});
-		$("#deliveryMoney").formValidator({onShow:"",onFocus:"请输入邮费",onCorrect:"输入正确"});
+		//$("#deliveryFreeMoney").formValidator({onShow:"",onFocus:"请输入包邮起步价",onCorrect:"输入正确"});
+		//$("#deliveryMoney").formValidator({onShow:"",onFocus:"请输入邮费",onCorrect:"输入正确"});
 		$("#deliveryCostTime").formValidator({onShow:"",onFocus:"请输入平均配送时间",onCorrect:"输入正确"});
-		$("#avgeCostMoney").formValidator({onShow:"",onFocus:"请输入平均消费金额",onCorrect:"输入正确"});
+		//$("#avgeCostMoney").formValidator({onShow:"",onFocus:"请输入平均消费金额",onCorrect:"输入正确"});
 		
 		getCommunitysForShopEdit();
 		initTime('serviceStartTime','{$object['serviceStartTime']}');
@@ -160,7 +160,7 @@ var filetypes = ["gif","jpg","png","jpeg"];
              </label>
              </td>
            </tr>
-           <tr>
+           <tr class="Hide">
              <th align='right'>配送区域<font color='red'>*</font>：</th>
              <td id="wst_shop_area">
              <div class="text-gray Hide">展开全部：<input type="checkbox" id="expendAll" checked <if condition="$WST_USER['isSelf'] == 1">disabled</if> ></div>
@@ -171,11 +171,11 @@ var filetypes = ["gif","jpg","png","jpeg"];
              <th align='right'>订单配送起步价(元)<font color='red'>*</font>：</th>
              <td><input type='text' id='deliveryStartMoney' class="form-control wst-ipt" value='{$object.deliveryStartMoney}' onkeypress="return WST.isNumberdoteKey(event)" onkeyup="javascript:WST.isChinese(this,1)" maxLength='6'/></td>
            </tr>
-           <tr>
+           <tr style="display:none;">
              <th align='right'>包邮起步价(元)<font color='red'>*</font>：</th>
              <td><input type='text' id='deliveryFreeMoney' class="form-control wst-ipt" value='{$object.deliveryFreeMoney}' onkeypress="return WST.isNumberdoteKey(event)" onkeyup="javascript:WST.isChinese(this,1)" maxLength='6'/></td>
            </tr>
-           <tr>
+           <tr style="display:none;">
              <th align='right'>邮费(元)<font color='red'>*</font>：</th>
              <td><input type='text' id='deliveryMoney' class="form-control wst-ipt" value='{$object.deliveryMoney}' onkeypress="return WST.isNumberdoteKey(event)" onkeyup="javascript:WST.isChinese(this,1)" maxLength='25'/></td>
            </tr>
@@ -183,11 +183,11 @@ var filetypes = ["gif","jpg","png","jpeg"];
              <th align='right'>平均配送时间(分钟)<font color='red'>*</font>：</th>
              <td><input type='text' id='deliveryCostTime' class="form-control wst-ipt" value='{$object.deliveryCostTime}' onkeypress="return WST.isNumberKey(event)" onkeyup="javascript:WST.isChinese(this,1)" maxLength='6'/></td>
            </tr>
-           <tr>
+           <tr  style="display:none;">
              <th align='right'>平均消费金额(元)<font color='red'>*</font>：</th>
              <td><input type='text' id='avgeCostMoney' class="form-control wst-ipt" value='{$object.avgeCostMoney}' onkeypress="return WST.isNumberdoteKey(event)" onkeyup="javascript:WST.isChinese(this,1)" maxLength='25'/></td>
            </tr>
-           <tr>
+           <tr  style="display:none;">
              <th align='right'>能否开发票<font color='red'>*</font>：</th>
              <td>
              <label>
@@ -202,7 +202,7 @@ var filetypes = ["gif","jpg","png","jpeg"];
              <th align='right'>发票说明：</th>
              <td><input type='text' id='invoiceRemarks' class="form-control wst-ipt" value='{$object.invoiceRemarks}' style='width:350px;' maxLength='100'/></td>
            </tr>
-           <tr>
+           <tr  style="display:none;">
              <th width='120' align='right'>转账银行<font color='red'>*</font>：</th>
              <td>
              <select id='bankId'>
@@ -213,7 +213,7 @@ var filetypes = ["gif","jpg","png","jpeg"];
              </select>
              </td>
            </tr>
-           <tr>
+           <tr style="display:none;">
              <th width='120' align='right'>银行卡卡号<font color='red'>*</font>：</th>
              <td><input type='text' id='bankNo' value='{$object.bankNo}' maxLength='25' size='50'/></td>
            </tr>

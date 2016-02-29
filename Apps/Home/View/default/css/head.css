@@ -510,11 +510,12 @@ body {
 	box-shadow: 4px 2px 5px rgba(0, 0, 0, 0.3);
 	background: #ffffff;
 	cursor: pointer;
+	border: 1px solid #E4E4F8;
 }
 
 .headNav .navCon .navCon-cate .cateMenu1 li {
 	height: 60px;
-	width: 210px;
+	width: 208px;
 	overflow: hidden;
 	border-top: 1px solid #a40000;
 }

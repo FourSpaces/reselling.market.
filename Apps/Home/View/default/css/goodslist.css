@@ -47,14 +47,14 @@
 }
 
 .search-items .items li:hover {
-	background-color: #e23e3d;
+	background-color: #ff6600;
 	border-radius: 5px;
 	color: #ffffff;
 	cursor: pointer
 }
 
 .search-items .items .searched {
-	background-color: #e23e3d;
+	background-color: #ff6600;
 	border-radius: 5px;
 	color: #ffffff;
 	cursor: pointer
@@ -89,14 +89,14 @@
 }
 
 .wst-area-country .items li:hover {
-	background-color: #e23e3d;
+	background-color: #ff6600;
 	border-radius: 5px;
 	color: #ffffff;
 	cursor: pointer
 }
 
 .wst-area-country .items .searched {
-	background-color: #e23e3d;
+	background-color: #ff6600;
 	border-radius: 5px;
 	color: #ffffff;
 	cursor: pointer
@@ -142,21 +142,21 @@
 }
 
 .wst-goods-list .wst-goods-header .licurr {
-	background-color: #e23e3d;
+	background-color: #ff6600;
 	border-radius: 5px;
 	color: #ffffff;
 	cursor: pointer
 }
 
 .wst-goods-list .wst-goods-header li:hover {
-	background-color: #e23e3d;
+	background-color: #ff6600;
 	border-radius: 5px;
 	color: #ffffff;
 	cursor: pointer
 }
 
 .wst-goods-list .wst-goods-header .searched{
-	background-color: #e23e3d;
+	background-color: #ff6600;
 	border-radius: 5px;
 	color: #ffffff;
 	cursor: pointer
@@ -196,7 +196,7 @@
 }
 
 .wst-goods-item .goods-price .span1 {
-	color: #e23e3d;
+	color: #ff6600;
 	font-weight: bolder;
 }
 
@@ -299,7 +299,7 @@
 }
 
 .wst-goods-page li {
-    border: 2px solid #e23e3d;
+    border: 2px solid #ff6600;
     border-radius: 5px;
     transition: all 0.1s ease 0s;
 	-moz-transition: all 0.1s ease 0s; /* Firefox 4 */
@@ -308,7 +308,7 @@
 }
 
 .wst-goods-page li:hover{
-	border: 2px solid #e23e3d;
+	border: 2px solid #ff6600;
 	background-color:#ffffff;
 	transform:scale3d(1.2,1.2,1);
 }

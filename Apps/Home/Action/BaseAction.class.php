@@ -80,7 +80,8 @@ class BaseAction extends Controller {
 				if(empty($user)){
 					session('WST_USER',$user);
 				}else{
-					die("{status:-999}");
+					//die("{status:-999}");
+					exit("{status:-999}"); 
 				}
 			}
 		}

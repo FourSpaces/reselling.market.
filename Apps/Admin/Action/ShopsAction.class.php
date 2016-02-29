@@ -16,7 +16,8 @@ class ShopsAction extends BaseAction{
 		$this->isLogin();
 		//获取商品分类信息
 		$m = D('Admin/GoodsCats');
-		$this->assign('goodsCatsList',$m->queryByList());
+		//$this->assign('goodsCatsList',$m->queryByList());
+		$this->assign('goodsCatsList',$m->queryServerByList());
 		//获取地区信息
 		$m = D('Admin/Areas');
 		$this->assign('areaList',$m->queryShowByList(0));
@@ -36,7 +37,12 @@ class ShopsAction extends BaseAction{
     	
     	$this->assign('object',$object);
     	$this->assign('src',I('src','index'));
-		$this->view->display('/shops/edit');
+    	if(I('id',0)==1){
+    		$this->view->display('/shops/adminedit');
+    	}else{
+    		$this->view->display('/shops/edit');
+    	}
+		
 	}
 	/**
 	 * 新增/修改操作

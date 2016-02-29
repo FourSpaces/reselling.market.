@@ -329,16 +329,16 @@ class ShopsModel extends BaseModel {
 		$data["shopAddress"] = I("shopAddress");
 		$data["deliveryStartMoney"] = I("deliveryStartMoney",0);
 		$data["deliveryCostTime"] = I("deliveryCostTime",0);
-		$data["deliveryFreeMoney"] = I("deliveryFreeMoney",0);
-		$data["deliveryMoney"] = I("deliveryMoney",0);
-		$data["avgeCostMoney"] = I("avgeCostMoney",0);
+		//$data["deliveryFreeMoney"] = I("deliveryFreeMoney",0);
+		//$data["deliveryMoney"] = I("deliveryMoney",0);
+		//$data["avgeCostMoney"] = I("avgeCostMoney",0);
 		$data["isInvoice"] = (int)I("isInvoice",1);
 		$data["serviceStartTime"] = I("serviceStartTime");
 		$data["serviceEndTime"] = I("serviceEndTime");
 		$data["shopAtive"] = (int)I("shopAtive",1);
 		$data["shopTel"] = I("shopTel");
-		$data["bankId"] = (int)I("bankId");
-		$data["bankNo"] = I("bankNo");
+		//$data["bankId"] = (int)I("bankId");
+		//$data["bankNo"] = I("bankNo");
 		
 		if($this->checkEmpty($data,true)){
 			$data["qqNo"] = I("qqNo");
@@ -356,6 +356,8 @@ class ShopsModel extends BaseModel {
 				$data = array();
 				$data[userName] = I("userName");
 				$m->where("userId=".$shops['userId'])->save($data);
+
+				/*  暂时去掉这个功能 20160219 1130
 				if($shops['isSelf']==0){
 			        //建立店铺和社区的关系
 					$relateArea = I('relateAreaId');
@@ -392,6 +394,7 @@ class ShopsModel extends BaseModel {
 						}
 					}
 				}
+				*/
 			}
 		}
 		return $rd;

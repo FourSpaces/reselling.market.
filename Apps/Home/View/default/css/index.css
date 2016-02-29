@@ -66,7 +66,7 @@
 	height: 32px;
 }
 .wst-floor .wst-fl-right .wst-fl-nvg3 {
-	background-color: #674941;
+	background-color: #66cc66;
 	height: 32px;
 }
 .wst-floor .wst-fl-right .wst-fl-nvg4 {
@@ -115,9 +115,9 @@
 .wst-floor .wst-fl-right .wst-fl-nvg8 li:hover{
 	float: left;
 	cursor: pointer;
-	color: red;
+	color: orange;
 	font-weight: bolder;
-	background-color: #e23c3d;
+	background-color: #ff6600;
 	color: #ffffff;
 }
 
@@ -130,9 +130,9 @@
 .wst-floor .wst-fl-right .wst-fl-nvg6 .selectli,
 .wst-floor .wst-fl-right .wst-fl-nvg7 .selectli,
 .wst-floor .wst-fl-right .wst-fl-nvg8 .selectli {
-	color: red;
+	color: orange;
 	font-weight: bolder;
-	background-color: #e23c3d;
+	background-color: #ff6600;
 	color: #ffffff;
 }
 
@@ -157,7 +157,7 @@
 }
 
 .wst-goods-container li{
-	border: 2px solid #e23e3d;
+	border: 2px solid #ff6600;
 	border-radius: 5px 5px 5px 5px;
     transition: all 0.1s ease 0s;
 	-moz-transition: all 0.1s ease 0s; /* Firefox 4 */
@@ -166,7 +166,7 @@
     
 }
 .wst-goods-container li:hover{
-	border: 2px solid #e23e3d;
+	border: 2px solid #ff6600;
 	background-color:#ffffff;
 	transform:scale3d(1.2,1.2,1);
 }

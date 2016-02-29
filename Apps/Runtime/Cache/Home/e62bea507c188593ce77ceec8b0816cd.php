@@ -71,7 +71,10 @@ var WST = ThinkPHP = window.Think = {
 			<li class="fore2 ld"><s></s>
 			<?php if(session('WST_USER.userId')>0){ ?>
 				<?php if(session('WST_USER.userType')==0){ ?>
+					<!--
 				    <a href="<?php echo U('Home/Shops/toOpenShopByUser');?>" rel="nofollow">成为服务商</a>
+				-->
+				    <a href="javascript:alert('详情请联系我们的客服人员')" rel="nofollow">成为服务商</a>
 				<?php }else{ ?>
 				    <?php if(session('WST_USER.loginTarget')==0){ ?>
 				        <a href="<?php echo U('Home/Shops/index');?>" rel="nofollow">卖家中心</a>
@@ -80,7 +83,11 @@ var WST = ThinkPHP = window.Think = {
 				    <?php } ?>
 				<?php } ?>
 			<?php }else{ ?>
+				<!--
 			    <a href="<?php echo U('Home/Shops/toOpenShop');?>" rel="nofollow">成为服务商</a>
+				-->
+
+			    <a href="javascript:alert('详情请联系我们的客服人员')" rel="nofollow">成为服务商</a>
 			<?php } ?>
 			</li>
 		</ul>
@@ -244,7 +251,7 @@ var WST = ThinkPHP = window.Think = {
 				<div class="wst-fl-nvg<?php echo ($k1); ?>">
 					<ul>
 						<li id="fl_<?php echo ($k1); ?>_0" style="line-height: 32px; width: 100px;"
-							onmouseover="gpanelOver(this);">精品推荐</li>
+							onmouseover="gpanelOver(this);" class="selectli">最新闲置</li>
 						<?php if(is_array($vo1['catChildren'])): $k2 = 0; $__LIST__ = $vo1['catChildren'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo2): $mod = ($k2 % 2 );++$k2;?><li id="fl_<?php echo ($k1); ?>_<?php echo ($k2); ?>" style="line-height: 32px; width: 100px;"
 							onmouseover="gpanelOver(this);"><?php echo ($vo2["catName"]); ?></li><?php endforeach; endif; else: echo "" ;endif; ?>
 					</ul>
@@ -295,10 +302,12 @@ var WST = ThinkPHP = window.Think = {
 								</div>
 								<div>
 									<em class="wst-left wst-goods-price" id='shopGoodsPrice_<?php echo ($vo3["goodsId"]); ?>' dataId='<?php echo ($vo3["goodsAttrId"]); ?>'>￥<?php echo (number_format($vo3['shopPrice'],2)); ?></em>
+									<!--
 									<a href="javascript:addCart(<?php echo ($vo3['goodsId']); ?>,0,'<?php echo ($vo3['goodsThums']); ?>')" class="wst-right btnCart" > <img
 										src="/reselling.market/Apps/Home/View/default/images/btn_addcart.png"
 										width="85" />
 									</a>
+									-->
 									<div class='wst-clear'></div>
 								</div>
 							</div>
@@ -307,14 +316,14 @@ var WST = ThinkPHP = window.Think = {
 						<div class='wst-clear'></div>
 					</div><?php endforeach; endif; else: echo "" ;endif; ?>
 					<div style="float: right; width: 180px; height: 180px;">
-						<?php if(is_array($vo1['recommendShops'])): $k2 = 0; $__LIST__ = $vo1['recommendShops'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo2): $mod = ($k2 % 2 );++$k2;?><div style="width: 180px; margin-top: 10px;">
-							<div style="width: 180px;">
-								<a
-									href="<?php echo U('Home/Shops/toShopHome/',array('shopId'=>$vo2['shopId']));?>">
-									<img class='lazyImg' data-original="/reselling.market/<?php echo ($vo2['shopImg']); ?>" height="120" width="180" />
-								</a>
-							</div>
-						</div><?php endforeach; endif; else: echo "" ;endif; ?>
+						<?php if(is_array($vo1['recommendShops'])): $k2 = 0; $__LIST__ = $vo1['recommendShops'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo2): $mod = ($k2 % 2 );++$k2; if($vo2['shopId'] > 1): ?><div style="width: 180px; margin-top: 10px;">
+									<div style="width: 180px;">
+										<a
+											href="<?php echo U('Home/Shops/toShopHome/',array('shopId'=>$vo2['shopId']));?>">
+											<img class='lazyImg' data-original="/reselling.market/<?php echo ($vo2['shopImg']); ?>" height="120" width="180" />
+										</a>
+									</div>
+								</div><?php endif; endforeach; endif; else: echo "" ;endif; ?>
 					</div>
 				</div>
 			</div>

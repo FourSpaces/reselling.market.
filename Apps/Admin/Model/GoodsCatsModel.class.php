@@ -22,6 +22,9 @@ class GoodsCatsModel extends BaseModel {
 		    $data["isShow"] = (int)I("isShow",0);
 			$data["catSort"] = (int)I("catSort",0);
 			$data["catFlag"] = 1;;
+			if($data["parentId"]==0){
+				$data["serviceType"] =(int)I("serviceType",0) ;;
+			}
 			$m = M('goods_cats');
 			$rs = $m->add($data);
 			if($rs){
@@ -41,6 +44,9 @@ class GoodsCatsModel extends BaseModel {
 	    if($this->checkEmpty($data)){
 	    	$data["isShow"] = (int)I("isShow",0);
 	    	$data["catSort"] = (int)I("catSort",0);
+	    	if(I("parentId",0)==0){
+				$data["serviceType"] =(int)I("serviceType",0) ;;
+			}
 	    	$m = M('goods_cats');
 			$rs = $m->where("catFlag=1 and catId=".(int)I('id'))->save($data);
 			if(false !== $rs){
@@ -82,6 +88,15 @@ class GoodsCatsModel extends BaseModel {
 	  public function queryByList($pid = 0){
 	     $m = M('goods_cats');
 	     $rs = $m->where('catFlag=1 and parentId='.(int)$pid)->select(); 
+		 return $rs;
+	  }
+
+	  /**
+	  * 获取服务分类列表
+	  */
+	  public function queryServerByList($pid = 0){
+	     $m = M('goods_cats');
+	     $rs = $m->where('catFlag=1 and serviceType=1 and parentId='.(int)$pid)->select(); 
 		 return $rs;
 	  }
 	  /**

@@ -161,6 +161,12 @@ class GoodsAction extends BaseAction {
 			$this->assign("favoriteGoodsId",$m->checkFavorite($goodsId,0));
 			$m = D('Home/Favorites');
 			$this->assign("favoriteShopId",$m->checkFavorite($shopId,1));
+
+			//获得商品所在地
+			 $userMode = D('Home/Users');
+			 $userData = $userMode->getAreaId($goodsDetails['userId']);
+			 //var_dump($userData);
+			 $this->assign("userData",$userData[0]);
 			//客户端二维码
 			$this->assign("qrcode",base64_encode("{type:'goods',content:'".$goodsId."',key:'wstmall'}"));
 			$this->display('default/goods_details');

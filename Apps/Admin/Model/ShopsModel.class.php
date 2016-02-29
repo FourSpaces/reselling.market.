@@ -45,14 +45,14 @@ class ShopsModel extends BaseModel {
 		$sdata["shopSn"] = I("shopSn");
 		$sdata["areaId1"] = (int)I("areaId1");
 		$sdata["areaId2"] = (int)I("areaId2");
-		$sdata["areaId3"] = (int)I("areaId3");
+		//$sdata["areaId3"] = (int)I("areaId3");
 		$sdata["goodsCatId1"] = (int)I("goodsCatId1");
 		$sdata["shopName"] = I("shopName");
 		$sdata["shopCompany"] = I("shopCompany");
 		$sdata["shopImg"] = I("shopImg");
 		$sdata["shopAddress"] = I("shopAddress");
-		$sdata["bankId"] = (int)I("bankId");
-		$sdata["bankNo"] = I("bankNo");
+		//$sdata["bankId"] = (int)I("bankId");
+		//$sdata["bankNo"] = I("bankNo");
 		$sdata["serviceStartTime"] = I("serviceStartTime");
 		$sdata["serviceEndTime"] = I("serviceEndTime");
 		$sdata["shopTel"] = I("shopTel");
@@ -77,20 +77,20 @@ class ShopsModel extends BaseModel {
 				}
 				$sdata["deliveryStartMoney"] = I("deliveryStartMoney",0);
 		        $sdata["deliveryCostTime"] = I("deliveryCostTime",0);
-				$sdata["deliveryFreeMoney"] = I("deliveryFreeMoney",0);
-		        $sdata["deliveryMoney"] = I("deliveryMoney",0);
-				$sdata["avgeCostMoney"] = I("avgeCostMoney",0);
+				//$sdata["deliveryFreeMoney"] = I("deliveryFreeMoney",0);
+		        //$sdata["deliveryMoney"] = I("deliveryMoney",0);
+				//$sdata["avgeCostMoney"] = I("avgeCostMoney",0);
 				$sdata["longitude"] = (float)I("longitude");
 				$sdata["latitude"] = (float)I("latitude");
 				$sdata["mapLevel"] = (int)I("mapLevel",13);
-				$sdata["isInvoice"] = (int)I("isInvoice",1);
+				//$sdata["isInvoice"] = (int)I("isInvoice",1);
 				$sdata["shopStatus"] = (int)I("shopStatus",1);
 				$sdata["shopAtive"] = (int)I("shopAtive",1);
 				$sdata["shopFlag"] = 1;
 				$sdata["createTime"] = date('Y-m-d H:i:s');
 			    $sdata['statusRemarks'] = I('statusRemarks');
 			    $sdata['qqNo'] = I('qqNo');
-			    $sdata["invoiceRemarks"] = I("invoiceRemarks");
+			    //$sdata["invoiceRemarks"] = I("invoiceRemarks");
 				$m = M('shops');
 				$shopId = $m->add($sdata);
 				if(false !== $shopId){
@@ -103,6 +103,40 @@ class ShopsModel extends BaseModel {
 					//建立店铺和社区的关系
 					$relateArea = I('relateAreaId');
 					$relateCommunity = I('relateCommunityId');
+
+					if($relateArea!=''){
+					$relateAreas = explode(',',$relateArea);
+					foreach ($relateAreas as $v){
+						if($v=='' || $v=='0')continue;
+						    $tmp = array();
+							$tmp['shopId'] = $shopId;
+							$tmp['areaId1'] = (int)I("areaId1");
+							$tmp['areaId2'] = $v;
+							//$tmp['areaId3'] = $v;
+							$tmp['communityId'] = 0;
+							$ra = $m->add($tmp);
+					}
+				}
+				if($relateCommunity!=''){
+				    //$m = M('communitys');
+				    //$lc = $m->where('communityFlag=1 and (communityId in(0,'.$relateCommunity.") or areaId3 in(0,".$relateArea."))")->select();
+				    
+				    $m = M('areas');
+				    $lc = $m->where('areaFlag=1 and (areaId in('.$relateCommunity.") or parentId in(".$relateArea."))")->select();
+				    if(count($lc)>0){
+				    	$m = M('shops_communitys');
+						foreach ($lc as $key => $v){
+							$tmp = array();
+							$tmp['shopId'] = $shopId;
+							$tmp['areaId1'] = $v['parentId'];
+							//$tmp['areaId2'] = $v['areaId2'];
+							//$tmp['areaId3'] = $v['areaId3'];
+							$tmp['communityId'] = $v['areaId'];
+							$ra = $m->add($tmp);
+						}
+					}
+				}
+				/*
 					if($relateArea!=''){
 						$m = M('shops_communitys');
 						$relateAreas = explode(',',$relateArea);
@@ -133,6 +167,7 @@ class ShopsModel extends BaseModel {
 							}
 						}
 					}
+					*/
 				}
 				
 			}
@@ -163,37 +198,37 @@ class ShopsModel extends BaseModel {
 		$data["shopSn"] = I("shopSn");
 		$data["areaId1"] = (int)I("areaId1");
 		$data["areaId2"] = (int)I("areaId2");
-		$data["areaId3"] = (int)I("areaId3");
-		$data["goodsCatId1"] = (int)I("goodsCatId1");
-		$data["isSelf"] = (int)I("isSelf",0);
+		//$data["areaId3"] = (int)I("areaId3");
+		$data["goodsCatId1"] = (int)I("goodsCatId1"); //所属类别
+		$data["isSelf"] = (int)I("isSelf",0);  //是否自营
 		if($data["isSelf"]==1){
 			$data["deliveryType"] = 1;
 		}else{
 			$data["deliveryType"] = 0;
 		}
 		$data["shopName"] = I("shopName");
-		$data["shopCompany"] = I("shopCompany");
+		$data["shopCompany"] = I("shopCompany");//公司名称
 		$data["shopImg"] = I("shopImg");
-		$data["shopAddress"] = I("shopAddress");
-		$data["deliveryStartMoney"] = I("deliveryStartMoney",0);
-		$data["deliveryCostTime"] = I("deliveryCostTime",0);
-		$data["deliveryFreeMoney"] = I("deliveryFreeMoney",0);
-		$data["deliveryMoney"] = I("deliveryMoney",0);
-		$data["avgeCostMoney"] = I("avgeCostMoney",0);
-		$data["bankId"] = I("bankId");
-		$data["bankNo"] = I("bankNo");
+		$data["shopAddress"] = I("shopAddress");//店铺地址
+		$data["deliveryStartMoney"] = I("deliveryStartMoney",0);//订单配送起步价
+		$data["deliveryCostTime"] = I("deliveryCostTime",0);//配送时间
+		//$data["deliveryFreeMoney"] = I("deliveryFreeMoney",0);//包邮起步价
+		//$data["deliveryMoney"] = I("deliveryMoney",0);
+		//$data["avgeCostMoney"] = I("avgeCostMoney",0);
+		//$data["bankId"] = I("bankId");
+		//$data["bankNo"] = I("bankNo");
 		$data["longitude"] = (float)I("longitude");
 		$data["latitude"] = (float)I("latitude");
 		$data["mapLevel"] = (int)I("mapLevel",13);
-		$data["isInvoice"] = I("isInvoice",1);
+		//$data["isInvoice"] = I("isInvoice",1);
 		$data["serviceStartTime"] = I("serviceStartTime");
 		$data["serviceEndTime"] = I("serviceEndTime");
 		$data["shopStatus"] = (int)I("shopStatus",0);
-		$data["shopAtive"] = (int)I("shopAtive",1);
+		$data["shopAtive"] = (int)I("shopAtive",1);//营业状态
 		$data["shopTel"] = I("shopTel");
 		if($this->checkEmpty($data,true)){
 			$data['qqNo'] = I('qqNo');
-			$data["invoiceRemarks"] = I("invoiceRemarks");
+			//$data["invoiceRemarks"] = I("invoiceRemarks");
 			$rs = $m->where("shopId=".$shopId)->save($data);
 		    if(false !== $rs){
 		    	$shopMessage = '';
@@ -235,10 +270,10 @@ class ShopsModel extends BaseModel {
 				$rd['status']= 1;
 				
 		        //建立店铺和社区的关系
-				$relateArea = I('relateAreaId');
-				$relateCommunity = I('relateCommunityId');
+				$relateArea = I('relateAreaId');  //送货区域id
+				$relateCommunity = I('relateCommunityId');  //送货区域列表
 				$m = M('shops_communitys');
-				$m->where('shopId='.$shopId)->delete();
+				$m->where('shopId='.$shopId)->delete();  //把关于此店铺 前面的东西都删掉，重新添加
 				if($relateArea!=''){
 					$relateAreas = explode(',',$relateArea);
 					foreach ($relateAreas as $v){
@@ -246,24 +281,27 @@ class ShopsModel extends BaseModel {
 						    $tmp = array();
 							$tmp['shopId'] = $shopId;
 							$tmp['areaId1'] = (int)I("areaId1");
-							$tmp['areaId2'] = (int)I("areaId2");
-							$tmp['areaId3'] = $v;
+							$tmp['areaId2'] = $v;
+							//$tmp['areaId3'] = $v;
 							$tmp['communityId'] = 0;
 							$ra = $m->add($tmp);
 					}
 				}
 				if($relateCommunity!=''){
-				    $m = M('communitys');
-				    $lc = $m->where('communityFlag=1 and (communityId in(0,'.$relateCommunity.") or areaId3 in(0,".$relateArea."))")->select();
+				    //$m = M('communitys');
+				    //$lc = $m->where('communityFlag=1 and (communityId in(0,'.$relateCommunity.") or areaId3 in(0,".$relateArea."))")->select();
+				    
+				    $m = M('areas');
+				    $lc = $m->where('areaFlag=1 and (areaId in('.$relateCommunity.") or parentId in(".$relateArea."))")->select();
 				    if(count($lc)>0){
 				    	$m = M('shops_communitys');
 						foreach ($lc as $key => $v){
 							$tmp = array();
 							$tmp['shopId'] = $shopId;
-							$tmp['areaId1'] = $v['areaId1'];
-							$tmp['areaId2'] = $v['areaId2'];
-							$tmp['areaId3'] = $v['areaId3'];
-							$tmp['communityId'] = $v['communityId'];
+							$tmp['areaId1'] = $v['parentId'];
+							//$tmp['areaId2'] = $v['areaId2'];
+							//$tmp['areaId3'] = $v['areaId3'];
+							$tmp['communityId'] = $v['areaId'];
 							$ra = $m->add($tmp);
 						}
 					}
@@ -352,7 +390,7 @@ class ShopsModel extends BaseModel {
         $areaId1 = (int)I('areaId1',0);
      	$areaId2 = (int)I('areaId2',0);
 	 	$sql = "select shopId,shopSn,shopName,u.userName,shopAtive,shopStatus,gc.catName from __PREFIX__shops s,__PREFIX__users u ,__PREFIX__goods_cats gc 
-	 	     where gc.catId=s.goodsCatId1 and s.userId=u.userId and shopStatus=1 and shopFlag=1 ";
+	 	     where gc.catId=s.goodsCatId1 and s.userId=u.userId and shopStatus=1 and shopFlag=1 and shopId<>1 ";
 	 	if(I('shopName')!='')$sql.=" and shopName like '%".I('shopName')."%'";
 	 	if(I('shopSn')!='')$sql.=" and shopSn like '%".I('shopSn')."%'";
 	 	if($areaId1>0)$sql.=" and areaId1=".$areaId1;

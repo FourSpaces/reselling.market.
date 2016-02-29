@@ -97,6 +97,9 @@
                <td>
                <span class='glyphicon glyphicon-minus' onclick='javascript:loadChildTree(this,{$vo.catId},"tr_0_{$i}")' style='margin-right:3px;cursor:pointer'></span>
                <input type='text' value='{$vo['catName']}' onchange='javascript:editName(this)' dataId="{$vo.catId}" class='form-control wst-ipt'/>
+                <if condition="($vo['parentId'] eq 0) AND ($vo['serviceType'] eq 1)">
+				<span style="color:blue;">[服务商分类]</span>
+				</if>
                </td>
                <td>{$vo['catSort']}</td>
                <td>

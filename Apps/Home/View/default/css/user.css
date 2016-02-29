@@ -41,7 +41,7 @@ a:link,a:visited,a:active,a:hover,a:hover {
 
 .wst-content {
 	background: #FFFFFF;
-	min-height: 948px;
+	min-height: 548px;
 	height: auto;
 	width: 990px;
 	float: right;
@@ -71,7 +71,7 @@ a:link,a:visited,a:active,a:hover,a:hover {
 	width: 198px;
 	margin: 0px;
 	padding: 0px;
-	min-height: 948px;
+	min-height: 548px;
 }
 
 .wst-menu li {
@@ -83,19 +83,19 @@ a:link,a:visited,a:active,a:hover,a:hover {
 }
 
 .wst-menu li:hover {
-	background-color: #e23e3d;
+	background-color: #ff6600;
 	font-weight: bolder;
 	color: #ffffff;
 }
 
 .wst-menu .selected {
-	background-color: #e23e3d;
+	background-color: #ff6600;
 	font-weight: bolder;
 	color: #ffffff;
 }
 
 .wst-menu .liselect {
-	background-color: #e23e3d;
+	background-color: #ff6600;
 	font-weight: bolder;
 	color: #ffffff;
 }
@@ -230,12 +230,12 @@ a:active,a:hover {
 }
 
 .wst-nav-box li:hover {
-	background-color: #e23e3d;
+	background-color: #ff6600;
 	font-weight: bolder;
 }
 
 .wst-nav-box .liselect {
-	background-color: #e23e3d;
+	background-color: #ff6600;
 	font-weight: bolder;
 }
 
@@ -303,12 +303,15 @@ input, textarea {
 }
 
 .wst-tab-nav .on {
-	background: none repeat scroll 0 0 #e23e3d;
+	background: none repeat scroll 0 0 #ff6600;
     border-bottom: 0 none;
     color: #ffffff;
     font-weight:bold;
 }
-
+.wst-tab-nav .on a{
+	text-decoration: none;
+    color: #ffffff;
+}
 .wst-tab-content {
 	padding: 5px;
 	width: 99%;

@@ -95,13 +95,13 @@ select{
 }
 
 .wst-menu li:hover {
-	background-color: #e23e3d;
+	background-color: #ff6600;
 	font-weight: bolder;
 	color: #ffffff;
 }
 
 .wst-menu .liselect {
-	background-color: #e23e3d;
+	background-color: #ff6600;
 	font-weight: bolder;
 	color: #ffffff;
 }
@@ -312,7 +312,7 @@ text-decoration
 }
 
 .wst-tab-nav .on {
-	background: none repeat scroll 0 0 #e23e3d;
+	background: none repeat scroll 0 0 #ff6600;
     border-bottom: 0 none;
     color: #ffffff;
     font-weight:bold;
@@ -386,12 +386,12 @@ text-decoration
 }
 
 .wst-nav-box li:hover {
-	background-color: #e23e3d;
+	background-color: #ff6600;
 	font-weight: bolder;
 }
 
 .wst-nav-box .liselect {
-	background-color: #e23e3d;
+	background-color: #ff6600;
 	font-weight: bolder;
 }
 
@@ -443,7 +443,7 @@ text-decoration
    vertical-align:middle;
    cursor:pointer
 }
-.wst-btn-query{border:1px solid #ffffff;height:25px;width:60px;background-color:#e23e3d;color:#ffffff;cursor: pointer;margin:2px;}
+.wst-btn-query{border:1px solid #ffffff;height:25px;width:60px;background-color:#ff6600;color:#ffffff;cursor: pointer;margin:2px;}
 .wst-state_yes{display:block;width:13px;height:13px;background-image: url("../../../View/default/images/icon_state_yes.png");}
 .wst-state_no{display:block;width:13px;height:13px;background-image: url("../../../View/default/images/icon_state_no.png");}
 .wst-page-items{
@@ -465,7 +465,7 @@ text-decoration
 }
 .wst-page-items a:hover{
 	text-decoration: none;
-	color: #e23e3d;
+	color: #ff6600;
 	font-weight:bolder;
 	border: 1px solid #D5D5D5;
 }
@@ -475,7 +475,7 @@ text-decoration
 	line-height: 25px;
 	padding: 0 10px;
 	margin: 0 2px;
-	color: #e23e3d;
+	color: #ff6600;
 	font-weight:bolder;
 	border: 1px solid #D5D5D5;
 	border-radius: 4px;

@@ -46,6 +46,19 @@ class UsersAction extends BaseAction {
      * 
      */
 	public function regist(){
+		$m = D('Home/Areas');
+    	$areaId2 = $this->getDefaultCity();
+      	//获得省列表
+    	$provinceList = $m->getProvinceList();
+      	//获得市列表
+    	$cityList = $m->getCityGroupByKey();
+      	//获得社区
+    	$area = $m->getArea($areaId2);
+    	$this->assign('provinceList',$provinceList);
+    	$this->assign('cityList',$cityList);
+    	$this->assign('area',$area);
+    	$this->assign('areaId2',$areaId2);
+
 		if(isset($_COOKIE["loginName"])){
 			$this->assign('loginName',$_COOKIE["loginName"]);
 		}else{
@@ -184,9 +197,21 @@ class UsersAction extends BaseAction {
 		$m = D('Home/Users');
 		$obj["userId"] = session('WST_USER.userId');
 		$user = $m->getUserById($obj);
-	
+		
+		//获得城市数据
+		$m = D('Home/areas');
+		$parentId = $m->queryById($user['cityId']);
+		$parentList = $m->getProvinceList();
+
+		//获得兄弟城市
+		$areasList = $m->queryByList($parentId);
+
 		$this->assign("user",$user);
 		$this->assign("umark","toEditUser");
+		$this->assign("parentId",$parentId);
+		$this->assign("parentList",$parentList);
+		$this->assign("areasId",$user['cityId']);
+		$this->assign("areasList",$areasList);
 		$this->assign('userType',$USER['userType']);
 		$this->display("default/users/edit_user");
 	}
