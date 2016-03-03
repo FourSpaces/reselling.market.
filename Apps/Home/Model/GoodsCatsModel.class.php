@@ -47,7 +47,7 @@ class GoodsCatsModel extends BaseModel {
 					$sql = "SELECT sp.shopName, g.saleCount , sp.shopId , g.goodsId , g.goodsName,g.goodsImg, g.goodsThums,g.shopPrice, g.goodsSn, g.createTime, g.popularity 
 							FROM __PREFIX__goods g, __PREFIX__shops sp left join __PREFIX__shops_communitys sc on sp.shopId = sc.shopId 
 							WHERE g.shopId = sp.shopId AND sp.shopStatus = 1 AND g.goodsFlag = 1 AND g.isSale = 1 AND g.goodsStatus = 1 AND g.goodsCatId2 = $cat2Id AND sc.communityId=$areaId2
-							ORDER BY g.popularity desc limit 8";
+							ORDER BY g.popularity desc limit 9";
 					$grs = $this->query($sql);
 					foreach ($grs as $gkey => $v){
 						if(intval($v['goodsAttrId'])>0)$grs[$gkey]['shopPrice'] = $v['attrPrice'];
@@ -60,11 +60,11 @@ class GoodsCatsModel extends BaseModel {
 				$sql = "SELECT sp.shopName, g.saleCount , sp.shopId , g.goodsId , g.goodsName,g.goodsImg, g.goodsThums,g.shopPrice, g.goodsSn,ga.id goodsAttrId,ga.attrPrice,g.createTime
 						FROM __PREFIX__goods g left join __PREFIX__goods_attributes ga on g.goodsId=ga.goodsId and ga.isRecomm=1, __PREFIX__shops sp
 						WHERE g.shopId = sp.shopId AND sp.shopStatus = 1 AND g.goodsFlag = 1 AND g.isAdminBest = 1 AND g.isSale = 1 AND g.goodsStatus = 1 AND g.goodsCatId1 = $cat1Id AND sp.areaId2=$areaId2
-						ORDER BY g.saleCount desc limit 8";
+						ORDER BY g.saleCount desc limit 9";
 				$sql = "SELECT sp.shopName, g.saleCount , sp.shopId , g.goodsId , g.goodsName,g.goodsImg, g.goodsThums,g.shopPrice, g.goodsSn, g.createTime, g.popularity 
                         FROM __PREFIX__goods g, __PREFIX__shops sp left join __PREFIX__shops_communitys sc on sp.shopId = sc.shopId 
                         WHERE g.shopId = sp.shopId AND sp.shopStatus = 1 AND g.goodsFlag = 1 AND g.isSale = 1 AND g.goodsStatus = 1 AND g.goodsCatId1 = $cat1Id AND sc.communityId=$areaId2 
-                        ORDER BY g.createTime desc limit 8";
+                        ORDER BY g.createTime desc limit 9";
 				$jgrs = $this->query($sql);
 
 

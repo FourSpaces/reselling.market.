@@ -29,8 +29,7 @@ var WST = ThinkPHP = window.Think = {
 <div id="wst-shortcut">
 	<div class="w">
 		<ul class="fl lh">
-			<li class="fore1 ld"><b></b><a href="javascript:addToFavorite()"
-				rel="nofollow">收藏{$CONF['mallName']}</a></li><s></s>
+			<li class="fore1" ><b></b><a style="font-weight: bold;" href='{:WSTDomain()}'>{$CONF['mallName']}</a></li><s></s>
 			<!--
 			<li class="fore3 ld menu" id="app-jd" data-widget="dropdown">
 				<span class="outline"></span> <span class="blank"></span> 
@@ -46,11 +45,11 @@ var WST = ThinkPHP = window.Think = {
 		</ul>
 	
 		<ul class="fr lh" style='float:right;'>
-			<li class="fore1" id="loginbar"><a href="{:U('Home/Orders/queryByPage')}"><span style='color:blue'>{$WST_USER['loginName']}</span></a> 欢迎您来到 <a href='{:WSTDomain()}'>{$CONF['mallName']}</a>！<s></s>&nbsp;
+			<li class="fore1" id="loginbar"><a href="{:U('Home/Orders/queryByPage')}"><span style='color:blue'>{$WST_USER['loginName']}</span></a> 欢迎您来到 <a style="font-weight: bold;" href='{:WSTDomain()}'>{$CONF['mallName']}</a>！<s></s>&nbsp;
 			<span>
 				<if condition="!$WST_USER['userId']">
 				<a href="{:U('Home/Users/login')}">[登录]</a>
-				<a href="{:U('Home/Users/regist')}"	class="link-regist">[免费注册]</a>
+				<a href="{:U('Home/Users/regist')}"	class="link-regist">[注册]</a>
 				</if>
 				<if condition="$WST_USER['userId'] gt 0">
 				<a href="javascript:logout();">[退出]</a>
@@ -63,7 +62,7 @@ var WST = ThinkPHP = window.Think = {
 					<!--
 				    <a href="{:U('Home/Shops/toOpenShopByUser')}" rel="nofollow">成为服务商</a>
 				-->
-				    <a href="javascript:alert('详情请联系我们的客服人员')" rel="nofollow">成为服务商</a>
+				    <a href="{:U('Articles/index',array('articleId'=>7))}" rel="nofollow">成为服务商</a>
 				<PHP>}else{</PHP>
 				    <PHP>if(session('WST_USER.loginTarget')==0){</PHP>
 				        <a href="{:U('Home/Shops/index')}" rel="nofollow">卖家中心</a>
@@ -76,7 +75,7 @@ var WST = ThinkPHP = window.Think = {
 			    <a href="{:U('Home/Shops/toOpenShop')}" rel="nofollow">成为服务商</a>
 				-->
 
-			    <a href="javascript:alert('详情请联系我们的客服人员')" rel="nofollow">成为服务商</a>
+			    <a href="{:U('Articles/index',array('articleId'=>7))}" rel="nofollow">成为服务商</a>
 			<PHP>}</PHP>
 			</li>
 		</ul>

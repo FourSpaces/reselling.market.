@@ -185,8 +185,8 @@ class ShopsAction extends BaseAction {
 		$this->isShopLogin();
 		$USER = session('WST_USER');
 		//获取银行列表
-		$m = D('Admin/Banks');
-		$this->assign('bankList',$m->queryByList(0));
+		//$m = D('Admin/Banks');
+		//$this->assign('bankList',$m->queryByList(0));
 		//获取商品信息
 		$m = D('Home/Shops');
 		$this->assign('object',$m->get((int)$USER['shopId']));

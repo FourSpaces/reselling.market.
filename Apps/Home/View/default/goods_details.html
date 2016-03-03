@@ -216,7 +216,24 @@
 								<tr>
 									<!--这里对联系方式 进行遮掩，非会员 无法看到-->
 									<td width="70"><span class="des-title-span">联系方式：</span></td>
-									<td><span style="font-size:14px;">手机：{$goodsDetails["phone"]} 联系人：{$goodsDetails["sellerName"]}</span></td>
+									<td><div id="lianxi_title" style="background: url('__ROOT__/Apps/Home/View/default/images/lxfsbj.png') no-repeat;background-size:100% 100%;-moz-background-size:100% 100%;-webkit-background-size:100% 100%;width:90px;height:28px;">
+										<a href="javascript:showdizhi()" class="btn2Cart">
+										<img src="__ROOT__/Apps/Home/View/default/images/lianxifanshi.png" style="width:90px;height:26px;" /></a>
+										</div>
+										<div id="sellerDiv" style="font-size:13px;width:180px;height:54px;display:none; background-color: rgb(220, 250, 125);">
+											<eq name="userLogin" value="true">
+												<div style="padding: 10px;">
+													<b>联系人</b>：{$goodsDetails["sellerName"]}<br/>
+													<b>手机号</b>：{$goodsDetails["phone"]} <br/> 
+												</div>
+											<else/>
+												<div style="padding: 10px;">
+													<b>请登录后查看</b>
+												</div>
+											</eq>
+											
+										</div>
+										</td>
 								</tr>
 								<tr>
 									<td width="70"><span class="des-title-span">交易方式：</span></td>
@@ -483,7 +500,7 @@
 						        </div>
 						    </div>
 						</div>					
-						<table id="appraiseTab" width="100%">
+						<table id="appraiseTab" width="90%">
 							<tr>
 								<td>
 
@@ -587,7 +604,7 @@ function addRespond(element,userName,parentId,goodsId){
 		//html.push('<div class="">');
 			html.push('<div class="cmt-edit-top clearfix">');
 				html.push('<div class="cmt-user">  <img src="__ROOT__/Apps/Home/View/default/images/2674228161.jpg" alt=""> </div>');
-				html.push('<div class="cmt-add">  <textarea id="rcontent" class="rcontents" placeholder="回复'+userName+'" data-ids="'+parentId+'"></textarea> </div>');
+				html.push('<div class="cmt-add" style="width:530px;">  <textarea id="rcontent" class="rcontents" placeholder="回复'+userName+'" data-ids="'+parentId+'" ></textarea> </div>');
 				html.push('<a title="关闭" href="javascript:RemoveRespond(\''+element.dataset.pointer+'\')" style="background-image: url(__ROOT__/Apps/Home/View/default/images/close_bottons.png); background-size: 100%;width: 25px; height: 25px; display: block; float: right;margin-right: 20px;"></a>');
 			html.push('</div>');
 			html.push('<div class="cmt-edit-btm clearfix"> <span class="cmt-send-el0"> <em id="rtextnum'+parentId+'"   class="cmt-send-textnum">0/140</em> <button  class="cmt-send-btn" onclick="Respond('+parentId+','+goodsId+')">评论</button> </span> </div>');
@@ -690,6 +707,12 @@ function getGoodsappraise(goodsId,p){
 		}	
 	});
 }
+
+function showdizhi(){
+  $("#lianxi_title").animate({width:'140px',paddingLeft:'40px'});
+  $("#sellerDiv").slideDown();
+}
+
 </script>
    	
 </html>

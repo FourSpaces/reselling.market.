@@ -1,6 +1,6 @@
 
 var curRowIndex = 0;
-var emailList = new Array("","163.com","126.com","qq.com","sina.com","gmail.com","sohu.com","vip.126.com","188.com","139.com");
+var emailList = new Array("","163.com","qq.com","gmail.com","139.com");
 
 
 function optionsOver(idx){	

@@ -91,16 +91,20 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
 			buttons: $("#dosubmit"),
 			onError : "该账号已存在。",
 			onWait : "请稍候..."
-		}).defaultPassed();
+		})<if condition="$object['shopId'] ==0 ">;
+
+			<else />.defaultPassed();
+
+		</if>
 	   $("#loginPwd").formValidator({
 			onShow:"",onFocus:"登录密码长度应该为5-20位之间"
 			}).inputValidator({
 				min:5,max:50,onError:"登录密码长度应该为5-20位之间"
 			});
-		$("#userPhone").inputValidator({min:11,max:11,onError:"你输入的手机号码非法,请确认"}).ajaxValidator({
+		$("#userPhone").formValidator({onShow:"",onFocus:"手机号不能为空",onCorrect:"输入正确"}).inputValidator({min:11,max:11,onError:"你输入的手机号码非法,请确认"}).ajaxValidator({
 			dataType : "json",
 			async : true,
-			url : "{:U('Admin/Users/checkLoginKey',array('id'=>$object['userId']))}",
+			url : "{:U('Admin/Users/checkLoginKey')}",
 			success : function(data){
 				var json = WST.toJson(data);
 	            if( json.status == "1" ) {
@@ -113,13 +117,39 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
 			buttons: $("#dosubmit"),
 			onError : "该手机号码已存在。",
 			onWait : "请稍候..."
-		}).defaultPassed().unFormValidator(true);
-		$("#shopSn").formValidator({onShow:"",onFocus:"店铺编号不能超过20个字符",onCorrect:"输入正确"}).inputValidator({min:1,max:20,onError:"店铺编号不符合要求,请确认"});
-		$("#shopName").formValidator({onShow:"",onFocus:"店铺名称不能超过20个字符",onCorrect:"输入正确"}).inputValidator({min:1,max:20,onError:"店铺名称不符合要求,请确认"});
-		$("#userName").formValidator({onShow:"",onFocus:"请输入店主姓名",onCorrect:"输入正确"}).inputValidator({min:1,max:20,onError:"店主姓名不能为空,请确认"});
-		$("#shopCompany").formValidator({onShow:"",onFocus:"请输入公司名称",onCorrect:"输入正确"}).inputValidator({min:1,max:50,onError:"公司名称不能为空,请确认"});
-		$("#shopTel").formValidator({onShow:"",onFocus:"请输入店铺电话",onCorrect:"输入正确"}).inputValidator({min:1,max:50,onError:"店铺电话不能为空,请确认"});
-		$("#shopAddress").formValidator({onShow:"",onFocus:"请输入店铺地址",onCorrect:"输入正确"}).inputValidator({min:1,max:120,onError:"店铺地址不能为空,请确认"});
+		})<if condition="$object['shopId'] ==0 ">;
+			<else />.defaultPassed();
+		</if>
+		$("#shopSn").formValidator({onShow:"",onFocus:"店铺编号不能超过20个字符",onCorrect:"输入正确"}).inputValidator({min:1,max:20,onError:"店铺编号不符合要求,请确认"})<if condition="$object['shopId'] ==0 ">;
+		
+			<else />.defaultPassed();
+
+		</if>
+		$("#shopName").formValidator({onShow:"",onFocus:"店铺名称不能超过20个字符",onCorrect:"输入正确"}).inputValidator({min:1,max:20,onError:"店铺名称不符合要求,请确认"})<if condition="$object['shopId'] ==0 ">;
+		
+			<else />.defaultPassed();
+
+		</if>
+		$("#userName").formValidator({onShow:"",onFocus:"请输入店主姓名",onCorrect:"输入正确"}).inputValidator({min:1,max:20,onError:"店主姓名不能为空,请确认"})<if condition="$object['shopId'] ==0 ">;
+		
+			<else />.defaultPassed();
+
+		</if>
+		$("#shopCompany").formValidator({onShow:"",onFocus:"请输入公司名称",onCorrect:"输入正确"}).inputValidator({min:1,max:50,onError:"公司名称不能为空,请确认"})<if condition="$object['shopId'] ==0 ">;
+		
+			<else />.defaultPassed();
+
+		</if>
+		$("#shopTel").formValidator({onShow:"",onFocus:"请输入店铺电话",onCorrect:"输入正确"}).inputValidator({min:1,max:50,onError:"店铺电话不能为空,请确认"})<if condition="$object['shopId'] ==0 ">;
+		
+			<else />.defaultPassed();
+
+		</if>
+		$("#shopAddress").formValidator({onShow:"",onFocus:"请输入店铺地址",onCorrect:"输入正确"}).inputValidator({min:1,max:120,onError:"店铺地址不能为空,请确认"})<if condition="$object['shopId'] ==0 ">;
+		
+			<else />.defaultPassed();
+
+		</if>
 		$("#areaId2").formValidator({onFocus:"请选择所属地区"}).inputValidator({min:1,onError: "请选择所属地区"});
 		$("#goodsCatId1").formValidator({onFocus:"请选择所属行业"}).inputValidator({min:1,onError: "请选择所属行业"});
 		/*
@@ -139,18 +169,21 @@ dl.areaSelect dd{ float: left; margin-left: 20px; cursor: pointer;}
 			  }
 		});
 		ShopMapInit();
-		<if condition="$object['shopId'] !=0 ">
+
+		<if condition="$object['shopId'] ==0 ">
+			<else />
 		   getAreaList("areaId2",{$object.areaId1},0,{$object.areaId2});
-		   //getAreaList("areaId3",{$object.areaId2},1,{$object.areaId3});
+		   
 		</if>
 		
 		initTime('serviceStartTime','{$object['serviceStartTime']}');
 		initTime('serviceEndTime','{$object['serviceEndTime']}');
 		
-		<if condition="$object['shopId'] !=0 ">
-		   getCommunitys();
-		   //这里使用另一个方法来对选择的数据进行选择重现
-		   //使用拼接id 的方法
+		<if condition="$object['shopId'] ==0 ">
+		   //	document.getElementById("loginName").focus();
+			<else />
+			getCommunitys();
+		   	//document.getElementById("shopSn").focus();
 		</if>
         
 		if ($("input[name='shopStatus']:checked").val() <= -1) {

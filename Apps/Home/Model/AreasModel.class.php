@@ -142,6 +142,33 @@ class AreasModel extends BaseModel {
 	  		$areaId2 = (int)$_COOKIE['areaId2'];
 	  	}
 	  	//定位城市
+	  	/*
+	  	if($areaId2==0){
+	  		//IP定位
+	  		$Ip = new \Org\Net\IpLocation('UTFWry.dat'); // 实例化类 参数表示IP地址库文件
+	  		$area = $Ip->getlocation(get_client_ip());
+	  		if($area['area']!=""){
+	  			$m = D('Home/Areas');
+	  			$sql ="SELECT areaId FROM __PREFIX__areas WHERE isShow=1 AND areaFlag = 1 AND areaType=1 AND areaName like '$cityName'";
+	  			$rs = $m->query($sql);
+	  			if($rs[0]["areaId"]>0){
+	  				$areaId2 = $rs[0]["areaId"];
+	  			}else{
+	  				$areaId2 = $GLOBALS['CONFIG']['defaultCity'];
+	  			}
+	  		}else{
+	  			$areaId2 = $GLOBALS['CONFIG']['defaultCity'];
+	  		}
+	  	}
+	  	*/
+	  	//获得默认城市
+	  	$GLOBALS['CONFIG']['defaultCity'] = 0; 
+	  	$sql ="SELECT fieldValue FROM __PREFIX__sys_configs WHERE fieldType!='hidden' AND configId = 32";
+	  	$rs = $this->query($sql);
+	  	if($rs[0]["fieldValue"]>0){
+	  				$GLOBALS['CONFIG']['defaultCity'] = $rs[0]["fieldValue"];
+	  			}
+
 	  	if($areaId2==0){
 	  		//IP定位
 	  		$Ip = new \Org\Net\IpLocation('UTFWry.dat'); // 实例化类 参数表示IP地址库文件

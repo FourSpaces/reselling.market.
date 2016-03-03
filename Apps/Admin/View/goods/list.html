@@ -159,6 +159,7 @@
    </script>
    <body class='wst-page'>
     <form method='post' action='{:U("Admin/Goods/index")}' autocomplete="off">
+    	<!--
        <div class='wst-tbar'> 
       地区：<select id='areaId1' name='areaId1' onchange='javascript:getAreaList("areaId2",this.value,0)'>
                <option value='0'>请选择</option>
@@ -169,37 +170,41 @@
              <select id='areaId2' name='areaId2'>
                <option value='0'>请选择</option>
              </select>
-  商城分类：<select id='goodsCatId1' name='goodsCatId1' onchange='javascript:getCatList("goodsCatId2",this.value,0)'>
-	                <option value='0'>请选择</option>
-	                <volist name="goodsCatsList" id="vo">
-	                <option value='{$vo['catId']}' <if condition="$goodsCatId1 == $vo['catId'] ">selected</if>>{$vo['catName']}</option>
-	                </volist>
-	             </select>
-	             <select id='goodsCatId2' name='goodsCatId2' onchange='javascript:getCatList("goodsCatId3",this.value,1);'>
-	                <option value='0'>请选择</option>
-	             </select>
-	             <select id='goodsCatId3' name='goodsCatId3'>
-	                <option value='0'>请选择</option>
-	             </select>
-   </div>
-   <div class='wst-tbar'>            
-       所属店铺：<input type='text' id='shopName' name='shopName' value='{$shopName}'/>            
-       商品：<input type='text' id='goodsName' name='goodsName' value='{$goodsName}'/> 
-     商品类型：<select id='isAdminBest' name='isAdminBest'>
-    <option value='-1'>全部</option>
-    <option value='1' <if condition="$isAdminBest eq 1">selected</if>>精品</option>
-    <option value='0' <if condition="$isAdminBest eq 0">selected</if>>非精品</option>
-  </select>
-  <select id='isAdminRecom' name='isAdminRecom'>
-    <option value='-1'>全部</option>
-    <option value='1' <if condition="$isAdminRecom eq 1">selected</if>>推荐</option>
-    <option value='0' <if condition="$isAdminRecom eq 0">selected</if>>非推荐</option>
-  </select>
-  <button type="submit" class="btn btn-primary glyphicon glyphicon-search">查询</button> 
+         -->
+        <div class='wst-tbar'> 
+	  商城分类：<select style="line-height: initial;" id='goodsCatId1' name='goodsCatId1' onchange='javascript:getCatList("goodsCatId2",this.value,0)'>
+		                <option value='0'>请选择</option>
+		                <volist name="goodsCatsList" id="vo">
+		                <option value='{$vo['catId']}' <if condition="$goodsCatId1 == $vo['catId'] ">selected</if>>{$vo['catName']}</option>
+		                </volist>
+		             </select>
+		             <select style="line-height: initial;"  id='goodsCatId2' name='goodsCatId2' onchange='javascript:getCatList("goodsCatId3",this.value,1);'>
+		                <option value='0'>请选择</option>
+		             </select>
+		             <select style="line-height: initial;"  id='goodsCatId3' name='goodsCatId3'>
+		                <option value='0'>请选择</option>
+		             </select>
+	    </div>
+        <div class='wst-tbar'>            
+       		所属店铺：<input style="line-height: initial;"  type='text' id='shopName' name='shopName' value='{$shopName}'/>            
+       		商品：<input style="line-height: initial;"  type='text' id='goodsName' name='goodsName' value='{$goodsName}'/> 
+    <!--
+	     商品类型：<select  style="display:none;"  id='isAdminBest' name='isAdminBest'>
+	    <option value='-1'>全部</option>
+	    <option value='1' <if condition="$isAdminBest eq 1">selected</if>>精品</option>
+	    <option value='0' <if condition="$isAdminBest eq 0">selected</if>>非精品</option>
+	  </select>
+	  <select style="display:none;" id='isAdminRecom' name='isAdminRecom'>
+	    <option value='-1'>全部</option>
+	    <option value='1' <if condition="$isAdminRecom eq 1">selected</if>>推荐</option>
+	    <option value='0' <if condition="$isAdminRecom eq 0">selected</if>>非推荐</option>
+	  </select>
+	-->
+  		<button type="submit" class="btn btn-primary glyphicon glyphicon-search" style="margin-top: -2px;line-height: initial;">查询</button> 
        </div>
        </form>
        <div class='wst-body'>
-        <div class='wst-tbar'> 
+        <div class='wst-tbar' style="display:none;"> 
         <php>if(in_array('splb_04',$WST_STAFF['grant'])){</php>
         <button type="button" class="btn btn-primary glyphicon" onclick='javascript:batchBest(1)'>设置精品</button>
         <button type="button" class="btn btn-primary glyphicon" onclick='javascript:batchBest(0)'>取消精品</button>
@@ -210,22 +215,24 @@
         <table class="table table-hover table-striped table-bordered wst-list">
            <thead>
              <tr>
-               <th width='2'><input type='checkbox' name='chk' onclick='javascript:checkAll(this.checked)'/></th>
+               <th width='2' style="text-align: center;"><input type='checkbox' name='chk' onclick='javascript:checkAll(this.checked)'/></th>
                <th width='180'>商品名称</th>
                <th width='60'>商品编号</th>
                <th width='40'>价格</th>
                <th width='100'>店铺</th>
                <th width='100'>商城分类</th>
+               <!--
                <th width='25'>推荐</th>
                <th width='25'>精品</th>
-               <th width='25'>销量</th>
+           		-->
+               <th width='44'>浏览量</th>
                <th width='80'>操作</th>
              </tr>
            </thead>
            <tbody>
             <volist name="Page['root']" id="vo" key='i'>
              <tr >
-               <td><input type='checkbox' class='chk' name='chk_{$vo['goodsId']}' value='{$vo['goodsId']}'/></td>
+               <td  style="text-align: center;"><input type='checkbox' class='chk' name='chk_{$vo['goodsId']}' value='{$vo['goodsId']}'/></td>
                <td img='{$vo['goodsThums']}' class='imgPreview'>
                <img src='__ROOT__/{$vo['goodsThums']}' width='50'/>
                {$vo['goodsName']}
@@ -234,13 +241,15 @@
                <td>{$vo['shopPrice']}&nbsp;</td>
                <td><a href="{:U('Admin/Goods/index',array('shopName'=>$vo['shopName']))}">{$vo['shopName']}</a>&nbsp;</td>
                <td>{$vo['catName']}&nbsp;</td>
+               <!--
                <td>
                <if condition="$vo['isAdminRecom']==1 "><span class='label label-success'>推荐</span></if>
                </td>
                <td>
                <if condition="$vo['isAdminBest']==1 "><span class='label label-success'>精品</span></if>
                </td>
-               <td>{$vo['saleCount']}</td>
+           		-->
+               <td>{$vo['popularity']}</td>
                <td>
                <a class="btn btn-primary glyphicon" href='{:U("Admin/Goods/toView",array("id"=>$vo["goodsId"]))}'>查看</a> 
                <php>if(in_array('splb_04',$WST_STAFF['grant'])){</php>

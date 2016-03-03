@@ -102,6 +102,13 @@ class GoodsAction extends BaseAction {
 		$kcode = I("kcode");
 		$scrictCode = base64_encode(md5("wstmall".date("Y-m-d")));
 		
+		//获得当前用户名
+		$USER = session('WST_USER');
+		if (empty($USER) || ($USER['userId']=='')){
+			$this->assign("userLogin",'false');
+		}else{
+			$this->assign("userLogin",'true');
+		}
 		//查询商品详情		
 		$goodsId = (int)I("goodsId");
 		$this->assign('goodsId',$goodsId);

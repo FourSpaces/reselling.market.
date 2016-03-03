@@ -196,9 +196,16 @@ class UsersModel extends BaseModel {
 		$data['userEmail'] = I("userEmail");
 	    $data['createTime'] = date('Y-m-d H:i:s');
 	    $data['userFlag'] = 1;
-	    
-	   
+	    /*   这里进行批量注册 
+	    $rs = null;
+	    for ($i=1; $i < 100; $i++) { 
+	    	$data['loginName'] = $loginName.$i;
+	    	$data['userName'] = I('userName').$i;
+	    	$rs = $m->add($data);
+	    }
+	    */
 		$rs = $m->add($data);
+
 		if(false !== $rs){
 			$rd['status']= 1;
 			$rd['userId']= $rs;

@@ -64,6 +64,7 @@
            <thead>
              <tr>
                <th width='40'>序号</th>
+               <th width='40'>ID</th>
                <th>标题</th>
                <th width='80'>分类</th>
                <th width='80'>是否显示</th>
@@ -76,6 +77,7 @@
             <volist name="Page['root']" id="vo" key='i'>
              <tr>
                <td>{$i}</td>
+               <td>{$vo['articleId']}</td>
                <td>{$vo['articleTitle']}</td>
                <td>{$vo['catName']}</td>
                <td>
