@@ -2,7 +2,7 @@ html,body,div,iframe,blockquote,h1,h2,h3,h4,h5,h6,p,pre,a,address,big,cite,code,
 	{
 	margin: 0;
 	padding: 0;
-	font-family: Arial, "微软雅黑";
+	font-family: Arial,'Kaushan Script', cursive;;
 	
 }
 
@@ -12,7 +12,7 @@ body {
 
 html,body,div,iframe,blockquote,p,pre,a,address,big,cite,code,del,font,img,ins,small,var,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend
 	{
-	font-size: 13px;
+	font-size: 14px;
 }
 
 ol,ul {
@@ -185,6 +185,7 @@ a:hover {
 	width: 13px;
 	height: 13px;
 	background-position: -90px -23px;
+	padding-left: 16px;
 	cursor: pointer;
 }
 
@@ -998,7 +999,7 @@ b, strong {
 .wst-article-menu{width: 210px;float: left;border: 1px solid #40CCF5;}
 .wst-article-menu .item{background-color: #F7F7F7;height: 30px;line-height: 30px;padding-left: 14px;}
 .wst-article-menu .sub-item{border-bottom : 1px dotted #B9E8F9;height: 28px;line-height: 28px;padding-left: 14px;}
-.wst-article-main{width: 975px;float: right;border: 1px solid #40CCF5;padding: 4px;}
+.wst-article-main{width: 975px;float: right;min-height: 300px;border: 1px solid #40CCF5;padding: 4px;}
 .wst-article-main .title{padding-left:4px;font-size: 15px;font-weight: bold;line-height: 30px;background-color:#F7F7F7}
 .wst-article-main .content{padding-left:4}
 #wst-hotsearch-keys{line-height:28px;padding-left:20px;color:#6C6C6C;height:25px;overflow:hidden;}

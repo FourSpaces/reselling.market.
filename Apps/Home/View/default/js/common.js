@@ -77,14 +77,14 @@ $(function() {
 	
 	$("#wst-panel-goods").click(function(){
 		$("#wst-search-type").val(1);
-		$("#wst-panel-goods").css({"background-color":"#E23C3D","border":"1px solid red","color":"#ffffff"});
+		$("#wst-panel-goods").css({"background-color":"#ff6600","border":"1px solid #FF9900","color":"#ffffff"});
 		$("#wst-panel-shop").css({"background-color":"#F3F3F3","border":"0","color":"#000000"});
 		$("#keyword").val("");
 		$("#keyword").attr("placeholder","搜索 商品");
 	});
 	$("#wst-panel-shop").click(function(){
 		$("#wst-search-type").val(2);
-		$("#wst-panel-shop").css({"background-color":"#E23C3D","border":"1px solid red","color":"#ffffff"});
+		$("#wst-panel-shop").css({"background-color":"#ff6600","border":"1px solid #FF9900","color":"#ffffff"});
 		$("#wst-panel-goods").css({"background-color":"#F3F3F3","border":"0","color":"#000000"});
 		$("#keyword").val("");
 		$("#keyword").attr("placeholder","搜索 店铺");
