@@ -13,6 +13,7 @@ class BaseAction extends Controller {
 	
 	public function __construct(){
 		parent::__construct();
+		C('WST_RUNTIME_PATH',dirname(dirname(dirname(__File__)))."\Runtime");
 		//初始化系统信息
 		$m = D('Home/System');
 		$GLOBALS['CONFIG'] = $m->loadConfigs();

@@ -1,0 +1,10 @@
+INSERT INTO `rmt_navs` VALUES (2, 0, 0, 0, '首页', 'index.php', 1, 0, 0, '2015-7-12 20:08:36');
+INSERT INTO `rmt_navs` VALUES (3, 0, 0, 0, '店铺街', 'index.php/Home/Shops/toShopStreet.html', 0, 0, 4, '2015-7-12 20:10:00');
+INSERT INTO `rmt_navs` VALUES (4, 0, 0, 0, '发布闲置', 'index.php/Home/Goods/toEdit/umark/toEditGoods.html', 1, 0, 2, '2015-7-12 20:11:21');
+INSERT INTO `rmt_navs` VALUES (5, 1, 0, 0, '关于我们', 'index.php/Home/Articles/index/articleId/1', 1, 0, 0, '2015-7-12 20:25:58');
+INSERT INTO `rmt_navs` VALUES (7, 1, 0, 0, 'WST百科', '#', 1, 0, 0, '2015-7-12 23:02:39');
+INSERT INTO `rmt_navs` VALUES (10, 1, 0, 0, '诚征英才', 'index.php/Home/Articles/index/articleId/2', 1, 0, 0, '2015-7-12 23:04:41');
+INSERT INTO `rmt_navs` VALUES (8, 1, 0, 0, '帮助中心', '#', 1, 0, 0, '2015-7-12 23:03:43');
+INSERT INTO `rmt_navs` VALUES (9, 1, 0, 0, '法律声明', 'index.php/Home/Articles/index/articleId/3', 1, 0, 0, '2015-7-12 23:03:55');
+INSERT INTO `rmt_navs` VALUES (11, 1, 0, 0, '网站地图', 'index.php/Home/Articles/index/articleId/9', 1, 0, 0, '2015-7-12 23:04:51');
+INSERT INTO `rmt_navs` VALUES (14, 0, 0, 0, '我的闲置', 'index.php/Home/Goods/queryOnSaleByPage.html', 1, 0, 3, '2016-2-14 16:32:16');

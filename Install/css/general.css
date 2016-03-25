@@ -15,15 +15,14 @@ body {
   margin: 0px;
   padding: 0px;
   text-align:center;
-  background: url('../images/bg.jpg') repeat left top;
-  font:15px 宋体, Arial, Helvetica, sans-serif;
+  font: 14px/1.5 "microsoft yahei", Helvetica, Tahoma, Arial, sans-serif;
 }
 p{margin:2px;font-size:15px;line-height:25px;}
 .bold{font-weight: bold;}
 .comment {
   color: #888;
 }
-.main{margin:0 auto;background:#0EAAE7;overflow:hidden;width:860px;min-height:400px;border-radius:10px;margin-top:10px;padding-top:20px;}
+.main{margin:0 auto;background:#f3f3f3;overflow:hidden;width:860px;min-height:400px;border-radius:10px;margin-top:10px;padding-top:20px;}
 .content{border: 1px solid #ccc;
     min-height: 320px;
     line-height: 25px;
@@ -65,7 +64,7 @@ a.install:hover {
 }
 .tips {
   display:none;
-  color: white;
+  color: #A09E9E;
   font-size: 13px;
 }
 .check-env {width: 98%;margin: 0 auto;text-align: left;}
@@ -74,3 +73,75 @@ a.install:hover {
 .check-1{background:url('../images/fail.gif') no-repeat;width:16px;height:16px;display: inline-block;margin-right:5px;}
 .check1{background:url('../images/ok.gif') no-repeat;width:16px;height:16px;display: inline-block;margin-right:5px;}
 .check0{background:url('../images/unkown.gif') no-repeat;width:16px;height:16px;display: inline-block;margin-right:5px;}
+
+body > .navbar {
+    font-size: 13px;
+}
+.navbar {
+    margin-bottom: 20px;
+    overflow: visible;
+}
+body .navbar-inverse .navbar-inner {
+    min-height: 50px;
+    background: none;
+    border: none;
+    box-shadow: none;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.navbar .nav {
+    position: relative;
+    left: 0;
+    display: block;
+    float: left;
+    margin: 0 10px 0 0;
+    list-style: none;
+    margin-left: 120px;
+}
+
+body .navbar-inverse .navbar-inner {
+    background: none;
+    border: none;
+    box-shadow: none;
+    text-align: center;
+    padding: 10px 0;
+}
+#steps li {
+    display: inline;
+    float: none;
+    font-weight: 900;
+}
+
+#steps li.active a, #steps li a:hover {
+    background: none;
+    color: #333;
+    box-shadow: none;
+
+}
+#steps li a {
+    display: inline;
+    font-size: 16px;
+}
+
+#steps li a span {
+    padding: 7px 13px;
+    background: #666;
+    color: #fff;
+    margin-right: 10px;
+    border-radius: 100%;
+}
+
+#steps li.active a span {
+    padding: 12px 19px;
+    font-size: 18px;
+    background: #44b549;
+}
+
+.navbar .nav > li > a {
+    float: none;
+    padding: 10px 15px 10px;
+    color: #777777;
+    text-decoration: none;
+    text-shadow: 0 1px 0 #ffffff;
+}

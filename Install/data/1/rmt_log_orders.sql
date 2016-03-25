@@ -1,0 +1,11 @@
+INSERT INTO `rmt_log_orders` VALUES (1, 2, '下单成功', 9, 0, '2015-5-19 23:35:49');
+INSERT INTO `rmt_log_orders` VALUES (2, 2, '商家已受理订单', 9, 0, '2015-5-19 23:40:20');
+INSERT INTO `rmt_log_orders` VALUES (3, 2, '订单打包中', 9, 0, '2015-5-19 23:41:11');
+INSERT INTO `rmt_log_orders` VALUES (4, 2, '商家已发货', 9, 0, '2015-5-19 23:41:49');
+INSERT INTO `rmt_log_orders` VALUES (5, 2, '用户已收货', 9, 0, '2015-5-19 23:42:31');
+INSERT INTO `rmt_log_orders` VALUES (6, 2, '用户已收货', 9, 0, '2015-5-19 23:42:39');
+INSERT INTO `rmt_log_orders` VALUES (7, 2, '用户已收货', 9, 0, '2015-5-19 23:59:42');
+INSERT INTO `rmt_log_orders` VALUES (8, 2, '用户已收货', 9, 0, '2015-5-19 23:59:50');
+INSERT INTO `rmt_log_orders` VALUES (9, 2, '用户拒收', 9, 0, '2015-5-19 23:59:57');
+INSERT INTO `rmt_log_orders` VALUES (10, 2, '商家确认拒收', 9, 0, '2015-5-20 00:09:38');
+INSERT INTO `rmt_log_orders` VALUES (11, 3, '下单成功', 9, 0, '2015-5-24 15:59:46');

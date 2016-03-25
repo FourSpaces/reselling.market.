@@ -1,0 +1,9 @@
+INSERT INTO `rmt_communitys` VALUES (15, 440000, 440100, 440106, 0, 1, '五山岑村社区', 1, '', 1);
+INSERT INTO `rmt_communitys` VALUES (16, 440000, 440100, 440106, 0, 1, '华南农业大学社区', 2, '', 1);
+INSERT INTO `rmt_communitys` VALUES (17, 440000, 440100, 440106, 0, 1, '华南理工大学社区', 3, '', 1);
+INSERT INTO `rmt_communitys` VALUES (18, 440000, 440100, 440106, 0, 1, '暨南大学社区', 4, '', 1);
+INSERT INTO `rmt_communitys` VALUES (19, 440000, 440100, 440106, 0, 1, '华南师范大学社区', 5, '', 1);
+INSERT INTO `rmt_communitys` VALUES (20, 440000, 440100, 440106, 0, 1, '石牌桥社区', 8, '', 1);
+INSERT INTO `rmt_communitys` VALUES (21, 440000, 440100, 440106, 0, 1, '岗顶社区', 6, '', 1);
+INSERT INTO `rmt_communitys` VALUES (22, 440000, 440100, 440106, 0, 1, '五羊新村', 6, '', 1);
+INSERT INTO `rmt_communitys` VALUES (23, 440000, 440100, 440106, 0, 1, '天河体育中心', 7, '', 1);

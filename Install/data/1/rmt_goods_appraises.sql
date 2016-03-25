@@ -1,0 +1,13 @@
+INSERT INTO `rmt_goods_appraises` VALUES (1, NULL, 0, NULL, 275, NULL, 48, 49, 0, 0, 0, 'ssssssssssssssssssssssssssssss', 1, '2016-2-27 10:02:12', 0);
+INSERT INTO `rmt_goods_appraises` VALUES (2, NULL, 0, NULL, 275, NULL, 44, 49, 0, 0, 0, 'zzzzzzzzzz', 1, '2016-2-27 10:05:29', 0);
+INSERT INTO `rmt_goods_appraises` VALUES (3, NULL, 0, NULL, 275, NULL, 42, 49, 0, 0, 0, 'zzzzzzzzzz', 1, '2016-2-27 10:07:32', 0);
+INSERT INTO `rmt_goods_appraises` VALUES (4, NULL, 0, NULL, 275, NULL, 44, 49, 0, 0, 0, '杀杀杀', 1, '2016-2-27 10:53:25', 0);
+INSERT INTO `rmt_goods_appraises` VALUES (5, NULL, 0, NULL, 275, NULL, 44, 49, 0, 0, 0, '3块钱卖不卖', 1, '2016-2-27 11:18:38', 0);
+INSERT INTO `rmt_goods_appraises` VALUES (6, NULL, 0, NULL, 275, NULL, 44, 49, 0, 0, 0, 'zzzzz', 1, '2016-2-27 14:41:31', 0);
+INSERT INTO `rmt_goods_appraises` VALUES (7, NULL, 0, NULL, 275, NULL, 44, 49, 0, 0, 0, 'zzzzzzzz', 1, '2016-2-27 14:41:50', 0);
+INSERT INTO `rmt_goods_appraises` VALUES (8, NULL, 0, NULL, 275, NULL, 44, 49, 0, 0, 0, 'zzzzzzzz', 1, '2016-2-27 14:48:43', 0);
+INSERT INTO `rmt_goods_appraises` VALUES (9, NULL, 0, NULL, 275, NULL, 44, 49, 0, 0, 0, 'zzzz', 1, '2016-2-27 14:59:39', 0);
+INSERT INTO `rmt_goods_appraises` VALUES (10, NULL, 8, NULL, 275, NULL, 44, 49, 0, 0, 0, '这是我这里的第一次留言', 1, '2016-2-28 21:10:14', 0);
+INSERT INTO `rmt_goods_appraises` VALUES (11, NULL, 0, NULL, 272, NULL, 44, 44, 0, 0, 0, 'zzzz', 1, '2016-2-28 22:19:36', 0);
+INSERT INTO `rmt_goods_appraises` VALUES (12, NULL, 11, NULL, 272, NULL, 44, 44, 0, 0, 0, '这是我的第一次留言哦！', 1, '2016-2-28 22:31:39', 0);
+INSERT INTO `rmt_goods_appraises` VALUES (13, NULL, 0, NULL, 272, NULL, 44, 44, 0, 0, 0, '测试留言第二次', 1, '2016-2-28 22:31:52', 0);

@@ -142,7 +142,8 @@ class IndexAction extends BaseAction {
     public function cleanAllCache(){
     	$this->isAjaxLogin();
         $rv = array('status'=>-1);
+        //C('WST_RUNTIME_PATH',dirname(dirname(dirname(__File__)))."\Runtime");
 		$rv['status'] = WSTDelDir(C('WST_RUNTIME_PATH'));
-    	$this->ajaxReturn($rv);
+        $this->ajaxReturn($rv);
     }
 }

@@ -33,6 +33,19 @@ timezone_set();
 </script>
 </head>
 <body>
+
+  <div class="navbar navbar-inverse">
+    <div style="width:960px;margin:0 auto;">
+      <div style="margin:60px auto 50px auto;"><h1><b>大学生 物尽其用二手 系统安装</b></h1></div>
+      <ul id="steps" class="nav">
+        <li class=<?php if($step==0){?>"active"<?php }?>><a href="javascript:;"><span>1</span>安装协议</a></li>
+        <li class=<?php if($step==1){?>"active"<?php }?>><a href="javascript:;"><span>2</span>环境检测</a></li>
+        <li class=<?php if($step==2){?>"active"<?php }?>><a href="javascript:;"><span>3</span>创建数据库</a></li>
+        <li class=<?php if($step==3){?>"active"<?php }?>><a href="javascript:;"><span>4</span>完成</eq></a></li>
+        
+      </ul>
+    </div>
+  </div>
 <div style="width:960px;margin:0 auto;">
     <div style="margin:0 auto;margin-top:20px;background:url('./images/1_03.png') no-repeat left top;width:280px;height:47px;"></div>
     <form id='form1'action='index.php'>
@@ -126,6 +139,13 @@ timezone_set();
                       <input type="text" class="ipt" name="db_host" id="db_host" value="localhost" onblur='checkVal(this.id)'>
                       <span class='db_host tips'>数据库主机不能为空</span>
                   </td>
+                </tr>
+                <tr>
+                  <td align="right">访问端口号<span class='red'>*</span>：</td>
+                  <td align="left">
+                      <input type="text" class="ipt" name="db_port" id="db_port" value="3306" onblur='checkVal(this.id)'>
+                      <span class='db_user tips'>访问端口号不能为空</span>
+                </td>
                 </tr>
                 <tr>
                   <td align="right">访问账号<span class='red'>*</span>：</td>

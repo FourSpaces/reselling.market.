@@ -53,6 +53,7 @@ function WSTGoodsCats(){
     $cats = S("WST_CACHE_GOODS_CAT_WEB");
 	if(!$cats){
 		$m = M();
+
 		$sql = "select catId,catName from __PREFIX__goods_cats WHERE parentId = 0 AND isShow =1 AND catFlag = 1 order by catSort asc";
 		$rs1 = $m->query($sql);
 		$cats = array();
@@ -75,7 +76,7 @@ function WSTGoodsCats(){
 			$rs1[$i]["catChildren"] = $cats2;
 			$cats[] = $rs1[$i];
 		}
-		S("WST_CACHE_GOODS_CAT_WEB",$cats,31536000);
+		S("WST_CACHE_GOODS_CAT_WEB",$cats,3600);
 	}
 	return $cats;
 }

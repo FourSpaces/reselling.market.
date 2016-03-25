@@ -74,7 +74,7 @@ function dir_writeable($dir) {
 	}
 	return $writeable;
 }
-function initConfig($db_host,$db_user,$db_pass,$db_prefix,$db_name){
+function initConfig($db_host,$db_user,$db_pass,$db_port,$db_prefix,$db_name){
 	$code = "return array(
 	    'VAR_PAGE'=>'p',
 	    'PAGE_SIZE'=>15,
@@ -83,6 +83,7 @@ function initConfig($db_host,$db_user,$db_pass,$db_prefix,$db_name){
 	    'DB_NAME'=>'".$db_name."',
 	    'DB_USER'=>'".$db_user."',
 	    'DB_PWD'=>'".$db_pass."',
+	    'DB_PORT'=>'".$db_port."',
 	    'DB_PREFIX'=>'".$db_prefix."',
 	    'DEFAULT_C_LAYER' =>  'Action',
 	    'DEFAULT_CITY' => '440100',
@@ -90,7 +91,7 @@ function initConfig($db_host,$db_user,$db_pass,$db_prefix,$db_name){
         'DATA_PATH_LEVEL'=>2, 
 	    'SESSION_PREFIX' => 'WSTMALL',
         'COOKIE_PREFIX'  => 'WSTMALL',
-		'LOAD_EXT_CONFIG' => 'wst_config'
+		'LOAD_EXT_CONFIG' => 'rmt_config'
 	)";
 	$code = "<?php\n ".$code.";\n?>";
     file_put_contents(INSTALL_ROOT."/Apps/Common/Conf/config.php", $code);

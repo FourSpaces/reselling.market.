@@ -131,24 +131,33 @@ function WSTStrReplace($str,$repStr,$start,$splilt = ''){
 	}
 	return $newStr;
 }
+
+function deldirs($dirpath){
+	$dh=opendir($dirpath);
+		//echo "delete:/".$dirpath.'\n';
+		while (($file=readdir($dh))!==false) {
+			if($file!="." && $file!="..") {
+			    $fullpath=$dirpath."/".$file;
+			    if(!is_dir($fullpath)) {
+			        unlink($fullpath);  //删除文件
+			        //echo "delete:/".$fullpath.'\n';
+			    } else {
+			        deldirs($fullpath);
+			        rmdir($fullpath); //删除目录
+			    }
+		    }
+		}	 
+	closedir($dh);
+}
 /**
  * 循环删除指定目录下的文件及文件夹
  * @param string $dirpath 文件夹路径
  */
 function WSTDelDir($dirpath){
-	$dh=opendir($dirpath);
-	while (($file=readdir($dh))!==false) {
-		if($file!="." && $file!="..") {
-		    $fullpath=$dirpath."/".$file;
-		    if(!is_dir($fullpath)) {
-		        unlink($fullpath);
-		    } else {
-		        WSTDelDir($fullpath);
-		        rmdir($fullpath);
-		    }
-	    }
-	}	 
-	closedir($dh);
+
+	
+	deldirs($dirpath);
+	
     $isEmpty = 1;
 	$dh=opendir($dirpath);
 	while (($file=readdir($dh))!== false) {
@@ -157,8 +166,13 @@ function WSTDelDir($dirpath){
 			break;
 		}
 	}
+	//closedir($dh);
+
 	return $isEmpty;
 }
+
+
+
 /**
  * 获取网站域名
  */

@@ -7,6 +7,7 @@ $(document).ready(function(){
         var dbHost = $('#dbHost').val();
         var dbUser = $('#dbUser').val();
         var dbPass = $('#dbPass').val();
+        var dbPass = $('#dbPass').val();
         var dbPrefix = $('#dbPrefix').val();
         var dbName = $('#dbName').val();
         
@@ -42,6 +43,7 @@ function initDataBase(){
 	dataConfig.db_host = $('#db_host').val();
 	dataConfig.db_user = $('#db_user').val();
 	dataConfig.db_pass = $('#db_pass').val();
+    dataConfig.db_port = $('#db_port').val();
 	dataConfig.db_prefix = $('#db_prefix').val();
 	dataConfig.db_name = $('#db_name').val();
 	dataConfig.admin_name = $('#admin_name').val();
@@ -53,6 +55,10 @@ function initDataBase(){
     }
     if( dataConfig.db_user == ''){
         $('.db_user').show().addClass('red');
+        check = false;
+    }
+    if( dataConfig.db_port == ''){
+        $('.db_port').show().addClass('red');
         check = false;
     }
     if( dataConfig.db_name == ''){
@@ -101,7 +107,7 @@ function getTableList(){
     	var table = null;
         if(json.status==1){
         	for(var i=0;i<json.list.length;i++){
-        		table = json.list[i].replace('wst_','').replace('.sql','');
+        		table = json.list[i].replace('rmt_','').replace('.sql','');
         		dataTables.push(table);
         		$('<div><img src="../Install/images/database.png" id="data_'+table+'"></span>&nbsp;'+table+'</div>').appendTo('#data_init');
         	}

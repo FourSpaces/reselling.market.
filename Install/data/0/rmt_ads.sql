@@ -1,0 +1,10 @@
+INSERT INTO `rmt_ads` VALUES (11, 54, 0, 0, 0, 'Upload/ads/2016-03/56d70073988e0.png', '2f', '', '2015-5-8', '2016-9-2', 2, 0);
+INSERT INTO `rmt_ads` VALUES (12, 334, 0, 0, 0, 'Upload/ads/2016-03/56d700c5b2d15.png', '1f', '', '2015-5-8', '2016-11-16', 0, 0);
+INSERT INTO `rmt_ads` VALUES (13, 55, 0, 0, 0, 'Upload/ads/2016-03/56d6ffad1da6e.png', '3f', '', '2015-5-8', '2016-10-12', 0, 0);
+INSERT INTO `rmt_ads` VALUES (14, 50, 0, 0, 0, 'Upload/ads/2016-03/56d6fec517903.png', '4f', '', '2015-5-8', '2016-9-8', 0, 5);
+INSERT INTO `rmt_ads` VALUES (15, 362, 0, 0, 0, 'Upload/ads/2016-03/56d700e33810e.png', '5f', '', '2015-5-8', '2016-10-31', 0, 0);
+INSERT INTO `rmt_ads` VALUES (16, 56, 0, 0, 0, 'Upload/ads/2016-03/56d6fd3ce2412.png', '6f', '', '2015-5-8', '2016-11-10', 6, 0);
+INSERT INTO `rmt_ads` VALUES (17, -1, 0, 0, 0, 'Upload/ads/2016-01/56ab79643ec7d.jpg', '1', '', '2016-1-1', '2017-1-1', 1, 1);
+INSERT INTO `rmt_ads` VALUES (18, -1, 0, 0, 0, 'Upload/ads/2016-01/56ab794d1fc14.jpg', '2', '', '2016-1-1', '2016-7-1', 2, 0);
+INSERT INTO `rmt_ads` VALUES (19, -1, 0, 0, 0, 'Upload/ads/2016-01/56ab7929eccb7.png', '3', '', '2016-1-1', '2017-1-1', 3, 8);
+INSERT INTO `rmt_ads` VALUES (20, -1, 0, 0, 0, 'Upload/ads/2016-01/56ab78eda4f40.png', '4', '', '2016-1-1', '2017-1-1', 4, 0);

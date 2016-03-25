@@ -12,7 +12,7 @@ if(!defined('IN_WSTMALL')) {
 }
 define('CHARSET', 'utf-8');
 define('DBCHARSET', 'utf8');
-define('TABLEPRE', 'wst_');
+define('TABLEPRE', 'rmt_');
 
 $env_items = array
 (
