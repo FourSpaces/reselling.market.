@@ -21,6 +21,8 @@ class ShopsAction extends BaseAction{
 		//获取地区信息
 		$m = D('Admin/Areas');
 		$this->assign('areaList',$m->queryShowByList(0));
+
+		echo var_export($m->queryShowByList(0) , true);
 		//获取银行列表
 		$m = D('Admin/Banks');
 		$this->assign('bankList',$m->queryByList(0));

@@ -4,7 +4,7 @@
 	    'PAGE_SIZE'=>15,
 		'DB_TYPE'=>'mysql',
 	    'DB_HOST'=>'localhost',
-	    'DB_NAME'=>'reselling12',
+	    'DB_NAME'=>'resellings',
 	    'DB_USER'=>'root',
 	    'DB_PWD'=>'admin409',
 	    'DB_PORT'=>'3306',
