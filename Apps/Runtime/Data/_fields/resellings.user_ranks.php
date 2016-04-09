@@ -1,0 +1,1 @@
+a:8:{i:0;s:6:"rankId";i:1;s:8:"rankName";i:2;s:10:"startScore";i:3;s:8:"endScore";i:4;s:6:"rebate";i:5;s:10:"createTime";s:3:"_pk";s:6:"rankId";s:5:"_type";a:6:{s:6:"rankId";s:7:"int(11)";s:8:"rankName";s:11:"varchar(20)";s:10:"startScore";s:7:"int(11)";s:8:"endScore";s:7:"int(11)";s:6:"rebate";s:7:"int(11)";s:10:"createTime";s:8:"datetime";}}

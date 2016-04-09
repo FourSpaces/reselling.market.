@@ -1,0 +1,3 @@
+<?php
+//000000086400a:6:{i:334;a:0:{}i:54;a:0:{}i:55;a:0:{}i:50;a:0:{}i:362;a:0:{}i:56;a:4:{i:0;a:4:{s:7:"shopcnt";s:1:"0";s:6:"shopId";s:2:"38";s:8:"shopName";s:7:"shop002";s:7:"shopImg";s:38:"Upload/shops/2016-03/56d7fccf9ff72.png";}i:1;a:4:{s:7:"shopcnt";s:1:"0";s:6:"shopId";s:2:"34";s:8:"shopName";s:15:"大大泡泡糖";s:7:"shopImg";s:38:"Upload/shops/2016-01/56ada3c9e99ea.jpg";}i:2;a:4:{s:7:"shopcnt";s:1:"0";s:6:"shopId";s:2:"35";s:8:"shopName";s:7:"DPx0001";s:7:"shopImg";s:38:"Upload/shops/2016-02/56c31c4ddd505.jpg";}i:3;a:4:{s:7:"shopcnt";s:1:"0";s:6:"shopId";s:2:"36";s:8:"shopName";s:5:"test2";s:7:"shopImg";s:38:"Upload/shops/2016-02/56c336d5799db.jpg";}}}
+?>

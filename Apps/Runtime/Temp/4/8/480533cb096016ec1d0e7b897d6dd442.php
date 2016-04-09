@@ -1,0 +1,3 @@
+<?php
+//000000086400a:4:{i:0;a:4:{s:4:"adId";s:2:"17";s:6:"adName";s:1:"1";s:5:"adURL";s:0:"";s:6:"adFile";s:36:"Upload/ads/2016-01/56ab79643ec7d.jpg";}i:1;a:4:{s:4:"adId";s:2:"18";s:6:"adName";s:1:"2";s:5:"adURL";s:0:"";s:6:"adFile";s:36:"Upload/ads/2016-01/56ab794d1fc14.jpg";}i:2;a:4:{s:4:"adId";s:2:"19";s:6:"adName";s:1:"3";s:5:"adURL";s:0:"";s:6:"adFile";s:36:"Upload/ads/2016-01/56ab7929eccb7.png";}i:3;a:4:{s:4:"adId";s:2:"20";s:6:"adName";s:1:"4";s:5:"adURL";s:0:"";s:6:"adFile";s:36:"Upload/ads/2016-01/56ab78eda4f40.png";}}
+?>
